@@ -25,10 +25,10 @@ export default {
       let baseUrl = "https://"
       switch (this.network) {
         case "mainnet":
-          baseUrl+= "tronscan.org/#"
+          baseUrl += "tronscan.org/#"
           break
         case "shasta":
-          baseUrl+= "shasta.tronscan.org/#"
+          baseUrl += "shasta.tronscan.org/#"
           break
       }
 

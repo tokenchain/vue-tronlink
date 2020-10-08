@@ -1,6 +1,6 @@
 {
-  "name": "@asymptix/vue-tronlink",
-  "version": "0.1.0",
+  "name": "vue-tronlink",
+  "version": "0.1.14",
   "description": "Vue support for the TronLink browser extension",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,7 @@
     "lint": "eslint './**/*.{js,vue}'",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Asymptix/vue-tronlink.git"
-  },
+  "repository": "git@gitee.com:jjhoc/vue-tronlink.git",
   "keywords": [
     "vue",
     "vue2",
@@ -19,12 +16,12 @@
     "trx",
     "tronlink"
   ],
-  "author": "Dmytro Zarezenko",
+  "author": "HeskemoKondax",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Asymptix/vue-tronlink/issues"
   },
-  "homepage": "https://github.com/Asymptix/vue-tronlink#readme",
+  "homepage": "https://gitee.com/jjhoc/vue-tronlink",
   "babel": {
     "presets": [
       "@babel/preset-env"
@@ -40,14 +37,14 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3",
-    "babel-jest": "^24.7.1",
-    "coveralls": "^3.0.3",
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^24.9.0",
+    "coveralls": "^3.1.0",
     "eslint": "^5.16.0",
-    "eslint-plugin-vue": "^5.2.2",
-    "jest": "^24.7.1",
-    "jest-junit": "^6.3.0",
-    "tronweb": "^2.4.1"
+    "eslint-plugin-vue": "^5.2.3",
+    "jest": "^24.9.0",
+    "jest-junit": "^6.4.0",
+    "tronweb": "^2.10.2"
   }
 }

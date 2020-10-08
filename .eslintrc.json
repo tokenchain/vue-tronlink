@@ -13,6 +13,7 @@
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
+    "parser": "@typescript-eslint/parser",
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
@@ -20,15 +21,32 @@
     "vue"
   ],
   "rules": {
-    "indent": ["error", 2, {
-      "SwitchCase": 1
-    }],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "double"],
-    "semi": ["error", "never"],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "never"
+    ],
     "no-undef": "warn",
     "no-console": "warn",
-    "space-before-function-paren": ["off"],
-    "object-property-newline": ["error"]
+    "space-before-function-paren": [
+      "off"
+    ],
+    "object-property-newline": [
+      "error"
+    ]
   }
 }
