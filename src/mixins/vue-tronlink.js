@@ -12,9 +12,16 @@ export default {
             if (window && window.hasOwnProperty("tronWeb")) {
                 this.tronWeb = window.tronWeb
                 this.tronLink = new TronLink(this.tronWeb)
-                console.log("TronLink is OK!")
+                this.notify_tron_installed()
             }
+            this.notify_tron_not_install()
+        },
+        notify_tron_not_install() {
             console.log("TronLink is not installed")
+
+        },
+        notify_tron_installed() {
+            console.log("TronLink is OK!")
         },
     },
     mounted() {
