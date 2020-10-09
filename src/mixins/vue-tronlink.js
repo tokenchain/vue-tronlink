@@ -18,10 +18,11 @@ export default {
         },
         notify_tron_not_install() {
             console.log("TronLink is not installed")
-
+            this.$emit("notify_tron_not_install")
         },
         notify_tron_installed() {
             console.log("TronLink is OK!")
+            this.$emit("notify_tron_installed")
         },
     },
     mounted() {
