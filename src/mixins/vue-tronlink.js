@@ -13,8 +13,10 @@ export default {
                 this.tronWeb = window.tronWeb
                 this.tronLink = new TronLink(this.tronWeb)
                 this.notify_tron_installed()
+                return true
             }
             this.notify_tron_not_install()
+            return false
         },
         notify_tron_not_install() {
             console.log("TronLink is not installed")
