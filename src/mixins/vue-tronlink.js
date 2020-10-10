@@ -26,6 +26,7 @@ export default {
             console.log("TronLink is OK!")
             this.$emit("notify_tron_installed")
         },
+
     },
     mounted() {
         let _this = this

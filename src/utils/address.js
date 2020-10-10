@@ -46,5 +46,14 @@ const Address = {
     }
 
 }
-
-export default Address
+const ADDRESS_SIZE = 34;
+const ADDRESS_PREFIX = "41";
+const ADDRESS_PREFIX_BYTE = 0x41;
+const ADDRESS_PREFIX_REGEX = /^(41)/;
+export {
+    ADDRESS_SIZE,
+    ADDRESS_PREFIX,
+    ADDRESS_PREFIX_BYTE,
+    ADDRESS_PREFIX_REGEX,
+    Address
+}

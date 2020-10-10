@@ -1,4 +1,4 @@
-import Address from "./utils/Address"
+import {Address} from "./utils/address"
 
 /**
  * TronLink extension interaction functionality
@@ -42,6 +42,10 @@ export default class TronLink {
      */
     getAccountAddress() {
         return this.tronWeb.defaultAddress.base58
+    }
+
+    NewContract(abi = [], address = false) {
+        return new this.tronWeb.Contract(this.tronWeb, abi, address)
     }
 
     /**

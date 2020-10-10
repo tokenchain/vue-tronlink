@@ -1,9 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/utils/abi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/accounts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/base58.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/base64.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/bytes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/code.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/const.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/contract/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/contract/method.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/crypto.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/ethersUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/help.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TronLink.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/Address.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/address.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +54,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utils" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -28,6 +62,11 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.customizations" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/utils" />
+    </key>
   </component>
   <component name="RunManager" selected="Jest.Invalid input format">
     <configuration name="Invalid input format" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
@@ -72,12 +111,24 @@
       <workItem from="1602165630842" duration="1265000" />
       <workItem from="1602167014949" duration="8000" />
       <workItem from="1602270327219" duration="175000" />
-      <workItem from="1602270783981" duration="8000" />
+      <workItem from="1602270783981" duration="43000" />
+      <workItem from="1602308520986" duration="1293000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="WindowStateProjectService">
     <state width="1533" height="219" key="GridCell.Tab.0.bottom" timestamp="1602140119662">

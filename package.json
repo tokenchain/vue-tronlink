@@ -1,6 +1,6 @@
 {
   "name": "vue-tronlink",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "Vue support for the TronLink browser extension",
   "main": "index.js",
   "scripts": {
@@ -46,5 +46,14 @@
     "jest": "^24.9.0",
     "jest-junit": "^6.4.0",
     "tronweb": "^2.10.2"
+  },
+  "dependencies": {
+    "bignumber.js": "^9.0.1",
+    "elliptic": "^6.5.3",
+    "ethers": "^5.0.17",
+    "eventemitter3": "^4.0.7",
+    "injectpromise": "^1.0.0",
+    "semver": "^7.3.2",
+    "validator": "^13.1.17"
   }
 }
