@@ -40,12 +40,17 @@ auto_install_nvm(){
     fi
 }
 npmdeploy(){
+    echo "npm deploy starts here.."
+    npm config set proxy=null
+    npm config set registry https://registry.npmjs.org/
     username=$(npm whoami)
     if [[ $username == "jrhess" ]]; then
       echo "You have login the npm platform and it is ready to publish"
       npm publish --dry-run
-      npm publish .
+      echo "dry run is done.."
+      npm publish --access=public
     fi
+    npm config set registry=https://registry.npm.taobao.org/
     auto_install_nvm
 }
 gitpush(){
