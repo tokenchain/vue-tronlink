@@ -18,7 +18,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "vue"
+    "vue",
+    "@typescript-eslint"
   ],
   "rules": {
     "indent": [

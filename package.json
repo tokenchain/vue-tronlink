@@ -1,6 +1,6 @@
 {
   "name": "vue-tronlink",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Vue support for the TronLink browser extension",
   "main": "index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   "author": "HeskemoKondax",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Asymptix/vue-tronlink/issues"
+    "url": "https://gitee.com/jjhoc/vue-tronlink/issues"
   },
   "homepage": "https://gitee.com/jjhoc/vue-tronlink",
   "babel": {

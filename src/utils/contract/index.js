@@ -1,4 +1,4 @@
-import TronWeb from 'index';
+import TronWeb from 'tronweb';
 import utils from '..';
 import Method from './method';
 import injectpromise from 'injectpromise';
@@ -28,6 +28,7 @@ export default class Contract {
         else this.address = false;
 
         this.loadAbi(abi);
+        this.constant_XXXX = undefined;
     }
 
     async _getEvents(options = {}) {
