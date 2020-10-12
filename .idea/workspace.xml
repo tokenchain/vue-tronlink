@@ -19,26 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.cache/0b/5a026a143b4c71fffb5e094e9325e4.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/0b/5a026a143b4c71fffb5e094e9325e4.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/64/ae467221f9d0c599072c257e2f157d.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/64/ae467221f9d0c599072c257e2f157d.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/78/85c0e487c85cf1c661c4ab805e652e.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/78/85c0e487c85cf1c661c4ab805e652e.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/ad/58b6b6492602571c520d3fe4cc210a.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/ad/58b6b6492602571c520d3fe4cc210a.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/b2/95f132977a88fbc4d94604a0c68c28.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/b2/95f132977a88fbc4d94604a0c68c28.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/b4/6c5157583fa7634442ce34a90f1dd8.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/b4/6c5157583fa7634442ce34a90f1dd8.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/b6/2365e4b39cfe32672a051f446bc67d.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/b6/2365e4b39cfe32672a051f446bc67d.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/ba/9cb896b1fbafc5ee8e16207858bf92.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/ba/9cb896b1fbafc5ee8e16207858bf92.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/be/cda1426cd1f7d6f5e934b09a9842df.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/be/cda1426cd1f7d6f5e934b09a9842df.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache/f8/bd63646c0954530c07ff943b29a75b.json" beforeDir="false" afterPath="$PROJECT_DIR$/.cache/f8/bd63646c0954530c07ff943b29a75b.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/dist/main.1f19ae8e.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/const.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" afterDir="false" />
-    </list>
+    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -170,6 +151,7 @@
       <workItem from="1602512650334" duration="1938000" />
       <workItem from="1602517728652" duration="183000" />
       <workItem from="1602518947333" duration="663000" />
+      <workItem from="1602519717361" duration="300000" />
     </task>
     <servers />
   </component>
