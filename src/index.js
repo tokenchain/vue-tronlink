@@ -1,9 +1,11 @@
-import KEYS from "./utils/const"
+import NODES from "./utils/const"
 import TronLink from "./TronLink";
-import utils from "./utils"
+import utilFullList from "./utils"
+import TronLinkComponent from "./mixins/vue-tronlink"
 
 export {
-    utils,
-    KEYS,
-    TronLink
+    utilFullList,
+    TronLink,
+    NODES,
+    TronLinkComponent
 }

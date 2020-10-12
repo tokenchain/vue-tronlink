@@ -19,7 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="" />
+    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/const.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/const.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -150,6 +155,7 @@
       <workItem from="1602498333005" duration="3000" />
       <workItem from="1602512650334" duration="1938000" />
       <workItem from="1602517728652" duration="183000" />
+      <workItem from="1602518947333" duration="469000" />
     </task>
     <servers />
   </component>

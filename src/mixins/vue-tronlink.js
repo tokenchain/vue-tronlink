@@ -1,10 +1,5 @@
 import TronLink from "../TronLink"
-import {
-    CONF_MAINNET, CONF_NILE,
-    CONF_SHASTA, DEFAULT_NODES,
-    FULL_NAMES, CONF_TRONEX,
-    CONF_NILE_CLASSIC
-} from "../utils/const";
+import NODES from "../utils/const";
 
 /**
  * events:
@@ -52,18 +47,18 @@ export default {
             this.$emit("notify_tron_not_install", this.tronLinkInitialData, this.connectedNode)
         },
         prenodenume(data_full_node) {
-            if (data_full_node === CONF_NILE.full_node) {
-                this.connectedNode = FULL_NAMES.NILE
-            } else if (data_full_node === CONF_MAINNET.full_node) {
-                this.connectedNode = FULL_NAMES.MAINNET
-            } else if (data_full_node === CONF_SHASTA.full_node) {
-                this.connectedNode = FULL_NAMES.SHASTA
-            } else if (data_full_node === DEFAULT_NODES.full_node) {
-                this.connectedNode = FULL_NAMES.MAINNET
-            } else if (data_full_node === CONF_TRONEX.full_node) {
-                this.connectedNode = FULL_NAMES.TRONEX
-            } else if (data_full_node === CONF_NILE_CLASSIC.full_node) {
-                this.connectedNode = FULL_NAMES.NILE
+            if (data_full_node === NODES.CONF_NILE.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.NILE
+            } else if (data_full_node === NODES.CONF_MAINNET.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.MAINNET
+            } else if (data_full_node === NODES.CONF_SHASTA.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.SHASTA
+            } else if (data_full_node === NODES.DEFAULT_NODES.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.MAINNET
+            } else if (data_full_node === NODES.CONF_TRONEX.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.TRONEX
+            } else if (data_full_node === NODES.CONF_NILE_CLASSIC.full_node) {
+                this.connectedNode = NODES.FULL_NAMES.NILE
             } else {
                 this.connectedNode = ""
             }
@@ -118,16 +113,16 @@ export default {
             return this.tronLink && this.tronWeb
         },
         isNile() {
-            return this.connectedNode === FULL_NAMES.NILE
+            return this.connectedNode === NODES.FULL_NAMES.NILE
         },
         isMainnet() {
-            return this.connectedNode === FULL_NAMES.MAINNET
+            return this.connectedNode === NODES.FULL_NAMES.MAINNET
         },
         isShasta() {
-            return this.connectedNode === FULL_NAMES.SHASTA
+            return this.connectedNode === NODES.FULL_NAMES.SHASTA
         },
         isTronex() {
-            return this.connectedNode === FULL_NAMES.TRONEX
+            return this.connectedNode === NODES.FULL_NAMES.TRONEX
         },
     },
     mounted() {

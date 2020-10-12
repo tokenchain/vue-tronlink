@@ -42,7 +42,7 @@ const FULL_NAMES = {
     SHASTA: "SHASTA",
     TRONEX: "TRONEX"
 }
-export {
+export default {
     FULL_NAMES,
     CONF_MAINNET,
     CONF_NILE,

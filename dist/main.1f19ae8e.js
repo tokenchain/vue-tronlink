@@ -8741,33 +8741,29 @@ exports.default = TronLink;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.DEFAULT_NODES = exports.CONF_NILE_CLASSIC = exports.CONF_TRONEX = exports.CONF_SHASTA = exports.CONF_NILE = exports.CONF_MAINNET = exports.FULL_NAMES = void 0;
+exports.default = void 0;
 var DEFAULT_NODES = {
   'full_node': 'https://api.trongrid.io',
   'solidity_node': 'https://api.trongrid.io',
   'event_server': 'https://api.trongrid.io'
 };
-exports.DEFAULT_NODES = DEFAULT_NODES;
 var CONF_MAINNET = {
   "full_node": "https://api.trongrid.io",
   "event_server": "https://api.trongrid.io"
 }; //The long running, maintained by the tron-us community
 
-exports.CONF_MAINNET = CONF_MAINNET;
 var CONF_SHASTA = {
   "full_node": "https://api.shasta.trongrid.io",
   "event_server": "https://api.shasta.trongrid.io",
   "faucet": "https://www.trongrid.io/faucet"
 }; //Maintained by the official team
 
-exports.CONF_SHASTA = CONF_SHASTA;
 var CONF_NILE = {
   "full_node": "https://httpapi.nileex.io",
   "event_server": "https://eventtest.nileex.io",
   "solidity_node": "https://httpapi.nileex.io",
   "faucet": "http://nileex.io/join/getJoinPage"
 };
-exports.CONF_NILE = CONF_NILE;
 var CONF_NILE_CLASSIC = {
   "full_node": "https://api.nileex.io",
   "event_server": "https://event.nileex.io",
@@ -8775,20 +8771,27 @@ var CONF_NILE_CLASSIC = {
   "faucet": "http://nileex.io/join/getJoinPage"
 }; //Maintained by the official team
 
-exports.CONF_NILE_CLASSIC = CONF_NILE_CLASSIC;
 var CONF_TRONEX = {
   "full_node": "https://testhttpapi.tronex.io",
   "event_server": "https://testapi.tronex.io",
   "faucet": "http://testnet.tronex.io/join/getJoinPage"
 };
-exports.CONF_TRONEX = CONF_TRONEX;
 var FULL_NAMES = {
   NILE: "NILE",
   MAINNET: "MAINNET",
   SHASTA: "SHASTA",
   TRONEX: "TRONEX"
 };
-exports.FULL_NAMES = FULL_NAMES;
+var _default = {
+  FULL_NAMES: FULL_NAMES,
+  CONF_MAINNET: CONF_MAINNET,
+  CONF_NILE: CONF_NILE,
+  CONF_SHASTA: CONF_SHASTA,
+  CONF_TRONEX: CONF_TRONEX,
+  CONF_NILE_CLASSIC: CONF_NILE_CLASSIC,
+  DEFAULT_NODES: DEFAULT_NODES
+};
+exports.default = _default;
 },{}],"../mixins/vue-tronlink.js":[function(require,module,exports) {
 "use strict";
 
@@ -8799,7 +8802,7 @@ exports.default = void 0;
 
 var _TronLink = _interopRequireDefault(require("../TronLink"));
 
-var _const = require("../utils/const");
+var _const = _interopRequireDefault(require("../utils/const"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -8856,18 +8859,18 @@ var _default = {
       this.$emit("notify_tron_not_install", this.tronLinkInitialData, this.connectedNode);
     },
     prenodenume: function prenodenume(data_full_node) {
-      if (data_full_node === _const.CONF_NILE.full_node) {
-        this.connectedNode = _const.FULL_NAMES.NILE;
-      } else if (data_full_node === _const.CONF_MAINNET.full_node) {
-        this.connectedNode = _const.FULL_NAMES.MAINNET;
-      } else if (data_full_node === _const.CONF_SHASTA.full_node) {
-        this.connectedNode = _const.FULL_NAMES.SHASTA;
-      } else if (data_full_node === _const.DEFAULT_NODES.full_node) {
-        this.connectedNode = _const.FULL_NAMES.MAINNET;
-      } else if (data_full_node === _const.CONF_TRONEX.full_node) {
-        this.connectedNode = _const.FULL_NAMES.TRONEX;
-      } else if (data_full_node === _const.CONF_NILE_CLASSIC.full_node) {
-        this.connectedNode = _const.FULL_NAMES.NILE;
+      if (data_full_node === _const.default.CONF_NILE.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.NILE;
+      } else if (data_full_node === _const.default.CONF_MAINNET.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.MAINNET;
+      } else if (data_full_node === _const.default.CONF_SHASTA.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.SHASTA;
+      } else if (data_full_node === _const.default.DEFAULT_NODES.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.MAINNET;
+      } else if (data_full_node === _const.default.CONF_TRONEX.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.TRONEX;
+      } else if (data_full_node === _const.default.CONF_NILE_CLASSIC.full_node) {
+        this.connectedNode = _const.default.FULL_NAMES.NILE;
       } else {
         this.connectedNode = "";
       }
@@ -8975,16 +8978,16 @@ var _default = {
       return this.tronLink && this.tronWeb;
     },
     isNile: function isNile() {
-      return this.connectedNode === _const.FULL_NAMES.NILE;
+      return this.connectedNode === _const.default.FULL_NAMES.NILE;
     },
     isMainnet: function isMainnet() {
-      return this.connectedNode === _const.FULL_NAMES.MAINNET;
+      return this.connectedNode === _const.default.FULL_NAMES.MAINNET;
     },
     isShasta: function isShasta() {
-      return this.connectedNode === _const.FULL_NAMES.SHASTA;
+      return this.connectedNode === _const.default.FULL_NAMES.SHASTA;
     },
     isTronex: function isTronex() {
-      return this.connectedNode === _const.FULL_NAMES.TRONEX;
+      return this.connectedNode === _const.default.FULL_NAMES.TRONEX;
     }
   },
   mounted: function mounted() {
@@ -9558,7 +9561,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59466" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50889" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

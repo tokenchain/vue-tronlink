@@ -1,13 +1,14 @@
-import {BigNumber, utils, version, Contract} from "tronweb"
+// @ts-ignore
+import {isArray, isBigNumber} from "../index"
 import {EventEmitter} from "eventemitter3"
 
 export default class BaseContract extends EventEmitter {
     protected decodeValues(params) {
         const results = []
-        if (utils.isArray(params)) {
+        if (isArray(params)) {
             const l = params.length
             for (let h = 0; h < l; h++) {
-                if (utils.isBigNumber(params[h])) {
+                if (isBigNumber(params[h])) {
                     results.push(params[h].toNumber())
                 } else {
                     console.log("parse outside :: ", params[h])
