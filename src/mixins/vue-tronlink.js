@@ -1,5 +1,5 @@
 import TronLink from "../TronLink"
-import {CONF_MAINNET, CONF_NILE, CONF_SHASTA, DEFAULT_NODES, FULL_NAMES} from "../utils/const";
+import {CONF_MAINNET, CONF_NILE, CONF_SHASTA, DEFAULT_NODES, FULL_NAMES, CONF_TRONEX} from "../utils/const";
 
 /**
  * events:
@@ -69,8 +69,13 @@ export default {
                             this.$emit("notify_tron_account_set", this.account_name, this.authorized_address)
                         }
                     }
-                    //console.log("checker messsage result ", message.action)
-                    //console.log(message.data)
+                    if (this._debug_tronlink) {
+                        console.group("Wallet action received")
+                        console.log("checker messsage result - ", message.action)
+                        console.log(message.data)
+                        console.groupEnd()
+                    }
+
                 }
             })
             console.log("TronLink is OK! ✅ ")
