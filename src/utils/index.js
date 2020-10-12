@@ -1,14 +1,14 @@
-import * as accounts from './accounts';
-import * as base58 from './base58';
-import * as bytes from './bytes';
-import * as crypto from './crypto';
-import * as code from './code';
-import * as abi from './abi';
-import * as ethersUtils from './ethersUtils';
+import * as accounts from 'accounts';
+import * as base58 from 'base58';
+import * as bytes from 'bytes';
+import * as crypto from 'crypto';
+import * as code from 'code';
+import * as abi from 'abi';
+import * as ethersUtils from 'ethersUtils';
 
 import validator from 'validator';
 import BigNumber from 'bignumber.js';
-import {ADDRESS_PREFIX} from './address';
+import {ADDRESS_PREFIX} from 'address';
 
 const utils = {
 
