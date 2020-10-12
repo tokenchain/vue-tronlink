@@ -5,6 +5,7 @@ export default {
         return {
             tronLink: null,
             tronWeb: null,
+            tronLinkInitialData: false,
         }
     },
     methods: {
@@ -23,6 +24,15 @@ export default {
             this.$emit("notify_tron_not_install")
         },
         notify_tron_installed() {
+            window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
+                if (isTronLink) {
+                    if (message.action === 'tabReply' && !this.tronLinkInitialData) {
+                        this.tronLinkInitialData = message.data.data;
+                    }
+                    console.log("checker messsage result ", message.action)
+                    console.log(message.data.data)
+                }
+            })
             console.log("TronLink is OK!")
             this.$emit("notify_tron_installed")
         },

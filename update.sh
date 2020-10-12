@@ -28,15 +28,17 @@ preinstall(){
     npm install typescript --save-dev
     pip3 install git+git://github.com/psf/black
 }
-auto_install=0
+
 mod_package_json() {
     param_chan=$(echo "$1 = \"$2\"")
     echo "$param_chan"
     cat $NODEPFILE | jq "$param_chan" $NODEPFILE | sponge $NODEPFILE
 }
 auto_install_nvm(){
-    if [[ $auto_install==1 ]]; then
+    if (( AUTO_INSTALL==1 )); then
         $CMD_FINAL
+    else
+        echo "no install"
     fi
 }
 npmdeploy(){
@@ -59,6 +61,7 @@ gitpush(){
     git commit -m "package updates related items. please check in commit details"
     git push
 }
+AUTO_INSTALL=0
 #tsc -b
 PROJECT_NAME="vue-tronlink"
 VERSION=$(cat version)
