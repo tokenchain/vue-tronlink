@@ -1,2 +1,6 @@
 update.sh
 .cache
+develop
+dist
+node_modules
+.circleci

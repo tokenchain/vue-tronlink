@@ -11,6 +11,7 @@ import BigNumber from 'bignumber.js';
 import {ADDRESS_PREFIX} from './address';
 
 const utils = {
+
     isValidURL(url) {
         if (typeof url !== 'string')
             return false;
@@ -137,7 +138,7 @@ const utils = {
         return val !== null && typeof val !== 'undefined';
     },
 
-    async sleep(millis = 1000){
+    async sleep(millis = 1000) {
         return new Promise(resolve => setTimeout(resolve, millis));
     }
 }
@@ -150,5 +151,7 @@ export default {
     bytes,
     crypto,
     abi,
-    ethersUtils
+    ethersUtils,
+    validator,
+    BigNumber,
 };

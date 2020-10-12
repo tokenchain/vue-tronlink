@@ -20,16 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/entry/TronTest.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entry/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entry/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TronAnchor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TronAnchor.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +35,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -156,7 +151,9 @@
       <workItem from="1602495247476" duration="106000" />
       <workItem from="1602495708255" duration="717000" />
       <workItem from="1602496431260" duration="279000" />
-      <workItem from="1602496736388" duration="1309000" />
+      <workItem from="1602496736388" duration="1399000" />
+      <workItem from="1602498333005" duration="3000" />
+      <workItem from="1602512650334" duration="1938000" />
     </task>
     <servers />
   </component>
