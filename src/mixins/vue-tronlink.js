@@ -29,6 +29,7 @@ export default {
             authorized_address: false,
             //module debug on core tronlink only
             _debug_tronlink: false,
+            node_version: "",
         }
     },
     methods: {
@@ -67,7 +68,7 @@ export default {
                 this.connectedNode = ""
             }
         },
-        notify_tron_installed() {
+        async notify_tron_installed() {
             window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
                 if (isTronLink) {
                     if (message.action === 'tabReply' && !this.tronLinkInitialData) {
@@ -95,8 +96,16 @@ export default {
 
                 }
             })
+            await this.updateNodeVersion()
+            //ts-ignore
+            let provider = this.tronWeb.currentProvider().full_node.host
+            this.prenodenume(provider)
             console.log("TronLink is OK! ✅ ")
             this.$emit("notify_tron_installed")
+        },
+        async updateNodeVersion() {
+            let version = await this.tronWeb.getFullnodeVersion()
+            this.node_version = version
         },
         debugTronLink(bool) {
             this._debug_tronlink = bool
