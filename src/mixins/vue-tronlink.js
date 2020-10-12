@@ -21,6 +21,8 @@ export default {
             account_name: false,
             // TB9M9KdCvee3qnRtKE7GACZpTh3oiTX9JL
             authorized_address: false,
+            //module debug on core tronlink only
+            _debug_tronlink: false,
         }
     },
     methods: {
@@ -74,7 +76,9 @@ export default {
             console.log("TronLink is OK! ✅ ")
             this.$emit("notify_tron_installed")
         },
-
+        debugTronLink(bool) {
+            this._debug_tronlink = bool
+        }
     },
     mounted() {
         let _this = this
