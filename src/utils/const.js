@@ -23,6 +23,12 @@ const CONF_NILE = {
     "solidity_node": "https://httpapi.nileex.io",
     "faucet": "http://nileex.io/join/getJoinPage",
 }
+const CONF_NILE_CLASSIC = {
+    "full_node": "https://api.nileex.io",
+    "event_server": "https://event.nileex.io",
+    "solidity_node": "https://api.nileex.io",
+    "faucet": "http://nileex.io/join/getJoinPage",
+}
 
 //Maintained by the official team
 const CONF_TRONEX = {
@@ -42,6 +48,7 @@ export {
     CONF_NILE,
     CONF_SHASTA,
     CONF_TRONEX,
+    CONF_NILE_CLASSIC,
     DEFAULT_NODES
 }
 

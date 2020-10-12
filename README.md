@@ -12,5 +12,6 @@ Vue support for the TronLink browser extension
  * notify_tron_installed
  * notify_tron_node_change
  * notify_tron_account_set
+ * notify_tron_initialization
 
  

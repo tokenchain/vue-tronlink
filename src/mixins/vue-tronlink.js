@@ -1,5 +1,10 @@
 import TronLink from "../TronLink"
-import {CONF_MAINNET, CONF_NILE, CONF_SHASTA, DEFAULT_NODES, FULL_NAMES, CONF_TRONEX} from "../utils/const";
+import {
+    CONF_MAINNET, CONF_NILE,
+    CONF_SHASTA, DEFAULT_NODES,
+    FULL_NAMES, CONF_TRONEX,
+    CONF_NILE_CLASSIC
+} from "../utils/const";
 
 /**
  * events:
@@ -7,12 +12,13 @@ import {CONF_MAINNET, CONF_NILE, CONF_SHASTA, DEFAULT_NODES, FULL_NAMES, CONF_TR
  * notify_tron_installed
  * notify_tron_node_change
  * notify_tron_account_set
+ * notify_tron_initialization
  */
 export default {
     data() {
         return {
-            tronLink: null,
-            tronWeb: null,
+            tronLink: false,
+            tronWeb: false,
             // object json
             tronLinkInitialData: false,
             // node name NILE, MAINNET
@@ -28,8 +34,12 @@ export default {
     methods: {
         checkTronLink() {
             if (window && window.hasOwnProperty("tronWeb")) {
-                this.tronWeb = window.tronWeb
-                this.tronLink = new TronLink(this.tronWeb)
+                if (!this.tronWeb) {
+                    this.tronWeb = window.tronWeb
+                }
+                if (!this.tronLink) {
+                    this.tronLink = new TronLink(window.tronWeb)
+                }
                 this.notify_tron_installed()
                 return true
             }
@@ -38,28 +48,35 @@ export default {
         },
         notify_tron_not_install() {
             console.log("TronLink is not installed")
-            this.$emit("notify_tron_not_install")
+            this.$emit("notify_tron_not_install", this.tronLinkInitialData, this.connectedNode)
+        },
+        prenodenume(data_full_node) {
+            if (data_full_node === CONF_NILE.full_node) {
+                this.connectedNode = FULL_NAMES.NILE
+            } else if (data_full_node === CONF_MAINNET.full_node) {
+                this.connectedNode = FULL_NAMES.MAINNET
+            } else if (data_full_node === CONF_SHASTA.full_node) {
+                this.connectedNode = FULL_NAMES.SHASTA
+            } else if (data_full_node === DEFAULT_NODES.full_node) {
+                this.connectedNode = FULL_NAMES.MAINNET
+            } else if (data_full_node === CONF_TRONEX.full_node) {
+                this.connectedNode = FULL_NAMES.TRONEX
+            } else if (data_full_node === CONF_NILE_CLASSIC.full_node) {
+                this.connectedNode = FULL_NAMES.TRONEX
+            } else {
+                this.connectedNode = ""
+            }
         },
         notify_tron_installed() {
             window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
                 if (isTronLink) {
                     if (message.action === 'tabReply' && !this.tronLinkInitialData) {
                         this.tronLinkInitialData = message.data.data;
+                        this.prenodenume(this.tronLinkInitialData.node.full_node)
+                        this.$emit("notify_tron_initialization", this.tronLinkInitialData)
                     }
                     if (message.action === 'setNode') {
-                        if (message.data.node.fullNode === CONF_NILE.full_node) {
-                            this.connectedNode = FULL_NAMES.NILE
-                        } else if (message.data.node.fullNode === CONF_MAINNET.full_node) {
-                            this.connectedNode = FULL_NAMES.MAINNET
-                        } else if (message.data.node.fullNode === CONF_SHASTA.full_node) {
-                            this.connectedNode = FULL_NAMES.SHASTA
-                        } else if (message.data.node.fullNode === DEFAULT_NODES.full_node) {
-                            this.connectedNode = FULL_NAMES.MAINNET
-                        } else if (message.data.node.fullNode === CONF_TRONEX.full_node) {
-                            this.connectedNode = FULL_NAMES.TRONEX
-                        } else {
-                            this.connectedNode = ""
-                        }
+                        this.prenodenume(message.data.node.fullNode)
                         this.$emit("notify_tron_node_change", this.connectedNode)
                     }
                     if (message.action === 'setAccount') {
@@ -83,6 +100,9 @@ export default {
         },
         debugTronLink(bool) {
             this._debug_tronlink = bool
+        },
+        isInstalled() {
+            return this.tronLink && this.tronWeb
         },
         isNile() {
             return this.connectedNode === FULL_NAMES.NILE
