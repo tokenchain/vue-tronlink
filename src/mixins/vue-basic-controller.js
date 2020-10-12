@@ -1,4 +1,4 @@
-import tronlink from "vue-tronlink/src/mixins/vue-tronlink"
+import tronlink from "./vue-tronlink"
 
 export default {
     mixins: [tronlink],

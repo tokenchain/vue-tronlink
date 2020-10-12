@@ -5,11 +5,15 @@
 </template>
 
 <script>
+import {FULL_NAMES} from "../utils/const";
+
+
 export default {
+  name: "TronAnchor",
   props: {
     network: {
       type: String,
-      default: "shasta"
+      default: FULL_NAMES.SHASTA
     },
     type: {
       type: String,
@@ -24,10 +28,16 @@ export default {
     getURL() {
       let baseUrl = "https://"
       switch (this.network) {
-        case "mainnet":
+        case FULL_NAMES.MAINNET:
           baseUrl += "tronscan.org/#"
           break
-        case "shasta":
+        case FULL_NAMES.SHASTA:
+          baseUrl += "shasta.tronscan.org/#"
+          break
+        case FULL_NAMES.TRONEX:
+          baseUrl += "shasta.tronscan.org/#"
+          break
+        case FULL_NAMES.NILE:
           baseUrl += "shasta.tronscan.org/#"
           break
       }

@@ -20,8 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/entry/TronTest.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entry/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entry/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/update.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TronAnchor.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TronAnchor.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -45,6 +54,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -60,13 +70,14 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/entry" />
+      <recent name="$PROJECT_DIR$/develop" />
+      <recent name="$PROJECT_DIR$/src/impl" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/utils" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/develop" />
-      <recent name="$PROJECT_DIR$/src/impl" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.All Tests">
@@ -142,7 +153,10 @@
       <workItem from="1602491742547" duration="15000" />
       <workItem from="1602493393423" duration="799000" />
       <workItem from="1602494240346" duration="614000" />
-      <workItem from="1602495247476" duration="31000" />
+      <workItem from="1602495247476" duration="106000" />
+      <workItem from="1602495708255" duration="717000" />
+      <workItem from="1602496431260" duration="279000" />
+      <workItem from="1602496736388" duration="1309000" />
     </task>
     <servers />
   </component>
@@ -162,10 +176,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="571" y="413" key="#ESLint" timestamp="1602311004381">
+    <state x="571" y="413" key="#ESLint" timestamp="1602496682930">
       <screen x="0" y="25" width="1792" height="983" />
     </state>
-    <state x="571" y="413" key="#ESLint/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602311004381" />
+    <state x="571" y="413" key="#ESLint/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602496682930" />
     <state x="671" y="353" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602314423401">
       <screen x="0" y="25" width="1792" height="987" />
     </state>
@@ -190,10 +204,10 @@
       <screen x="0" y="25" width="1792" height="983" />
     </state>
     <state width="1231" height="222" key="GridCell.Tab.0.right/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602323822932" />
-    <state x="652" y="272" width="597" height="492" key="find.popup" timestamp="1602328171782">
-      <screen x="0" y="25" width="1792" height="987" />
+    <state x="652" y="271" width="597" height="490" key="find.popup" timestamp="1602498086300">
+      <screen x="0" y="25" width="1792" height="983" />
     </state>
-    <state x="652" y="271" width="597" height="490" key="find.popup/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602311955806" />
+    <state x="652" y="271" width="597" height="490" key="find.popup/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602498086300" />
     <state x="652" y="272" width="597" height="492" key="find.popup/-1920.25.1920.1055/0.25.1792.987@0.25.1792.987" timestamp="1602328171782" />
   </component>
 </project>

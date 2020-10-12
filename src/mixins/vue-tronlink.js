@@ -39,7 +39,7 @@ export default {
                     this.tronWeb = window.tronWeb
                 }
                 if (!this.tronLink) {
-                    this.tronLink = new TronLink(window.tronWeb)
+                    this.tronLink = new TronLink(this.tronWeb)
                 }
                 this.notify_tron_installed()
                 return true
@@ -63,7 +63,7 @@ export default {
             } else if (data_full_node === CONF_TRONEX.full_node) {
                 this.connectedNode = FULL_NAMES.TRONEX
             } else if (data_full_node === CONF_NILE_CLASSIC.full_node) {
-                this.connectedNode = FULL_NAMES.TRONEX
+                this.connectedNode = FULL_NAMES.NILE
             } else {
                 this.connectedNode = ""
             }
@@ -97,10 +97,14 @@ export default {
                 }
             })
             await this.updateNodeVersion()
-            //ts-ignore
-            let provider = this.tronWeb.currentProvider().full_node.host
-            this.prenodenume(provider)
+            // ts-ignore
+            let provider = this.tronLink.tronWeb.currentProvider()
             console.log("TronLink is OK! ✅ ")
+            if (this._debug_tronlink) {
+                console.log(provider.fullNode.host)
+                console.log(this.tronWeb)
+            }
+            this.prenodenume(provider.fullNode.host)
             this.$emit("notify_tron_installed")
         },
         async updateNodeVersion() {
