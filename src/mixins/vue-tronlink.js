@@ -29,8 +29,11 @@ export default {
                     if (message.action === 'tabReply' && !this.tronLinkInitialData) {
                         this.tronLinkInitialData = message.data.data;
                     }
+                    if (message.action === 'setNode') {
+                        this.$emit("notify_tron_node_change")
+                    }
                     console.log("checker messsage result ", message.action)
-                    console.log(message.data.data)
+                    console.log(message.data)
                 }
             })
             console.log("TronLink is OK!")
