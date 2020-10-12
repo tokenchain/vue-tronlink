@@ -1,6 +1,6 @@
 {
   "name": "vue-tronlink",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "description": "Vue support for the TronLink browser extension",
   "main": "index.js",
   "scripts": {

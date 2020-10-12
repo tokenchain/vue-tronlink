@@ -61,6 +61,10 @@ gitpush(){
     git commit -m "package updates related items. please check in commit details"
     git push
 }
+taobao(){
+  cnpm sync vue-tronlink
+  cnpm info vue-tronlink
+}
 AUTO_INSTALL=0
 #tsc -b
 PROJECT_NAME="vue-tronlink"
@@ -77,3 +81,4 @@ mod_package_json ".homepage" "https://gitee.com/jjhoc/vue-tronlink"
 echo "==== done ====="
 gitpush
 npmdeploy
+taobao

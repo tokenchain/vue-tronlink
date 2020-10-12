@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/update.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +141,8 @@
       <workItem from="1602491419304" duration="1000" />
       <workItem from="1602491742547" duration="15000" />
       <workItem from="1602493393423" duration="799000" />
-      <workItem from="1602494240346" duration="594000" />
+      <workItem from="1602494240346" duration="614000" />
+      <workItem from="1602495247476" duration="31000" />
     </task>
     <servers />
   </component>
