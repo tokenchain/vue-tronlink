@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.npmignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +47,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/utils" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -61,12 +61,13 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/utils" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/develop" />
       <recent name="$PROJECT_DIR$/src/impl" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/utils" />
     </key>
   </component>
   <component name="RunManager" selected="Jest.All Tests">
@@ -135,7 +136,10 @@
       <workItem from="1602485496210" duration="392000" />
       <workItem from="1602486088741" duration="255000" />
       <workItem from="1602486574872" duration="1855000" />
-      <workItem from="1602490073821" duration="211000" />
+      <workItem from="1602490073821" duration="580000" />
+      <workItem from="1602490748796" duration="182000" />
+      <workItem from="1602491269384" duration="148000" />
+      <workItem from="1602491419304" duration="1000" />
     </task>
     <servers />
   </component>

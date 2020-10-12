@@ -83,7 +83,19 @@ export default {
         },
         debugTronLink(bool) {
             this._debug_tronlink = bool
-        }
+        },
+        isNile() {
+            return this.connectedNode === FULL_NAMES.NILE
+        },
+        isMainnet() {
+            return this.connectedNode === FULL_NAMES.MAINNET
+        },
+        isShasta() {
+            return this.connectedNode === FULL_NAMES.SHASTA
+        },
+        isTronex() {
+            return this.connectedNode === FULL_NAMES.TRONEX
+        },
     },
     mounted() {
         let _this = this
