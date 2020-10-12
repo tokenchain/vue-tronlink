@@ -30,11 +30,18 @@ const CONF_TRONEX = {
     "event_server": "https://testapi.tronex.io",
     "faucet": "http://testnet.tronex.io/join/getJoinPage",
 }
-
+const FULL_NAMES = {
+    NILE: "NILE",
+    MAINNET: "MAINNET",
+    SHASTA: "SHASTA",
+    TRONEX: "TRONEX"
+}
 export {
+    FULL_NAMES,
     CONF_MAINNET,
     CONF_NILE,
     CONF_SHASTA,
-    CONF_TRONEX
+    CONF_TRONEX,
+    DEFAULT_NODES
 }
 
