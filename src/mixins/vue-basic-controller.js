@@ -1,11 +1,12 @@
 import tronlink from "./vue-tronlink"
+import {Base64} from "../utils/base64";
 
 export default {
     mixins: [tronlink],
     computed: {
         class_hash_approval() {
             if (this.token_send_approval_hash.length > 0) {
-                const index = this.txHashToIndex[this.token_send_approval_hash];
+                const index = this.txHashToIndex[this.token_send_approval_hash]
                 if (this.txs[index].status === "mined") {
                     return "is-success"
                 } else if (this.txs[index].status === "error") {
@@ -18,19 +19,19 @@ export default {
             }
         },
         wallet_coin() {
-            return this.getVal("wallet/QueryNowBalance", this._debug)
+            return this.getVal("wallet/QueryNowBalance", this.tronlink_controller_debug)
         },
         coin_symbol() {
-            return this.getVal("wallet/QueryNowSymbol", this._debug)
+            return this.getVal("wallet/QueryNowSymbol", this.tronlink_controller_debug)
         },
         contractAddress() {
-            return this.getVal("wallet/addressContract", this._debug)
+            return this.getVal("wallet/addressContract", this.tronlink_controller_debug)
         },
         mywalletaddress() {
-            return this.getVal("wallet/user_account", this._debug)
+            return this.getVal("wallet/user_account", this.tronlink_controller_debug)
         },
         contractBalance() {
-            return this.getVal("wallet/QueryContractBalance", this._debug)
+            return this.getVal("wallet/QueryContractBalance", this.tronlink_controller_debug)
         }
     },
     data() {
@@ -45,10 +46,10 @@ export default {
             txs: [],
             txHashToIndex: [],
             token_send_approval_hash: "",
-            _debug: true,
+            tronlink_controller_debug: true,
             _contract: false,
             _scan_error: false,
-            _worker_process: false,
+            _worker_process: false
         }
     },
     methods: {
@@ -57,8 +58,8 @@ export default {
          * @param e
          */
         report_scan_error(e) {
-            console.log(e);
-            this._scan_error = true;
+            console.log(e)
+            this._scan_error = true
         },
         /**
          * keep the heart beat checker
@@ -74,40 +75,70 @@ export default {
             return !this._contract && this.tronWeb
         },
         /**
-         *
+         * allow letter and numbers
          * @param cb
          * @returns {*}
          * @constructor
          */
-        InviteCodeGenerator(cb) {
-            // let hex = Math.floor (Math.random () * 0xFFFFFFF);
-            // let strCode = hex.toString (16).toUpperCase ();
-            // let strCode = generateCode (true, 6, 6);
-            const wallet_address = this.mywalletaddress;
-            const pubKey = this.W3.utils.keccak256(wallet_address);
-            const sub = String(pubKey).substring(3, 8).toUpperCase();
-            console.log("hash invite code generated", sub);
-            this.dispatch("masonic/gen_code", sub);
-            return cb(sub);
+        CodeGenerator(rexp) {
+            const address = this.tronLink.getAccountAddress()
+            const check = this.tronWeb.toHex(address)
+            const pubKey = this.tronWeb.utils.keccak256(check)
+            const b64 = new Base64()
+            const base64 = b64.encode(pubKey)
+            return base64.match(rexp).join("").toUpperCase()
+        },
+        /**
+         * only allow letters
+         * @constructor
+         */
+        BasedAddressCodeGenNumbic() {
+            const onlyLetters = this.CodeGenerator(/[a-zA-Z0-9]+/g)
+            const onlyUniqueLetters5 = onlyLetters.split("").filter(function (item, i, ar) {
+                return ar.indexOf(item) === i
+            }).join("").substring(0, 5)
+            if (this.isDebug()) {
+                console.log("the gen code is now at", onlyUniqueLetters5)
+            }
+            return onlyUniqueLetters5
+        },
+        /**
+         * only allow letters
+         * @constructor
+         */
+        BasedAddressCodeGen() {
+            const onlyLetters = this.CodeGenerator(/[a-zA-Z]+/g)
+            const onlyUniqueLetters5 = onlyLetters.split("").filter(function (item, i, ar) {
+                return ar.indexOf(item) === i
+            }).join("").substring(0, 5)
+            if (this.isDebug()) {
+                console.log("the gen code is now at", onlyUniqueLetters5)
+            }
+            return onlyUniqueLetters5
         },
         isDebug() {
-            return this.__debug;
+            return this.__debug
         },
         getVal(val, debug, format = "") {
             if (debug) {
                 return "00000"
             } else {
-                return this.storeget(val)
+                return this.loadLocal(val)
             }
         },
-        storeget(key) {
+        loadLocal(key) {
             if (this.$store) {
-                this.$store.getters[key];
+                this.$store.getters[key]
             }
         },
-        dispatch(key, content) {
+        saveLocal(key, content) {
             if (this.$store) {
-                this.$store.dispatch(key, content);
+                this.$store.dispatch(key, content)
+            }
+        },
+        reqs(key, content) {
+            if (this.$store) {
+                this.$store.dispatch(key, content)
             }
         }
     }

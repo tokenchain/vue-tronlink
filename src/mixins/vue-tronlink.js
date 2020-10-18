@@ -46,7 +46,7 @@ export default {
             console.log("TronLink is not installed")
             this.$emit("notify_tron_not_install", this.tronLinkInitialData, this.connectedNode)
         },
-        prenodenume(data_full_node) {
+        announce_node_name(data_full_node) {
             if (data_full_node === NODES.CONF_NILE.full_node) {
                 this.connectedNode = NODES.FULL_NAMES.NILE
             } else if (data_full_node === NODES.CONF_MAINNET.full_node) {
@@ -67,19 +67,29 @@ export default {
             window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
                 if (isTronLink) {
                     if (message.action === 'tabReply' && !this.tronLinkInitialData) {
-                        this.tronLinkInitialData = message.data.data;
-                        this.prenodenume(this.tronLinkInitialData.node.full_node)
-                        this.$emit("notify_tron_initialization", this.tronLinkInitialData)
+                        if (typeof message === "object" && message.hasOwnProperty("data")) {
+                            if (typeof message.data === "object" && message.data.hasOwnProperty("data")) {
+                                this.tronLinkInitialData = message.data.data;
+                                this.announce_node_name(this.tronLinkInitialData.node.full_node)
+                                this.$emit("notify_tron_initialization", this.tronLinkInitialData)
+                            } else {
+                                console.log(message.data)
+                            }
+                        } else {
+                            console.log(message)
+                        }
                     }
                     if (message.action === 'setNode') {
-                        this.prenodenume(message.data.node.fullNode)
+                        this.announce_node_name(message.data.node.fullNode)
                         this.$emit("notify_tron_node_change", this.connectedNode)
                     }
                     if (message.action === 'setAccount') {
-                        if (this.account_name !== message.data.name) {
-                            this.account_name = message.data.name
-                            this.authorized_address = message.data.address
-                            this.$emit("notify_tron_account_set", this.account_name, this.authorized_address)
+                        if (typeof message === "object" && message.hasOwnProperty("data")) {
+                            if (this.account_name !== message.data.name) {
+                                this.account_name = message.data.name
+                                this.authorized_address = message.data.address
+                                this.$emit("notify_tron_account_set", this.account_name, this.authorized_address)
+                            }
                         }
                     }
                     if (this._debug_tronlink) {
@@ -99,7 +109,7 @@ export default {
                 console.log(provider.fullNode.host)
                 console.log(this.tronWeb)
             }
-            this.prenodenume(provider.fullNode.host)
+            this.announce_node_name(provider.fullNode.host)
             this.$emit("notify_tron_installed")
         },
         async updateNodeVersion() {

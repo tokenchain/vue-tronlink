@@ -1,5 +1,6 @@
 import * as accounts from 'accounts';
 import * as base58 from 'base58';
+import * as base64 from 'base64';
 import * as bytes from 'bytes';
 import * as crypto from 'crypto';
 import * as code from 'code';
@@ -148,6 +149,7 @@ export default {
     code,
     accounts,
     base58,
+    base64,
     bytes,
     crypto,
     abi,

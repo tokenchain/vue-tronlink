@@ -19,7 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="" />
+    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/mixins/vue-metamask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,9 +34,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaScript File" />
         <option value="HTML File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -151,7 +157,15 @@
       <workItem from="1602512650334" duration="1938000" />
       <workItem from="1602517728652" duration="183000" />
       <workItem from="1602518947333" duration="663000" />
-      <workItem from="1602519717361" duration="300000" />
+      <workItem from="1602519717361" duration="384000" />
+      <workItem from="1602521536552" duration="187000" />
+      <workItem from="1602521750793" duration="10000" />
+      <workItem from="1602521836111" duration="24000" />
+      <workItem from="1602570721820" duration="49000" />
+      <workItem from="1602577324107" duration="655000" />
+      <workItem from="1602602752211" duration="111000" />
+      <workItem from="1603003584328" duration="659000" />
+      <workItem from="1603039990583" duration="1765000" />
     </task>
     <servers />
   </component>
@@ -204,5 +218,9 @@
     </state>
     <state x="652" y="271" width="597" height="490" key="find.popup/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602498086300" />
     <state x="652" y="272" width="597" height="492" key="find.popup/-1920.25.1920.1055/0.25.1792.987@0.25.1792.987" timestamp="1602328171782" />
+    <state x="454" y="219" key="search.everywhere.popup" timestamp="1603042298856">
+      <screen x="0" y="25" width="1792" height="1095" />
+    </state>
+    <state x="454" y="219" key="search.everywhere.popup/-1839.25.1839.1055/0.25.1792.1095@0.25.1792.1095" timestamp="1603042298856" />
   </component>
 </project>
