@@ -56,15 +56,19 @@ npmdeploy(){
     auto_install_nvm
 }
 gitpush(){
+    local gitcheck=$(git diff --shortstat)
     git add .
     #git remote add origin https://gitee.com/jjhoc/vue-tronlink.git
-    git commit -m "package updates related items. please check in commit details"
+    git commit -m "Please check! $gitcheck"
     git push
+    echo "♻️ You can open ${GIT_LOC} or git clone ${GIT_LOC}.git to copy to the local"
 }
+
 taobao(){
   cnpm sync vue-tronlink
   cnpm info vue-tronlink
 }
+GIT_LOC=https://gitee.com/jjhoc/vue-tronlink.git
 AUTO_INSTALL=0
 #tsc -b
 PROJECT_NAME="vue-tronlink"
