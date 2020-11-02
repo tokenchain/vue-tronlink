@@ -46,7 +46,7 @@ export default {
             console.log("TronLink is not installed")
             this.$emit("notify_tron_not_install", this.tronLinkInitialData, this.connectedNode)
         },
-        announce_node_name(data_full_node) {
+        announce_node_name(data_full_node = "") {
             if (data_full_node === NODES.CONF_NILE.full_node) {
                 this.connectedNode = NODES.FULL_NAMES.NILE
             } else if (data_full_node === NODES.CONF_MAINNET.full_node) {
@@ -70,7 +70,9 @@ export default {
                         if (typeof message === "object" && message.hasOwnProperty("data")) {
                             if (typeof message.data === "object" && message.data.hasOwnProperty("data")) {
                                 this.tronLinkInitialData = message.data.data;
-                                this.announce_node_name(this.tronLinkInitialData.node.full_node)
+                                if (typeof this.tronLinkInitialData === "object" && message.data.hasOwnProperty("node")) {
+                                    this.announce_node_name(this.tronLinkInitialData.node.full_node)
+                                }
                                 this.$emit("notify_tron_initialization", this.tronLinkInitialData)
                             } else {
                                 console.log(message.data)
