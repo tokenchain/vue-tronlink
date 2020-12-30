@@ -136,6 +136,25 @@ export default {
         isTronex() {
             return this.connectedNode === NODES.FULL_NAMES.TRONEX
         },
+        confirmDappChainID(chain_id_network) {
+            if (chain_id_network.toLowerCase() === "nile" && this.isNile()) {
+                return true
+            }
+
+            if (chain_id_network.toLowerCase() === "default" && this.isMainnet()) {
+                return true
+            }
+
+            if (chain_id_network.toLowerCase() === "mainnet" && this.isMainnet()) {
+                return true
+            }
+
+            if (chain_id_network.toLowerCase() === "mainnet" && this.isMainnet()) {
+                return true
+            }
+
+            return false
+        }
     },
     mounted() {
         let _this = this

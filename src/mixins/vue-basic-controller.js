@@ -1,8 +1,9 @@
 import tronlink from "./vue-tronlink"
+import imtoken from "./vue-imtoken"
 import {Base64} from "../utils/base64";
 
 export default {
-    mixins: [tronlink],
+    mixins: [tronlink, imtoken],
     computed: {
         class_hash_approval() {
             if (this.token_send_approval_hash.length > 0) {
