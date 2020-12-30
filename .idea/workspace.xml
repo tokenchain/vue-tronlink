@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-imtoken.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-imtoken.js" afterDir="false" />
-    </list>
+    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -189,7 +186,7 @@
       <workItem from="1604359533463" duration="162000" />
       <workItem from="1604386529625" duration="600000" />
       <workItem from="1604412831434" duration="1000" />
-      <workItem from="1609319106833" duration="4516000" />
+      <workItem from="1609319106833" duration="5221000" />
     </task>
     <servers />
   </component>
