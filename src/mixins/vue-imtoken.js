@@ -77,6 +77,25 @@ export default {
                 duration: 2500,
             })
         },
+        imtokenRouteTo(screen_id, title, url) {
+            if (!this.on_imtoken) return;
+            /**
+             imToken.callAPI('navigator.routeTo', {
+              screen: 'DappView',
+              passProps: {
+                title: 'DApp API Examples',
+                url: 'https://consenlabs.github.io/dapp-sdk-doc/index.html',
+              },
+            })
+             */
+            this.imtokenInstance.callAPI('navigator.routeTo', {
+                screen: screen_id,
+                passProps: {
+                    title: title,
+                    url: url,
+                },
+            })
+        },
         imtokenUIConfirm(payload, yes_cb, no_cb) {
             if (!this.on_imtoken) return;
             /**
