@@ -1,8 +1,6 @@
 <template>
   <section id="indexbox" class="container indexcolor">
-
     <button @click="goto_main">CONNECT</button>
-
   </section>
 </template>
 <script>

@@ -20,12 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/datavuex/eth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/datavuex/tron.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/junit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/junit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entry/TronTest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/entry/TronTest.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/address.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/address.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +80,7 @@
       <recent name="$PROJECT_DIR$/develop" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.coveralls">
+  <component name="RunManager" selected="npm.build">
     <configuration name="All Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -135,9 +135,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.coveralls" />
         <item itemvalue="npm.lint" />
-        <item itemvalue="npm.build" />
         <item itemvalue="Jest.All Tests" />
         <item itemvalue="Jest.Invalid input format" />
       </list>
@@ -207,6 +207,8 @@
       <workItem from="1612864467554" duration="110000" />
       <workItem from="1612865663109" duration="213000" />
       <workItem from="1612879468800" duration="436000" />
+      <workItem from="1612882816189" duration="295000" />
+      <workItem from="1612883312983" duration="24000" />
     </task>
     <servers />
   </component>
@@ -235,6 +237,10 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="408" y="217" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612882949049">
+      <screen x="79" y="25" width="1713" height="1095" />
+    </state>
+    <state x="408" y="217" key="#com.intellij.execution.impl.EditConfigurationsDialog/79.25.1713.1095@79.25.1713.1095" timestamp="1612882949049" />
     <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610633710729">
       <screen x="76" y="25" width="1716" height="1095" />
     </state>
@@ -244,26 +250,31 @@
     </state>
     <state x="696" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/83.25.1709.1095@83.25.1709.1095" timestamp="1612863427521" />
     <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/87.25.1705.1095@87.25.1705.1095" timestamp="1612851501387" />
-    <state width="1414" height="196" key="GridCell.Tab.0.bottom" timestamp="1604359694819">
-      <screen x="87" y="25" width="1705" height="1095" />
+    <state width="1363" height="467" key="GridCell.Tab.0.bottom" timestamp="1612883110562">
+      <screen x="79" y="25" width="1713" height="1095" />
     </state>
+    <state width="1363" height="467" key="GridCell.Tab.0.bottom/79.25.1713.1095@79.25.1713.1095" timestamp="1612883110562" />
     <state width="1414" height="196" key="GridCell.Tab.0.bottom/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694819" />
-    <state width="1414" height="196" key="GridCell.Tab.0.center" timestamp="1604359694818">
-      <screen x="87" y="25" width="1705" height="1095" />
+    <state width="1363" height="467" key="GridCell.Tab.0.center" timestamp="1612883110562">
+      <screen x="79" y="25" width="1713" height="1095" />
     </state>
+    <state width="1363" height="467" key="GridCell.Tab.0.center/79.25.1713.1095@79.25.1713.1095" timestamp="1612883110562" />
     <state width="1414" height="196" key="GridCell.Tab.0.center/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694818" />
-    <state width="1414" height="196" key="GridCell.Tab.0.left" timestamp="1604359694817">
-      <screen x="87" y="25" width="1705" height="1095" />
+    <state width="1363" height="467" key="GridCell.Tab.0.left" timestamp="1612883110561">
+      <screen x="79" y="25" width="1713" height="1095" />
     </state>
+    <state width="1363" height="467" key="GridCell.Tab.0.left/79.25.1713.1095@79.25.1713.1095" timestamp="1612883110561" />
     <state width="1414" height="196" key="GridCell.Tab.0.left/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694817" />
-    <state width="1414" height="196" key="GridCell.Tab.0.right" timestamp="1604359694818">
-      <screen x="87" y="25" width="1705" height="1095" />
+    <state width="1363" height="467" key="GridCell.Tab.0.right" timestamp="1612883110562">
+      <screen x="79" y="25" width="1713" height="1095" />
     </state>
+    <state width="1363" height="467" key="GridCell.Tab.0.right/79.25.1713.1095@79.25.1713.1095" timestamp="1612883110562" />
     <state width="1414" height="196" key="GridCell.Tab.0.right/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694818" />
-    <state x="704" y="299" width="570" height="546" key="find.popup" timestamp="1612863002635">
-      <screen x="83" y="25" width="1709" height="1095" />
+    <state x="701" y="299" width="572" height="546" key="find.popup" timestamp="1612883104485">
+      <screen x="79" y="25" width="1713" height="1095" />
     </state>
     <state x="700" y="299" width="572" height="546" key="find.popup/76.25.1716.1095@76.25.1716.1095" timestamp="1610634269835" />
+    <state x="701" y="299" width="572" height="546" key="find.popup/79.25.1713.1095@79.25.1713.1095" timestamp="1612883104485" />
     <state x="704" y="299" width="570" height="546" key="find.popup/83.25.1709.1095@83.25.1709.1095" timestamp="1612863002635" />
   </component>
 </project>

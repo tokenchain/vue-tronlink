@@ -1,4 +1,3 @@
-
 import {Address} from "./base/Address"
 import {TokenTrc20} from "./TokenTrc20";
 import {TronLinkToken, TronTRC20Token} from "./base/types";
@@ -98,9 +97,7 @@ export default class TronLink {
 
     async coinTRX(): Promise<number> {
         let wallet_trx_coin = 0
-        await this.tronWeb.trx.getBalance(this.getAccountAddress(), (e, balance) => {
-            wallet_trx_coin = balance
-        })
+        wallet_trx_coin = await this.tronWeb.trx.getBalance(this.getAccountAddress())
         return wallet_trx_coin
     }
 
