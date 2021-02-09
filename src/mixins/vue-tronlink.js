@@ -20,7 +20,7 @@ export default {
             connectedNode: false,
             // wallet account name
             account_name: false,
-            // TB9M9KdCvee3qnRtKE7GACZpTh3oiTX9JL
+            // --
             authorized_address: false,
             //module debug on core tronlink only
             _debug_tronlink: false,

@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/datavuex/eth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/datavuex/tron.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-basic-controller.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +36,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="JavaScript File" />
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -63,17 +67,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/abi/base" />
-      <recent name="$PROJECT_DIR$/src/abi" />
-      <recent name="$PROJECT_DIR$/src/entry" />
-      <recent name="$PROJECT_DIR$/develop" />
-      <recent name="$PROJECT_DIR$/src/impl" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/utils" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/datavuex" />
+      <recent name="$PROJECT_DIR$/src/abi/base" />
+      <recent name="$PROJECT_DIR$/src/abi" />
+      <recent name="$PROJECT_DIR$/src/entry" />
+      <recent name="$PROJECT_DIR$/develop" />
     </key>
   </component>
   <component name="RunManager" selected="npm.coveralls">
@@ -201,7 +205,8 @@
       <workItem from="1612861286878" duration="7000" />
       <workItem from="1612861358763" duration="2593000" />
       <workItem from="1612864467554" duration="110000" />
-      <workItem from="1612865663109" duration="41000" />
+      <workItem from="1612865663109" duration="213000" />
+      <workItem from="1612879468800" duration="436000" />
     </task>
     <servers />
   </component>

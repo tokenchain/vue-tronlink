@@ -1,6 +1,6 @@
 {
   "name": "vue-tronlink",
-  "version": "0.1.57",
+  "version": "0.1.58",
   "description": "Vue support for the TronLink browser extension",
   "main": "src/index.js",
   "scripts": {
@@ -54,6 +54,7 @@
     "postcss-modules": "^3.2.2",
     "tronweb": "^2.10.2",
     "vue": "^2.5.17",
+    "lodash": "^4.17.15",
     "vue-hot-reload-api": "^2.3.4",
     "vue-template-compiler": "^2.6.12"
   },
