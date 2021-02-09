@@ -1,5 +1,5 @@
 import { Address } from "./base/Address";
-import { TokenTrc20 } from "./abi/TokenTrc20";
+import { TokenTrc20 } from "./TokenTrc20";
 export default class TronLink {
     constructor(tronWeb) {
         this.tronWeb = tronWeb;

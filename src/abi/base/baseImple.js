@@ -1,4 +1,4 @@
-import { isArray, isBigNumber } from "../../utils";
+import { isArray, isBigNumber } from "../../utils/index";
 import { EventEmitter } from "eventemitter3";
 export default class BaseContract extends EventEmitter {
     decodeValues(params) {
