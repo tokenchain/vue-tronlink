@@ -8,6 +8,10 @@ Vue support for the TronLink browser extension
 
 This project will also support the future networks
 
+### TRC20 display
+ * support TRC20 balance
+ * TronLink support TRC20 token
+ * Basic coins from USDT, BTC, ETH, SUN, DP 
 
 ### vue mixin Events:
  * notify_tron_not_install

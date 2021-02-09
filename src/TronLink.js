@@ -1,4 +1,5 @@
 import {Address} from "./utils/address"
+import {TokenTrc20} from "./abi/TokenTrc20";
 
 /**
  * TronLink extension interaction functionality
@@ -13,6 +14,7 @@ export default class TronLink {
      */
     constructor(tronWeb) {
         this.tronWeb = tronWeb
+        this.tokens = {}
     }
 
     /**
@@ -90,4 +92,67 @@ export default class TronLink {
         throw "Invalid address formats"
     }
 
+
+    async getCoin(trc20_coin) {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin)
+    }
+
+    async coinDP() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
+    }
+
+    async coinCOLA() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
+    }
+
+    async coinBTC() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
+    }
+
+    async coinETH() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
+    }
+
+    async coinSUN() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
+    }
+
+    async coinUSDT() {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+    }
+
+    async getThirdTokenBalance(address, trc20_address) {
+        if (!this.isLoggedIn()) {
+            throw "wallet is not login"
+        }
+
+        if (!this.tokens.hasOwnProperty(trc20_address)) {
+            const contract = new TokenTrc20(this.tronWeb)
+            contract.setDebug(false)
+            await contract.init(trc20_address)
+
+            const a = await contract.balanceOf(address)
+            const d = await contract.decimals()
+
+            this.tokens[trc20_address] = {
+                instance: contract,
+                address: trc20_address,
+                decimal: d,
+                hold: {}
+            }
+            this.tokens[trc20_address].hold[address] = a
+        } else {
+            const contract = this.tokens[trc20_address].instance
+            const aa = await contract.balanceOf(address)
+            const dec = await contract.decimals()
+            this.tokens[trc20_address].decimal = dec
+            this.tokens[trc20_address].hold[address] = aa
+        }
+
+        return this.tokens[trc20_address];
+    }
+
+    getListedCoins() {
+        return this.tokens
+    }
 }

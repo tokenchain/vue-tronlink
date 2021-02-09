@@ -20,13 +20,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/abi/TokenTrc20.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/abi/base/base.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/abi/base/common.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/mixins/vue-token.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/ethereumnetworks.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TronLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-metamask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-metamask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-token.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +197,9 @@
       <workItem from="1604412831434" duration="1000" />
       <workItem from="1609319106833" duration="5221000" />
       <workItem from="1610362536737" duration="181000" />
-      <workItem from="1610633165782" duration="1487000" />
+      <workItem from="1610633165782" duration="1612000" />
+      <workItem from="1610634800899" duration="99000" />
+      <workItem from="1612848008365" duration="6095000" />
     </task>
     <servers />
   </component>
@@ -205,13 +207,10 @@
     <option name="version" value="3" />
     <option name="exactExcludedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/abi/base/base.js" />
-        <option value="$PROJECT_DIR$/src/abi/base/types.js" />
-        <option value="$PROJECT_DIR$/develop/impl/contract_sample.js" />
-        <option value="$PROJECT_DIR$/src/utils/contract/baseImple.js" />
-        <option value="$PROJECT_DIR$/develop/tronpygen/gen_ts/bonus_keep.js" />
-        <option value="$PROJECT_DIR$/develop/tronpygen/gen_ts/masonic_coal.js" />
         <option value="$PROJECT_DIR$/src/abi/TokenTrc20.js" />
+        <option value="$PROJECT_DIR$/src/abi/base/types.js" />
+        <option value="$PROJECT_DIR$/src/abi/base/base.js" />
+        <option value="$PROJECT_DIR$/src/utils/contract/baseImple.js" />
       </list>
     </option>
   </component>
@@ -228,51 +227,33 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="571" y="413" key="#ESLint" timestamp="1602496682930">
-      <screen x="0" y="25" width="1792" height="983" />
-    </state>
-    <state x="571" y="413" key="#ESLint/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602496682930" />
-    <state x="671" y="353" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602314423401">
-      <screen x="0" y="25" width="1792" height="987" />
-    </state>
-    <state x="671" y="353" key="#com.intellij.fileTypes.FileTypeChooser/-1920.25.1920.1055/0.25.1792.987@0.25.1792.987" timestamp="1602314423401" />
-    <state x="817" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1602313203212">
-      <screen x="0" y="25" width="1792" height="983" />
-    </state>
-    <state x="817" y="236" key="#com.intellij.ide.util.MemberChooser/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602313203212" />
     <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610633710729">
       <screen x="76" y="25" width="1716" height="1095" />
     </state>
     <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/76.25.1716.1095@76.25.1716.1095" timestamp="1610633710729" />
+    <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612851501387">
+      <screen x="87" y="25" width="1705" height="1095" />
+    </state>
+    <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/87.25.1705.1095@87.25.1705.1095" timestamp="1612851501387" />
     <state width="1414" height="196" key="GridCell.Tab.0.bottom" timestamp="1604359694819">
       <screen x="87" y="25" width="1705" height="1095" />
     </state>
-    <state width="1231" height="222" key="GridCell.Tab.0.bottom/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602323822933" />
     <state width="1414" height="196" key="GridCell.Tab.0.bottom/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694819" />
     <state width="1414" height="196" key="GridCell.Tab.0.center" timestamp="1604359694818">
       <screen x="87" y="25" width="1705" height="1095" />
     </state>
-    <state width="1231" height="222" key="GridCell.Tab.0.center/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602323822931" />
     <state width="1414" height="196" key="GridCell.Tab.0.center/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694818" />
     <state width="1414" height="196" key="GridCell.Tab.0.left" timestamp="1604359694817">
       <screen x="87" y="25" width="1705" height="1095" />
     </state>
-    <state width="1231" height="222" key="GridCell.Tab.0.left/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602323822930" />
     <state width="1414" height="196" key="GridCell.Tab.0.left/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694817" />
     <state width="1414" height="196" key="GridCell.Tab.0.right" timestamp="1604359694818">
       <screen x="87" y="25" width="1705" height="1095" />
     </state>
-    <state width="1231" height="222" key="GridCell.Tab.0.right/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602323822932" />
     <state width="1414" height="196" key="GridCell.Tab.0.right/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694818" />
     <state x="700" y="299" width="572" height="546" key="find.popup" timestamp="1610634269835">
       <screen x="76" y="25" width="1716" height="1095" />
     </state>
-    <state x="652" y="271" width="597" height="490" key="find.popup/-1920.25.1920.1055/0.25.1792.983@0.25.1792.983" timestamp="1602498086300" />
-    <state x="652" y="272" width="597" height="492" key="find.popup/-1920.25.1920.1055/0.25.1792.987@0.25.1792.987" timestamp="1602328171782" />
     <state x="700" y="299" width="572" height="546" key="find.popup/76.25.1716.1095@76.25.1716.1095" timestamp="1610634269835" />
-    <state x="454" y="219" key="search.everywhere.popup" timestamp="1603042298856">
-      <screen x="0" y="25" width="1792" height="1095" />
-    </state>
-    <state x="454" y="219" key="search.everywhere.popup/-1839.25.1839.1055/0.25.1792.1095@0.25.1792.1095" timestamp="1603042298856" />
   </component>
 </project>
