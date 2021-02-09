@@ -1,7 +1,6 @@
 
 import {Address} from "./base/Address"
-// @ts-ignore
-import {TokenTrc20} from "./abi/TokenTrc20";
+import {TokenTrc20} from "./TokenTrc20";
 import {TronLinkToken, TronTRC20Token} from "./base/types";
 
 /**

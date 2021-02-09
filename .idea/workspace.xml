@@ -20,25 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/abi/base/Address.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TronLink.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TokenTrc20.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TokenTrc20.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/base/common.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/common.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/abi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/abi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/address.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/baseImple.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/baseImple.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/contract/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/contract/method.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/method.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crypto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/help.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/update.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,6 +200,8 @@
       <workItem from="1612860954417" duration="54000" />
       <workItem from="1612861286878" duration="7000" />
       <workItem from="1612861358763" duration="2593000" />
+      <workItem from="1612864467554" duration="110000" />
+      <workItem from="1612865663109" duration="41000" />
     </task>
     <servers />
   </component>
