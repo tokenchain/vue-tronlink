@@ -110,11 +110,11 @@ export default class TronLink {
      * @param cb function callback
      * @param cberr function callback
      */
-    getCoinTRX(cb, cberr) {
+    getCoinTRX(cb, cberr): void {
         this.tronWeb.trx.getBalance(this.getAccountAddress(), (err, x) => {
-            if(err == null){
+            if (err == null) {
                 cb(x)
-            }else{
+            } else {
                 cberr(err)
             }
         })

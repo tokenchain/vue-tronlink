@@ -52,10 +52,18 @@ export default class TronLink {
     }
     async coinTRX() {
         let wallet_trx_coin = 0;
-        await this.tronWeb.trx.getBalance(this.getAccountAddress(), (e, balance) => {
-            wallet_trx_coin = balance;
-        });
+        wallet_trx_coin = await this.tronWeb.trx.getBalance(this.getAccountAddress());
         return wallet_trx_coin;
+    }
+    getCoinTRX(cb, cberr) {
+        this.tronWeb.trx.getBalance(this.getAccountAddress(), (err, x) => {
+            if (err == null) {
+                cb(x);
+            }
+            else {
+                cberr(err);
+            }
+        });
     }
     async getCoin(trc20_coin) {
         return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
