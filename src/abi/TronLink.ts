@@ -95,10 +95,29 @@ export default class TronLink {
         throw "Invalid address formats"
     }
 
+    /**
+     * doesnt work on the older version
+     * @deprecated
+     */
     async coinTRX(): Promise<number> {
         let wallet_trx_coin = 0
         wallet_trx_coin = await this.tronWeb.trx.getBalance(this.getAccountAddress())
         return wallet_trx_coin
+    }
+
+    /**
+     * the working version of get balance of coin trx the simple way
+     * @param cb function callback
+     * @param cberr function callback
+     */
+    getCoinTRX(cb, cberr) {
+        this.tronWeb.trx.getBalance(this.getAccountAddress(), (err, x) => {
+            if(err == null){
+                cb(x)
+            }else{
+                cberr(err)
+            }
+        })
     }
 
     async getCoin(trc20_coin: string): Promise<TronTRC20Token> {
