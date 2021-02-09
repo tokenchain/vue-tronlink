@@ -1,231 +1,247 @@
 // tslint:disable:no-unused-variable
 // tslint:disable:no-use-before-define
-import { BigNumber } from "bignumber.js"
+import {BigNumber} from "bignumber.js"
+import {TokenTrc20} from "../TokenTrc20";
+
+export interface Balancer {
+    [holder_address: string]: number;
+}
+
+export interface TronTRC20Token {
+    instance: TokenTrc20;
+    address: string;
+    decimal: number;
+    hold: Balancer;
+}
+
+export interface TronLinkToken {
+    [contract_address: string]: TronTRC20Token;
+}
 
 export enum OpCode {
-  // 0s: Stop and Arithmetic Operations
-  Stop = "STOP",
-  Add = "ADD",
-  Mul = "MUL",
-  Sub = "SUB",
-  Div = "DIV",
-  SDiv = "SDIV",
-  Mod = "MOD",
-  SMod = "SMOD",
-  AddMod = "ADDMOD",
-  MulMod = "MULMOD",
-  Exp = "EXP",
-  SignExtend = "SIGNEXTEND",
-  // 10s: Comparison & Bitwise Logic Operations
-  Lt = "LT",
-  Gt = "GT",
-  SLt = "SLT",
-  SGt = "SGT",
-  Eq = "EQ",
-  IsZero = "ISZERO",
-  And = "AND",
-  Or = "OR",
-  Xor = "XOR",
-  Not = "NOT",
-  Byte = "BYTE",
-  // 20s: SHA3
-  Sha3 = "SHA3",
-  // 30s: Environmental Information
-  Address = "ADDRESS",
-  Balance = "BALANCE",
-  Origin = "ORIGIN",
-  Caller = "CALLER",
-  CallValue = "CALLVALUE",
-  CallDataLoad = "CALLDATALOAD",
-  CallDataSize = "CALLDATASIZE",
-  CallDataCopy = "CALLDATACOPY",
-  CodeSize = "CODESIZE",
-  CodeCopy = "CODECOPY",
-  GasPrice = "GASPRICE",
-  ExtCodeSize = "EXTCODESIZE",
-  ExtCodeCopy = "EXTCODECOPY",
-  ReturnDataSize = "RETURNDATASIZE",
-  ReturnDataCopy = "RETURNDATACOPY",
-  // 40s: Block Information
-  BlockHash = "BLOCKHASH",
-  Coinbase = "COINBASE",
-  TimeStamp = "TimeStamp",
-  Number = "NUMBER",
-  Difficulty = "DIFFICULTY",
-  Gaslimit = "GASLIMIT",
-  // 50s: Stack, Memory, Storage and Flow Operations
-  Pop = "POP",
-  MLoad = "MLOAD",
-  MStore = "MSTORE",
-  MStore8 = "MSTORE8",
-  SLoad = "SLOAD",
-  SStore = "SSTORE",
-  Jump = "JUMP",
-  Jumpi = "JUMPI",
-  Pc = "PC",
-  MSize = "MSIZE",
-  Gas = "GAS",
-  JumpDest = "JUMPDEST",
-  // 60s & 70s: Push Operations
-  Push1 = "PUSH1",
-  Push2 = "PUSH2",
-  Push3 = "PUSH3",
-  Push4 = "PUSH4",
-  Push5 = "PUSH5",
-  Push6 = "PUSH6",
-  Push7 = "PUSH7",
-  Push8 = "PUSH8",
-  Push9 = "PUSH9",
-  Push10 = "PUSH10",
-  Push11 = "PUSH11",
-  Push12 = "PUSH12",
-  Push13 = "PUSH13",
-  Push14 = "PUSH14",
-  Push15 = "PUSH15",
-  Push16 = "PUSH16",
-  Push17 = "PUSH17",
-  Push18 = "PUSH18",
-  Push19 = "PUSH19",
-  Push20 = "PUSH20",
-  Push21 = "PUSH21",
-  Push22 = "PUSH22",
-  Push23 = "PUSH23",
-  Push24 = "PUSH24",
-  Push25 = "PUSH25",
-  Push26 = "PUSH26",
-  Push27 = "PUSH27",
-  Push28 = "PUSH28",
-  Push29 = "PUSH29",
-  Push30 = "PUSH30",
-  Push31 = "PUSH31",
-  Push32 = "PUSH32",
-  // 80s: Duplication Operation
-  Dup1 = "DUP1",
-  Dup2 = "DUP2",
-  Dup3 = "DUP3",
-  Dup4 = "DUP4",
-  Dup5 = "DUP5",
-  Dup6 = "DUP6",
-  Dup7 = "DUP7",
-  Dup8 = "DUP8",
-  Dup9 = "DUP9",
-  Dup10 = "DUP10",
-  Dup11 = "DUP11",
-  Dup12 = "DUP12",
-  Dup13 = "DUP13",
-  Dup14 = "DUP14",
-  Dup15 = "DUP15",
-  Dup16 = "DUP16",
-  // 90s: Exchange Operation
-  Swap1 = "SWAP1",
-  Swap2 = "SWAP2",
-  Swap3 = "SWAP3",
-  Swap4 = "SWAP4",
-  Swap5 = "SWAP5",
-  Swap6 = "SWAP6",
-  Swap7 = "SWAP7",
-  Swap8 = "SWAP8",
-  Swap9 = "SWAP9",
-  Swap10 = "SWAP10",
-  Swap11 = "SWAP11",
-  Swap12 = "SWAP12",
-  Swap13 = "SWAP13",
-  Swap14 = "SWAP14",
-  Swap15 = "SWAP15",
-  Swap16 = "SWAP16",
-  // a0s: Logging Operations
-  Log1 = "LOG1",
-  Log2 = "LOG2",
-  Log3 = "LOG3",
-  Log4 = "LOG4",
-  // f0s: System operations
-  Create = "CREATE",
-  Call = "CALL",
-  CallCode = "CALLCODE",
-  Return = "RETURN",
-  DelegateCall = "DELEGATECALL",
-  StaticCall = "STATICCALL",
-  Revert = "REVERT",
-  Invalid = "INVALID",
-  SelfDestruct = "SELFDESTRUCT",
+    // 0s: Stop and Arithmetic Operations
+    Stop = "STOP",
+    Add = "ADD",
+    Mul = "MUL",
+    Sub = "SUB",
+    Div = "DIV",
+    SDiv = "SDIV",
+    Mod = "MOD",
+    SMod = "SMOD",
+    AddMod = "ADDMOD",
+    MulMod = "MULMOD",
+    Exp = "EXP",
+    SignExtend = "SIGNEXTEND",
+    // 10s: Comparison & Bitwise Logic Operations
+    Lt = "LT",
+    Gt = "GT",
+    SLt = "SLT",
+    SGt = "SGT",
+    Eq = "EQ",
+    IsZero = "ISZERO",
+    And = "AND",
+    Or = "OR",
+    Xor = "XOR",
+    Not = "NOT",
+    Byte = "BYTE",
+    // 20s: SHA3
+    Sha3 = "SHA3",
+    // 30s: Environmental Information
+    Address = "ADDRESS",
+    Balance = "BALANCE",
+    Origin = "ORIGIN",
+    Caller = "CALLER",
+    CallValue = "CALLVALUE",
+    CallDataLoad = "CALLDATALOAD",
+    CallDataSize = "CALLDATASIZE",
+    CallDataCopy = "CALLDATACOPY",
+    CodeSize = "CODESIZE",
+    CodeCopy = "CODECOPY",
+    GasPrice = "GASPRICE",
+    ExtCodeSize = "EXTCODESIZE",
+    ExtCodeCopy = "EXTCODECOPY",
+    ReturnDataSize = "RETURNDATASIZE",
+    ReturnDataCopy = "RETURNDATACOPY",
+    // 40s: Block Information
+    BlockHash = "BLOCKHASH",
+    Coinbase = "COINBASE",
+    TimeStamp = "TimeStamp",
+    Number = "NUMBER",
+    Difficulty = "DIFFICULTY",
+    Gaslimit = "GASLIMIT",
+    // 50s: Stack, Memory, Storage and Flow Operations
+    Pop = "POP",
+    MLoad = "MLOAD",
+    MStore = "MSTORE",
+    MStore8 = "MSTORE8",
+    SLoad = "SLOAD",
+    SStore = "SSTORE",
+    Jump = "JUMP",
+    Jumpi = "JUMPI",
+    Pc = "PC",
+    MSize = "MSIZE",
+    Gas = "GAS",
+    JumpDest = "JUMPDEST",
+    // 60s & 70s: Push Operations
+    Push1 = "PUSH1",
+    Push2 = "PUSH2",
+    Push3 = "PUSH3",
+    Push4 = "PUSH4",
+    Push5 = "PUSH5",
+    Push6 = "PUSH6",
+    Push7 = "PUSH7",
+    Push8 = "PUSH8",
+    Push9 = "PUSH9",
+    Push10 = "PUSH10",
+    Push11 = "PUSH11",
+    Push12 = "PUSH12",
+    Push13 = "PUSH13",
+    Push14 = "PUSH14",
+    Push15 = "PUSH15",
+    Push16 = "PUSH16",
+    Push17 = "PUSH17",
+    Push18 = "PUSH18",
+    Push19 = "PUSH19",
+    Push20 = "PUSH20",
+    Push21 = "PUSH21",
+    Push22 = "PUSH22",
+    Push23 = "PUSH23",
+    Push24 = "PUSH24",
+    Push25 = "PUSH25",
+    Push26 = "PUSH26",
+    Push27 = "PUSH27",
+    Push28 = "PUSH28",
+    Push29 = "PUSH29",
+    Push30 = "PUSH30",
+    Push31 = "PUSH31",
+    Push32 = "PUSH32",
+    // 80s: Duplication Operation
+    Dup1 = "DUP1",
+    Dup2 = "DUP2",
+    Dup3 = "DUP3",
+    Dup4 = "DUP4",
+    Dup5 = "DUP5",
+    Dup6 = "DUP6",
+    Dup7 = "DUP7",
+    Dup8 = "DUP8",
+    Dup9 = "DUP9",
+    Dup10 = "DUP10",
+    Dup11 = "DUP11",
+    Dup12 = "DUP12",
+    Dup13 = "DUP13",
+    Dup14 = "DUP14",
+    Dup15 = "DUP15",
+    Dup16 = "DUP16",
+    // 90s: Exchange Operation
+    Swap1 = "SWAP1",
+    Swap2 = "SWAP2",
+    Swap3 = "SWAP3",
+    Swap4 = "SWAP4",
+    Swap5 = "SWAP5",
+    Swap6 = "SWAP6",
+    Swap7 = "SWAP7",
+    Swap8 = "SWAP8",
+    Swap9 = "SWAP9",
+    Swap10 = "SWAP10",
+    Swap11 = "SWAP11",
+    Swap12 = "SWAP12",
+    Swap13 = "SWAP13",
+    Swap14 = "SWAP14",
+    Swap15 = "SWAP15",
+    Swap16 = "SWAP16",
+    // a0s: Logging Operations
+    Log1 = "LOG1",
+    Log2 = "LOG2",
+    Log3 = "LOG3",
+    Log4 = "LOG4",
+    // f0s: System operations
+    Create = "CREATE",
+    Call = "CALL",
+    CallCode = "CALLCODE",
+    Return = "RETURN",
+    DelegateCall = "DELEGATECALL",
+    StaticCall = "STATICCALL",
+    Revert = "REVERT",
+    Invalid = "INVALID",
+    SelfDestruct = "SELFDESTRUCT",
 }
 
 export interface StructLog {
-  depth: number;
-  error: string;
-  gas: number;
-  gasCost: number;
-  memory: string[];
-  op: OpCode;
-  pc: number;
-  stack: string[];
-  storage: { [location: string]: string };
+    depth: number;
+    error: string;
+    gas: number;
+    gasCost: number;
+    memory: string[];
+    op: OpCode;
+    pc: number;
+    stack: string[];
+    storage: { [location: string]: string };
 }
 
 export interface TransactionTrace {
-  gas: number;
-  returnValue: any;
-  structLogs: StructLog[];
+    gas: number;
+    returnValue: any;
+    structLogs: StructLog[];
 }
 
 export type Unit =
-  | "kwei"
-  | "ada"
-  | "mwei"
-  | "babbage"
-  | "gwei"
-  | "shannon"
-  | "szabo"
-  | "finney"
-  | "ether"
-  | "kether"
-  | "grand"
-  | "einstein"
-  | "mether"
-  | "gether"
-  | "tether";
+    | "kwei"
+    | "ada"
+    | "mwei"
+    | "babbage"
+    | "gwei"
+    | "shannon"
+    | "szabo"
+    | "finney"
+    | "ether"
+    | "kether"
+    | "grand"
+    | "einstein"
+    | "mether"
+    | "gether"
+    | "tether";
 
 export interface JSONRPCRequestPayload {
-  params: any[];
-  method: string;
-  id: number;
-  jsonrpc: string;
+    params: any[];
+    method: string;
+    id: number;
+    jsonrpc: string;
 }
 
 export interface JSONRPCResponseError {
-  message: string;
-  code: number;
+    message: string;
+    code: number;
 }
 
 export interface JSONRPCResponsePayload {
-  result: any;
-  id: number;
-  jsonrpc: string;
-  error?: JSONRPCResponseError;
+    result: any;
+    id: number;
+    jsonrpc: string;
+    error?: JSONRPCResponseError;
 }
 
 export interface AbstractBlock {
-  number: number | null;
-  hash: string | null;
-  parentHash: string;
-  nonce: string | null;
-  sha3Uncles: string;
-  logsBloom: string | null;
-  transactionsRoot: string;
-  stateRoot: string;
-  miner: string;
-  difficulty: BigNumber;
-  totalDifficulty: BigNumber;
-  extraData: string;
-  size: number;
-  gasLimit: number;
-  gasUsed: number;
-  timestamp: number;
-  uncles: string[];
+    number: number | null;
+    hash: string | null;
+    parentHash: string;
+    nonce: string | null;
+    sha3Uncles: string;
+    logsBloom: string | null;
+    transactionsRoot: string;
+    stateRoot: string;
+    miner: string;
+    difficulty: BigNumber;
+    totalDifficulty: BigNumber;
+    extraData: string;
+    size: number;
+    gasLimit: number;
+    gasUsed: number;
+    timestamp: number;
+    uncles: string[];
 }
 
 export interface BlockWithoutTransactionData extends AbstractBlock {
-  transactions: string[];
+    transactions: string[];
 }
 
 export type ConstructorStateMutability = "nonpayable" | "payable";
@@ -242,14 +258,16 @@ export interface GanacheProvider {
 export interface Provider {
     sendAsync(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
 }
+
 /**
  * Web3.js version 1 provider interface
  * This provider interface was implemented in the pre-1.0Beta releases for Web3.js.
  * This interface allowed sending synchonous requests, support for which was later dropped.
  */
 export interface Web3JsV1Provider {
-  sendAsync(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
-  send(payload: JSONRPCRequestPayload): JSONRPCResponsePayload;
+    sendAsync(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
+
+    send(payload: JSONRPCRequestPayload): JSONRPCResponsePayload;
 }
 
 /**
@@ -258,7 +276,7 @@ export interface Web3JsV1Provider {
  * before the first attempts to conform to EIP1193
  */
 export interface Web3JsV2Provider {
-  send(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
+    send(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
 }
 
 /**
@@ -267,7 +285,7 @@ export interface Web3JsV2Provider {
  * however it does not conform entirely.
  */
 export interface Web3JsV3Provider {
-  send(method: string, params?: any[]): Promise<any>;
+    send(method: string, params?: any[]): Promise<any>;
 }
 
 export type Web3JsProvider = Web3JsV1Provider | Web3JsV2Provider | Web3JsV3Provider;
@@ -279,9 +297,11 @@ export type Web3JsProvider = Web3JsV1Provider | Web3JsV2Provider | Web3JsV3Provi
 export type EIP1193Event = "accountsChanged" | "networkChanged" | "close" | "connect" | "notification";
 
 export interface EIP1193Provider {
-  isEIP1193: boolean;
-  send(method: string, params?: any[]): Promise<any>;
-  on(event: EIP1193Event, listener: (result: any) => void): this;
+    isEIP1193: boolean;
+
+    send(method: string, params?: any[]): Promise<any>;
+
+    on(event: EIP1193Event, listener: (result: any) => void): this;
 }
 
 /**
@@ -290,13 +310,16 @@ export interface EIP1193Provider {
  * add here
  */
 export interface ZeroExProvider {
-  // TODO: Consolidate these bools into a single enum value
-  isZeroExProvider?: boolean;
-  isMetaMask?: boolean;
-  isParity?: boolean;
-  stop?(): void;
-  enable?(): Promise<void>;
-  sendAsync(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
+    // TODO: Consolidate these bools into a single enum value
+    isZeroExProvider?: boolean;
+    isMetaMask?: boolean;
+    isParity?: boolean;
+
+    stop?(): void;
+
+    enable?(): Promise<void>;
+
+    sendAsync(payload: JSONRPCRequestPayload, callback: JSONRPCErrorCallback): void;
 }
 
 /**
@@ -306,10 +329,10 @@ export interface ZeroExProvider {
 export type SupportedProvider = Web3JsProvider | GanacheProvider | EIP1193Provider | ZeroExProvider;
 
 export interface DataItem {
-  name: string;
-  type: string;
-  internalType?: string;
-  components?: DataItem[];
+    name: string;
+    type: string;
+    internalType?: string;
+    components?: DataItem[];
 }
 
 export interface MethodAbi {
@@ -317,7 +340,7 @@ export interface MethodAbi {
     // from JSON files, and this value has type `string` not type `'function'`
     type: string;
     name: string;
-  // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line no-use-before-define
     inputs: DataItem[];
     outputs: DataItem[];
     constant?: boolean;
@@ -340,6 +363,7 @@ export interface FallbackAbi {
     type: string;
     payable: boolean;
 }
+
 export interface EventParameter extends DataItem {
     indexed: boolean;
 }
@@ -374,11 +398,11 @@ export interface Transaction {
 }
 
 export interface TupleDataItem extends DataItem {
-  components: DataItem[];
+    components: DataItem[];
 }
 
 export interface BlockWithTransactionData extends AbstractBlock {
-  transactions: Transaction[];
+    transactions: Transaction[];
 }
 
 export interface CallTxDataBase {
@@ -418,14 +442,14 @@ export interface FilterObject {
 }
 
 export interface LogEntry {
-  logIndex: number | null;
-  transactionIndex: number | null;
-  transactionHash: string;
-  blockHash: string | null;
-  blockNumber: number | null;
-  address: string;
-  data: string;
-  topics: string[];
+    logIndex: number | null;
+    transactionIndex: number | null;
+    transactionHash: string;
+    blockHash: string | null;
+    blockNumber: number | null;
+    address: string;
+    data: string;
+    topics: string[];
 }
 
 export interface LogEntryEvent extends LogEntry {
@@ -433,21 +457,23 @@ export interface LogEntryEvent extends LogEntry {
 }
 
 export interface DecodedLogEntry<A> extends LogEntry {
-  event: string;
-  args: A;
+    event: string;
+    args: A;
 }
 
 export interface DecodedLogEntryEvent<A> extends DecodedLogEntry<A> {
-  removed: boolean;
+    removed: boolean;
 }
 
 export type ContractEventArg = any;
 
 export interface DecodedLogArgs {
-  [argName: string]: ContractEventArg;
+    [argName: string]: ContractEventArg;
 }
 
-export interface LogWithDecodedArgs<ArgsType extends DecodedLogArgs> extends DecodedLogEntry<ArgsType> {}
+export interface LogWithDecodedArgs<ArgsType extends DecodedLogArgs> extends DecodedLogEntry<ArgsType> {
+}
+
 export type RawLog = LogEntry;
 
 export type DecodedLogs = Array<LogWithDecodedArgs<DecodedLogArgs>>;
@@ -550,12 +576,13 @@ export type OutputField =
     | "evm.gasEstimates"
     | "ewasm.wast"
     | "ewasm.wasm";
+
 export interface ContractChainData {
-  address: string;
-  links: {
-    [linkName: string]: string;
-  };
-  constructorArgs: string;
+    address: string;
+    links: {
+        [linkName: string]: string;
+    };
+    constructorArgs: string;
 }
 
 export interface ContractChains {
@@ -581,9 +608,9 @@ export type ErrorType =
 export type ErrorSeverity = "error" | "warning";
 
 export interface SourceLocation {
-  file: string;
-  start: number;
-  end: number;
+    file: string;
+    start: number;
+    end: number;
 }
 
 export interface SolcError {
@@ -596,10 +623,11 @@ export interface SolcError {
 }
 
 export interface EvmBytecodeOutputLinkReferences {
-  [sourceFile: string]: {
-    [libraryName: string]: Array<{ start: number; length: number }>;
-  };
+    [sourceFile: string]: {
+        [libraryName: string]: Array<{ start: number; length: number }>;
+    };
 }
+
 export interface EvmBytecodeOutput {
     linkReferences: EvmBytecodeOutputLinkReferences;
     object: string;
@@ -607,8 +635,8 @@ export interface EvmBytecodeOutput {
 }
 
 export interface EvmOutput {
-  bytecode: EvmBytecodeOutput;
-  deployedBytecode: EvmBytecodeOutput;
+    bytecode: EvmBytecodeOutput;
+    deployedBytecode: EvmBytecodeOutput;
 }
 
 export interface DevdocOutput {
@@ -626,43 +654,46 @@ export interface DevdocOutput {
 }
 
 export interface CompilerSettingsMetadata {
-  useLiteralContent: true;
+    useLiteralContent: true;
 }
 
 export interface OptimizerSettings {
-  enabled: boolean;
-  runs?: number;
+    enabled: boolean;
+    runs?: number;
 }
 
 export interface Source {
-  id: number;
+    id: number;
 }
+
 // Copied from the solc.js library types
 export interface CompilerSettings {
-  remappings?: string[];
-  optimizer?: OptimizerSettings;
-  evmVersion?: "homestead" | "tangerineWhistle" | "spuriousDragon" | "byzantium" | "constantinople";
-  metadata?: CompilerSettingsMetadata;
-  libraries?: {
-    [fileName: string]: {
-      [libName: string]: string;
+    remappings?: string[];
+    optimizer?: OptimizerSettings;
+    evmVersion?: "homestead" | "tangerineWhistle" | "spuriousDragon" | "byzantium" | "constantinople";
+    metadata?: CompilerSettingsMetadata;
+    libraries?: {
+        [fileName: string]: {
+            [libName: string]: string;
+        };
     };
-  };
-  outputSelection: {
-    [fileName: string]: {
-      [contractName: string]: OutputField[];
+    outputSelection: {
+        [fileName: string]: {
+            [contractName: string]: OutputField[];
+        };
     };
-  };
 }
+
 export interface GeneratedCompilerOptions {
-  name: "solc";
-  version: string;
-  settings: CompilerSettings;
+    name: "solc";
+    version: string;
+    settings: CompilerSettings;
 }
+
 export interface CompilerOpts {
-  name: "solc";
-  version: string;
-  settings: CompilerSettings;
+    name: "solc";
+    version: string;
+    settings: CompilerSettings;
 }
 
 /**
@@ -699,23 +730,23 @@ export type AbiDefinition = FunctionAbi | EventAbi | RevertErrorAbi;
 export type ContractAbi = AbiDefinition[];
 
 export interface StandardContractOutput {
-  abi: ContractAbi;
-  evm: EvmOutput;
-  devdoc?: DevdocOutput;
+    abi: ContractAbi;
+    evm: EvmOutput;
+    devdoc?: DevdocOutput;
 }
 
 export interface ContractVersionData {
-  compiler: CompilerOpts;
-  sources: {
-    [sourceName: string]: {
-      id: number;
+    compiler: CompilerOpts;
+    sources: {
+        [sourceName: string]: {
+            id: number;
+        };
     };
-  };
-  sourceCodes: {
-    [sourceName: string]: string;
-  };
-  sourceTreeHashHex: string;
-  compilerOutput: StandardContractOutput;
+    sourceCodes: {
+        [sourceName: string]: string;
+    };
+    sourceTreeHashHex: string;
+    compilerOutput: StandardContractOutput;
 }
 
 /**
@@ -732,9 +763,9 @@ export interface ContractVersionData {
  * If any of the sources change, the hash would change notifying us that a re-compilation is necessary
  */
 export interface ContractArtifact extends ContractVersionData {
-  schemaVersion: string;
-  contractName: string;
-  chains: ContractChains;
+    schemaVersion: string;
+    contractName: string;
+    chains: ContractChains;
 }
 
 export interface StandardOutput {

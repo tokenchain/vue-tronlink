@@ -1,4 +1,4 @@
-import TronLink from "../TronLink"
+import TronLink from "../abi/TronLink"
 import NODES from "../utils/const";
 
 /**

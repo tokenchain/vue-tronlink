@@ -1,4 +1,4 @@
-import {ADDRESS_PREFIX, ADDRESS_PREFIX_BYTE, ADDRESS_SIZE} from './address';
+import {ADDRESS_PREFIX, ADDRESS_PREFIX_BYTE, ADDRESS_SIZE} from '../abi/base/Address';
 import {base64EncodeToString} from './code';
 import {base64DecodeFromString, hexStr2byteArray} from './code';
 import {encode58, decode58} from './base58';

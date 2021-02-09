@@ -1,8 +1,11 @@
+import {keccak256} from "../../utils/ethersUtils";
+
 /**
  * Address validation functions
  * source: https://ethereum.stackexchange.com/a/1379/7804
  */
-const Address = {
+
+class Address {
 
     /**
      * Checks if the given string is an address
@@ -11,7 +14,7 @@ const Address = {
      * @param {String} address the given HEX adress
      * @return {Boolean}
      */
-    isHexAddress(address) {
+    static isHexAddress(address: string): boolean {
         if (!/^(0x)?[0-9a-f]{42}$/i.test(address)) {
             // check if it has the basic requirements of an address
             return false
@@ -22,7 +25,7 @@ const Address = {
             // Otherwise check each case
             return this.isChecksumHexAddress(address)
         }
-    },
+    }
 
     /**
      * Checks if the given string is a checksummed address
@@ -31,11 +34,11 @@ const Address = {
      * @param {String} address the given HEX adress
      * @return {Boolean}
      */
-    isChecksumHexAddress(address) {
+    static isChecksumHexAddress(address: string): boolean {
         // Check each case
         address = address.replace("0x", "")
-        var addressHash = sha3(address.toLowerCase())
-        for (var i = 0; i < 40; i++) {
+        const addressHash = Address.sha3(address.toLowerCase())
+        for (let i = 0; i < 40; i++) {
             // the nth letter should be uppercase if the nth digit of casemap is 1
             if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i])
                 || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
@@ -45,7 +48,14 @@ const Address = {
         return true
     }
 
+
+    static sha3(stringf: string, prefix = true): string {
+        // @ts-ignore
+        return (prefix ? '0x' : '') + keccak256(Buffer.from(stringf, 'utf-8')).toString().substring(2);
+    }
+
 }
+
 const ADDRESS_SIZE = 34;
 const ADDRESS_PREFIX = "41";
 const ADDRESS_PREFIX_BYTE = 0x41;

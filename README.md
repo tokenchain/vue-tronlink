@@ -8,6 +8,9 @@ Vue support for the TronLink browser extension
 
 This project will also support the future networks
 
+### ETH Metamask wallet
+ * Support all metamask ethereum related networks
+
 ### TRC20 display
  * support TRC20 balance
  * TronLink support TRC20 token

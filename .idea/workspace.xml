@@ -20,13 +20,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/utils/ethereumnetworks.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/abi/base/Address.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/TronLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TronLink.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/TokenTrc20.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TokenTrc20.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/base/common.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/common.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-metamask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-metamask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-token.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/abi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/abi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/address.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/baseImple.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/contract/baseImple.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/baseImple.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/contract/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/contract/method.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/method.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/crypto.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/crypto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/help.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/help.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/update.sh" beforeDir="false" afterPath="$PROJECT_DIR$/update.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +49,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -68,15 +80,17 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/abi/base" />
+      <recent name="$PROJECT_DIR$/src/abi" />
+      <recent name="$PROJECT_DIR$/src/entry" />
+      <recent name="$PROJECT_DIR$/develop" />
+      <recent name="$PROJECT_DIR$/src/impl" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/utils" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/entry" />
-      <recent name="$PROJECT_DIR$/develop" />
-      <recent name="$PROJECT_DIR$/src/impl" />
     </key>
   </component>
   <component name="RunManager" selected="npm.coveralls">
@@ -199,7 +213,10 @@
       <workItem from="1610362536737" duration="181000" />
       <workItem from="1610633165782" duration="1612000" />
       <workItem from="1610634800899" duration="99000" />
-      <workItem from="1612848008365" duration="6095000" />
+      <workItem from="1612848008365" duration="6131000" />
+      <workItem from="1612860954417" duration="54000" />
+      <workItem from="1612861286878" duration="7000" />
+      <workItem from="1612861358763" duration="2593000" />
     </task>
     <servers />
   </component>
@@ -210,7 +227,8 @@
         <option value="$PROJECT_DIR$/src/abi/TokenTrc20.js" />
         <option value="$PROJECT_DIR$/src/abi/base/types.js" />
         <option value="$PROJECT_DIR$/src/abi/base/base.js" />
-        <option value="$PROJECT_DIR$/src/utils/contract/baseImple.js" />
+        <option value="$PROJECT_DIR$/src/abi/TronLink.js" />
+        <option value="$PROJECT_DIR$/src/abi/base/Address.js" />
       </list>
     </option>
   </component>
@@ -231,9 +249,10 @@
       <screen x="76" y="25" width="1716" height="1095" />
     </state>
     <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/76.25.1716.1095@76.25.1716.1095" timestamp="1610633710729" />
-    <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612851501387">
-      <screen x="87" y="25" width="1705" height="1095" />
+    <state x="696" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612863427521">
+      <screen x="83" y="25" width="1709" height="1095" />
     </state>
+    <state x="696" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/83.25.1709.1095@83.25.1709.1095" timestamp="1612863427521" />
     <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/87.25.1705.1095@87.25.1705.1095" timestamp="1612851501387" />
     <state width="1414" height="196" key="GridCell.Tab.0.bottom" timestamp="1604359694819">
       <screen x="87" y="25" width="1705" height="1095" />
@@ -251,9 +270,10 @@
       <screen x="87" y="25" width="1705" height="1095" />
     </state>
     <state width="1414" height="196" key="GridCell.Tab.0.right/87.25.1705.1095@87.25.1705.1095" timestamp="1604359694818" />
-    <state x="700" y="299" width="572" height="546" key="find.popup" timestamp="1610634269835">
-      <screen x="76" y="25" width="1716" height="1095" />
+    <state x="704" y="299" width="570" height="546" key="find.popup" timestamp="1612863002635">
+      <screen x="83" y="25" width="1709" height="1095" />
     </state>
     <state x="700" y="299" width="572" height="546" key="find.popup/76.25.1716.1095@76.25.1716.1095" timestamp="1610634269835" />
+    <state x="704" y="299" width="570" height="546" key="find.popup/83.25.1709.1095@83.25.1709.1095" timestamp="1612863002635" />
   </component>
 </project>

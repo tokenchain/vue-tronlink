@@ -1,5 +1,5 @@
 import utils from 'utils';
-import {ADDRESS_PREFIX_REGEX} from 'utils/address';
+import {ADDRESS_PREFIX_REGEX} from './Address';
 import injectpromise from 'injectpromise';
 
 const getFunctionSelector = abi => {
@@ -13,7 +13,6 @@ const getParamTypes = params => {
 const decodeOutput = (abi, output) => {
     const names = abi.map(({name}) => name).filter(name => !!name);
     const types = abi.map(({type}) => type);
-
     return utils.abi.decodeParams(names, types, output);
 };
 

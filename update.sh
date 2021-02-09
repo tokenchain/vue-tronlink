@@ -68,6 +68,7 @@ taobao(){
   cnpm sync vue-tronlink
   cnpm info vue-tronlink
 }
+
 GIT_LOC=https://gitee.com/jjhoc/vue-tronlink.git
 AUTO_INSTALL=0
 #tsc -b

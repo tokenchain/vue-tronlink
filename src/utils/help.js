@@ -1,5 +1,5 @@
 import {hexStr2byteArray} from 'code';
-import {ADDRESS_PREFIX} from 'address';
+import {ADDRESS_PREFIX} from '../abi/base/Address';
 import {
     getBase58CheckAddress,
     decodeBase58Address,

@@ -10,7 +10,7 @@ export class TokenTrc20 extends BaseContract {
     }
     static Instance() {
         if (window && window.hasOwnProperty("_contractTrc20Token888")) {
-            const obj = window.___contract__Fendi__;
+            const obj = window._contractTrc20Token888;
             if (obj instanceof TokenTrc20) {
                 return (obj);
             }
