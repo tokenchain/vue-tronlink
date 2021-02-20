@@ -49,6 +49,10 @@ export default class TronLink {
         return this.tronWeb.defaultAddress.base58
     }
 
+    getAccountAddressHex(): string {
+        return this.tronWeb.defaultAddress.hex
+    }
+
     NewContract(abi: any[] = [], address: boolean = false): any {
         return new this.tronWeb.Contract(this.tronWeb, abi, address)
     }
