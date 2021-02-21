@@ -105,7 +105,6 @@ export default {
                 } catch (error) {
                     this.Log(this.MetamaskMsg.USER_DENIED_ACCOUNT_AUTHORIZATION, "USER_DENIED_ACCOUNT_AUTHORIZATION");
                 }
-
             } else if (window.hasOwnProperty("web3")) {
                 window.web3 = new Web3(web3.currentProvider);
                 this.web3TimerCheck(window.web3);

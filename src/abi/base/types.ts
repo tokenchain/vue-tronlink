@@ -7,11 +7,85 @@ export interface Balancer {
     [holder_address: string]: number;
 }
 
+export interface TronLinkEventCaller {
+    signer(payload: TronLinkTunnelMessage): boolean;
+
+    reply(payload: TronLinkTabReply): boolean;
+}
+
 export interface TronTRC20Token {
     instance: TokenTrc20;
     address: string;
     decimal: number;
     hold: Balancer;
+}
+
+export interface TronLinkTunnelMessageDataTransaction {
+    raw_data: TronLinkTunnelMessageDataTransactionRawData;
+    raw_data_hex: string;
+    txID: string;
+    visible: boolean;
+}
+
+export interface TronLinkTunnelMessageDataRawContract {
+    type: string;
+    parameter: TronLinkTunnelMessageDataRawContractParameter;
+}
+
+
+export interface TronLinkContract {
+    call_value: number;
+    owner_address: string;
+    contract_address: string;
+    data: string;
+}
+
+export interface TronLinkTunnelMessageDataInput {
+    call_value: number;
+    chainType: number;
+    contract_address: string;
+    fee_limit: number;
+    function_selector: string;
+    owner_address: string;
+    parameter: string;
+}
+
+export interface TronLinkTunnelMessageDataRawContractParameter {
+    type_url: string;
+    value: TronLinkContract;
+}
+
+
+export interface TronLinkTunnelMessageDataTransactionRawData {
+    contract: TronLinkTunnelMessageDataRawContract[];
+    expiration: number;
+    fee_limit: number;
+    ref_block_bytes: string;
+    ref_block_hash: string;
+    timestamp: number;
+}
+
+
+export interface TronLinkTunnelMessageData {
+    input: TronLinkTunnelMessageDataInput;
+    transaction: TronLinkTunnelMessageDataTransaction;
+    useTronHeader: boolean;
+}
+
+export interface TronLinkTunnelMessage {
+    data: TronLinkTunnelMessageData;
+    action: string;
+    uuid: string;
+}
+
+export interface TronLinkTunnelMessageDataTransactionSigned extends TronLinkTunnelMessageDataTransaction {
+    signature: string[];
+}
+
+export interface TronLinkTabReply {
+    success: boolean;
+    uuid: string;
+    data: TronLinkTunnelMessageDataTransactionSigned;
 }
 
 export interface TronLinkToken {

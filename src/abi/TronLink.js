@@ -4,6 +4,7 @@ export default class TronLink {
     constructor(tronWeb) {
         this.tronWeb = tronWeb;
         this.tokens = {};
+        this.selected_function_human_operation = "";
     }
     isInstalled() {
         return !!this.tronWeb;
@@ -20,8 +21,15 @@ export default class TronLink {
     getAccountAddressHex() {
         return this.tronWeb.defaultAddress.hex;
     }
+    getAccountAddress0x() {
+        return "0x" + this.getAccountAddressHex().substr(2);
+    }
     NewContract(abi = [], address = false) {
         return new this.tronWeb.Contract(this.tronWeb, abi, address);
+    }
+    removeAllFunctionCalls() {
+        this.selected_function_reply = "";
+        this.selected_function_human_operation = "";
     }
     convertAddress(address, fromFormat, toFormat) {
         if (fromFormat == toFormat) {
@@ -123,5 +131,87 @@ export default class TronLink {
     explainTrc20(payload) {
         const me = this.getAccountAddress();
         return payload.hold[me];
+    }
+    setCallbackAsk(function_selector, caller) {
+        this.selected_function_human_operation = function_selector;
+        this.selected_function_caller = caller;
+    }
+    setCallbackReply(function_selector, caller) {
+        this.selected_function_human_operation = function_selector;
+        this.selected_function_caller = caller;
+    }
+    __signOp(payload) {
+        if (this.selected_function_human_operation != "") {
+            this.selected_function_caller.signer(payload);
+            this.selected_function_human_operation = "";
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    __signReply(payload) {
+        if (this.selected_function_reply != "") {
+            this.selected_function_reply_caller.reply(payload);
+            this.selected_function_reply = "";
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    eventListener(message, tronLinkInitialData, vueInstance) {
+        if (message.action === 'setNode') {
+            vueInstance.announce_node_name(message.data.node.fullNode);
+            vueInstance.$emit("notify_tron_node_change", message.data.node.fullNode);
+        }
+        if (message.action === 'setAccount') {
+            if (typeof message === "object" && message.hasOwnProperty("data")) {
+                if (vueInstance.hasOwnProperty("account_name") && vueInstance.account_name !== message.data.name) {
+                    vueInstance.$emit("notify_tron_account_set", message.data.name, message.data.address);
+                }
+            }
+        }
+        if (message.action === 'tunnel') {
+            if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
+                if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
+                    if (!this.__signOp(message)) {
+                        vueInstance.$emit("notify_tron_opensign", message.uuid, message.data.input.function_selector, message.data);
+                    }
+                }
+                else {
+                    if (!this.__signOp(message)) {
+                        vueInstance.$emit("notify_tron_opensign", message.uuid, message.data);
+                    }
+                }
+            }
+        }
+        if (message.action === 'tabReply') {
+            if (message.data.hasOwnProperty("success") && message.data.success === true) {
+                if (!this.__signReply(message)) {
+                    vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid);
+                }
+            }
+            if (!tronLinkInitialData) {
+                if (typeof message === "object" && message.hasOwnProperty("data")) {
+                    if (message.data.hasOwnProperty("data")) {
+                        tronLinkInitialData = message.data.data;
+                        if (message.data.hasOwnProperty("node")) {
+                            vueInstance.announce_node_name(message.data.node.full_node);
+                        }
+                        vueInstance.$emit("notify_tron_initialization", tronLinkInitialData);
+                    }
+                    else {
+                        console.log(message.data);
+                    }
+                }
+            }
+        }
+        if (vueInstance.hasOwnProperty("_debug_tronlink") && vueInstance._debug_tronlink) {
+            console.group("TronLink action hook");
+            console.log("checker from-", message.action);
+            console.log(message.data);
+            console.groupEnd();
+        }
     }
 }

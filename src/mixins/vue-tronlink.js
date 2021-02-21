@@ -63,44 +63,60 @@ export default {
                 this.connectedNode = ""
             }
         },
+        /**
+         *
+         *
+         *
+         window.addEventListener('message', function (e) {
+            try{
+              if (e.data.message && e.data.message.action == "tabReply") {
+                console.log("tabReply event", e.data.message)
+                if (e.data.message.data.data.node.chain == '_'){
+                    console.log("tronLink currently selects the main chain")
+                }else{
+                    console.log("tronLink currently selects the side chain")
+                }
+              }
+
+              if (e.data.message && e.data.message.action == "setAccount") {
+
+                var loginName = e.data.message.data.name;
+                var getName = localStorage.getItem('qas4567d');
+                var encodedString = window.btoa( loginName );
+                var decodedString = window.atob( getName );
+
+                if(getName && getName !=null){
+                  if(decodedString !=loginName){
+                    console.log('wallet connectionn')
+                    setTimeout(function() {
+                      toastAlert('success',"Wallet connected successfully",'tronwallet');
+                      localStorage.removeItem("qas4567d");
+                      localStorage.setItem('qas4567d', encodedString);
+                    },1000);
+                  }
+                }else{
+                 localStorage.setItem('qas4567d', encodedString);
+                }
+              }
+              if (e.data.message && e.data.message.action == "setNode") {
+                  console.log("setNode event", e.data.message)
+                  if (e.data.message.data.node.chain == '_'){
+                      console.log("tronLink currently selects the main chain")
+                  }else{
+                      console.log("tronLink currently selects the side chain")
+                  }
+
+              }
+            }catch(e){
+              console.log('wallet error',e)
+            }
+          });
+         * @returns {Promise<void>}
+         */
         async notify_tron_installed() {
             window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
                 if (isTronLink) {
-                    if (message.action === 'tabReply' && !this.tronLinkInitialData) {
-                        if (typeof message === "object" && message.hasOwnProperty("data")) {
-                            if (typeof message.data === "object" && message.data.hasOwnProperty("data")) {
-                                this.tronLinkInitialData = message.data.data;
-                                if (typeof this.tronLinkInitialData === "object" && message.data.hasOwnProperty("node")) {
-                                    this.announce_node_name(this.tronLinkInitialData.node.full_node)
-                                }
-                                this.$emit("notify_tron_initialization", this.tronLinkInitialData)
-                            } else {
-                                console.log(message.data)
-                            }
-                        } else {
-                            console.log(message)
-                        }
-                    }
-                    if (message.action === 'setNode') {
-                        this.announce_node_name(message.data.node.fullNode)
-                        this.$emit("notify_tron_node_change", this.connectedNode)
-                    }
-                    if (message.action === 'setAccount') {
-                        if (typeof message === "object" && message.hasOwnProperty("data")) {
-                            if (this.account_name !== message.data.name) {
-                                this.account_name = message.data.name
-                                this.authorized_address = message.data.address
-                                this.$emit("notify_tron_account_set", this.account_name, this.authorized_address)
-                            }
-                        }
-                    }
-                    if (this._debug_tronlink) {
-                        console.group("Wallet action received")
-                        console.log("checker messsage result - ", message.action)
-                        console.log(message.data)
-                        console.groupEnd()
-                    }
-
+                    this.tronLink.eventListener(message, this)
                 }
             })
             await this.updateNodeVersion()
@@ -115,8 +131,7 @@ export default {
             this.$emit("notify_tron_installed")
         },
         async updateNodeVersion() {
-            let version = await this.tronWeb.getFullnodeVersion()
-            this.node_version = version
+            this.node_version = await this.tronWeb.getFullnodeVersion()
         },
         debugTronLink(bool) {
             this._debug_tronlink = bool
@@ -141,15 +156,15 @@ export default {
                 return true
             }
 
-            if (chain_id_network.toLowerCase() === "default" && this.isMainnet()) {
+            if (chain_id_network.toLowerCase() === "tronex" && this.isTronex()) {
                 return true
             }
 
-            if (chain_id_network.toLowerCase() === "mainnet" && this.isMainnet()) {
+            if (chain_id_network.toLowerCase() === "shasta" && this.isShasta()) {
                 return true
             }
 
-            if (chain_id_network.toLowerCase() === "mainnet" && this.isMainnet()) {
+            if (chain_id_network.toLowerCase() === "default" || chain_id_network.toLowerCase() === "mainnet" && this.isMainnet()) {
                 return true
             }
 

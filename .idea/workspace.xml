@@ -21,6 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/dist/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-metamask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-metamask.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,8 +136,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Jest.All Tests" />
         <item itemvalue="npm.build" />
+        <item itemvalue="Jest.All Tests" />
         <item itemvalue="npm.coveralls" />
         <item itemvalue="npm.lint" />
         <item itemvalue="Jest.Invalid input format" />
@@ -206,6 +212,8 @@
       <workItem from="1612883312983" duration="158000" />
       <workItem from="1612888693687" duration="301000" />
       <workItem from="1612890938442" duration="151000" />
+      <workItem from="1613841269270" duration="272000" />
+      <workItem from="1613893325646" duration="5155000" />
     </task>
     <servers />
   </component>
