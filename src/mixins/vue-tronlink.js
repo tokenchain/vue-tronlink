@@ -114,9 +114,10 @@ export default {
          * @returns {Promise<void>}
          */
         async notify_tron_installed() {
+            const vue_level = this
             window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
                 if (isTronLink) {
-                    this.tronLink.eventListener(message, this)
+                    vue_level.tronLink.eventListener(message, vue_level.tronLinkInitialData, vue_level)
                 }
             })
             await this.updateNodeVersion()

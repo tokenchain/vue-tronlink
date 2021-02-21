@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import {FULL_NAMES} from "../utils/const";
+import FULL_NAMES from "../utils/const";
 
 
 export default {

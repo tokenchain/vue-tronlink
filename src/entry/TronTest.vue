@@ -19,8 +19,8 @@ export default {
     }
   },
   mounted() {
+    this.debugTronLink(true)
     this.$nextTick(() => {
-      this.debugTronLink(true)
       this.$on("notify_tron_not_install", () => {
         this.tronlinkinstalled = false
         console.log("detect done nil  🔔️")
@@ -39,7 +39,6 @@ export default {
         console.log("detect done notify_tron_account_set 🔔️")
       })
 
-
       this.$on("notify_tron_node_change", () => {
         console.log("detect done notify_tron_node_change 🔔️️")
         if (!this.isNile()) {
@@ -47,7 +46,7 @@ export default {
         }
       })
 
-      // this.checkTronLink()
+      this.checkTronLink()
     })
   },
   methods: {
