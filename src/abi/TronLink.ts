@@ -17,7 +17,6 @@ export default class TronLink {
     tokens: TronLinkToken
     selected_function_reply: string
     selected_function_human_operation: string
-    selected_function_reply_caller: TronLinkEventCaller
     selected_function_caller: TronLinkEventCaller
 
 
@@ -81,7 +80,6 @@ export default class TronLink {
     }
 
     removeAllFunctionCalls(): void {
-        this.selected_function_reply = ""
         this.selected_function_human_operation = ""
     }
 
@@ -221,20 +219,14 @@ export default class TronLink {
         return payload.hold[me]
     }
 
-    setCallbackAsk(function_selector: string, caller: TronLinkEventCaller) {
-        this.selected_function_human_operation = function_selector
-        this.selected_function_caller = caller
-    }
-
-    setCallbackReply(function_selector: string, caller: TronLinkEventCaller) {
+    setCallbackFunctionCall(function_selector: string, caller: TronLinkEventCaller) {
         this.selected_function_human_operation = function_selector
         this.selected_function_caller = caller
     }
 
     __signOp(payload: TronLinkTunnelMessage): boolean {
-        if (this.selected_function_human_operation != "") {
+        if (this.selected_function_human_operation == payload.data.input.function_selector) {
             this.selected_function_caller.signer(payload)
-            this.selected_function_human_operation = ""
             return true
         } else {
             return false
@@ -242,9 +234,9 @@ export default class TronLink {
     }
 
     __signReply(payload: TronLinkTabReply): boolean {
-        if (this.selected_function_reply != "") {
-            this.selected_function_reply_caller.reply(payload)
-            this.selected_function_reply = ""
+        if (this.selected_function_caller != undefined && this.selected_function_human_operation != "") {
+            this.selected_function_caller.reply(payload)
+            this.selected_function_human_operation = ""
             return true
         } else {
             return false
@@ -273,11 +265,11 @@ export default class TronLink {
         if (message.action === 'tunnel') {
             if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
                 if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
-                    if (!this.__signOp(message)) {
+                    if (!this.__signOp(message.data)) {
                         vueInstance.$emit("notify_tron_opensign", message.uuid, message.data.input.function_selector, message.data)
                     }
                 } else {
-                    if (!this.__signOp(message)) {
+                    if (!this.__signOp(message.data)) {
                         vueInstance.$emit("notify_tron_opensign", message.uuid, message.data)
                     }
                 }
@@ -288,9 +280,13 @@ export default class TronLink {
             /**
              * response from the wallet sign action
              */
-            if (message.data.hasOwnProperty("success") && message.data.success === true) {
-                if (!this.__signReply(message)) {
-                    vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid)
+            if (message.data.hasOwnProperty("success")) {
+                if (message.data.success === true) {
+                    if (!this.__signReply(message.data)) {
+                        vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid)
+                    }
+                } else {
+                    this.removeAllFunctionCalls()
                 }
             }
 

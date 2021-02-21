@@ -28,7 +28,6 @@ export default class TronLink {
         return new this.tronWeb.Contract(this.tronWeb, abi, address);
     }
     removeAllFunctionCalls() {
-        this.selected_function_reply = "";
         this.selected_function_human_operation = "";
     }
     convertAddress(address, fromFormat, toFormat) {
@@ -132,18 +131,13 @@ export default class TronLink {
         const me = this.getAccountAddress();
         return payload.hold[me];
     }
-    setCallbackAsk(function_selector, caller) {
-        this.selected_function_human_operation = function_selector;
-        this.selected_function_caller = caller;
-    }
-    setCallbackReply(function_selector, caller) {
+    setCallbackFunctionCall(function_selector, caller) {
         this.selected_function_human_operation = function_selector;
         this.selected_function_caller = caller;
     }
     __signOp(payload) {
-        if (this.selected_function_human_operation != "") {
+        if (this.selected_function_human_operation == payload.data.input.function_selector) {
             this.selected_function_caller.signer(payload);
-            this.selected_function_human_operation = "";
             return true;
         }
         else {
@@ -151,9 +145,9 @@ export default class TronLink {
         }
     }
     __signReply(payload) {
-        if (this.selected_function_reply != "") {
-            this.selected_function_reply_caller.reply(payload);
-            this.selected_function_reply = "";
+        if (this.selected_function_caller != undefined && this.selected_function_human_operation != "") {
+            this.selected_function_caller.reply(payload);
+            this.selected_function_human_operation = "";
             return true;
         }
         else {
@@ -175,21 +169,26 @@ export default class TronLink {
         if (message.action === 'tunnel') {
             if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
                 if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
-                    if (!this.__signOp(message)) {
+                    if (!this.__signOp(message.data)) {
                         vueInstance.$emit("notify_tron_opensign", message.uuid, message.data.input.function_selector, message.data);
                     }
                 }
                 else {
-                    if (!this.__signOp(message)) {
+                    if (!this.__signOp(message.data)) {
                         vueInstance.$emit("notify_tron_opensign", message.uuid, message.data);
                     }
                 }
             }
         }
         if (message.action === 'tabReply') {
-            if (message.data.hasOwnProperty("success") && message.data.success === true) {
-                if (!this.__signReply(message)) {
-                    vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid);
+            if (message.data.hasOwnProperty("success")) {
+                if (message.data.success === true) {
+                    if (!this.__signReply(message.data)) {
+                        vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid);
+                    }
+                }
+                else {
+                    this.removeAllFunctionCalls();
                 }
             }
             if (!tronLinkInitialData) {

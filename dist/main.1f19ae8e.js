@@ -60322,7 +60322,6 @@ var TronLink = /*#__PURE__*/function () {
   }, {
     key: "removeAllFunctionCalls",
     value: function removeAllFunctionCalls() {
-      this.selected_function_reply = "";
       this.selected_function_human_operation = "";
     }
   }, {
@@ -60694,23 +60693,16 @@ var TronLink = /*#__PURE__*/function () {
       return payload.hold[me];
     }
   }, {
-    key: "setCallbackAsk",
-    value: function setCallbackAsk(function_selector, caller) {
-      this.selected_function_human_operation = function_selector;
-      this.selected_function_caller = caller;
-    }
-  }, {
-    key: "setCallbackReply",
-    value: function setCallbackReply(function_selector, caller) {
+    key: "setCallbackFunctionCall",
+    value: function setCallbackFunctionCall(function_selector, caller) {
       this.selected_function_human_operation = function_selector;
       this.selected_function_caller = caller;
     }
   }, {
     key: "__signOp",
     value: function __signOp(payload) {
-      if (this.selected_function_human_operation != "") {
+      if (this.selected_function_human_operation == payload.data.input.function_selector) {
         this.selected_function_caller.signer(payload);
-        this.selected_function_human_operation = "";
         return true;
       } else {
         return false;
@@ -60719,9 +60711,9 @@ var TronLink = /*#__PURE__*/function () {
   }, {
     key: "__signReply",
     value: function __signReply(payload) {
-      if (this.selected_function_reply != "") {
-        this.selected_function_reply_caller.reply(payload);
-        this.selected_function_reply = "";
+      if (this.selected_function_caller != undefined && this.selected_function_human_operation != "") {
+        this.selected_function_caller.reply(payload);
+        this.selected_function_human_operation = "";
         return true;
       } else {
         return false;
@@ -60746,11 +60738,11 @@ var TronLink = /*#__PURE__*/function () {
       if (message.action === 'tunnel') {
         if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
           if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
-            if (!this.__signOp(message)) {
+            if (!this.__signOp(message.data)) {
               vueInstance.$emit("notify_tron_opensign", message.uuid, message.data.input.function_selector, message.data);
             }
           } else {
-            if (!this.__signOp(message)) {
+            if (!this.__signOp(message.data)) {
               vueInstance.$emit("notify_tron_opensign", message.uuid, message.data);
             }
           }
@@ -60758,9 +60750,13 @@ var TronLink = /*#__PURE__*/function () {
       }
 
       if (message.action === 'tabReply') {
-        if (message.data.hasOwnProperty("success") && message.data.success === true) {
-          if (!this.__signReply(message)) {
-            vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid);
+        if (message.data.hasOwnProperty("success")) {
+          if (message.data.success === true) {
+            if (!this.__signReply(message.data)) {
+              vueInstance.$emit("notify_tron_sign_success_broadcast", message.data, message.uuid);
+            }
+          } else {
+            this.removeAllFunctionCalls();
           }
         }
 
@@ -61659,7 +61655,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61215" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62091" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
