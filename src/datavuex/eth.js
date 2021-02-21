@@ -26,7 +26,8 @@ const state = {
     decimals: 0,
     w3instance: "",
     tokenlist: {},
-    tokenFlatList: []
+    tokenFlatList: [],
+    console_items: []
 }
 
 const mutations = {
@@ -38,7 +39,7 @@ const mutations = {
         state.user_account = payload
         state.islogin = true
     },
-    USER_BASIC(state, { founder }) {
+    USER_BASIC(state, {founder}) {
         state.founder_account = founder
     },
     IS_FOUNDER(state, b) {
@@ -50,6 +51,17 @@ const mutations = {
     ETH_BAL(state, payload) {
         // store web3 user account
         state.network_balance = payload
+    },
+    CLEAR_ITEM(state) {
+        state.console_items = []
+    },
+    PUSH_ITEM(state, payload) {
+        state.console_items.unshift({
+            message: payload.msg,
+            type: payload.whatsort,
+            data: payload.dat,
+            time: new Date().getTime()
+        })
     },
     CONTRACT_DECIMAL(state, payload) {
         // store web3 user account
@@ -86,33 +98,39 @@ const mutations = {
     }
 }
 const actions = {
-    syncdata({ commit, state }, health) {
+    newEventTransaction({commit}, payload) {
+        commit("PUSH_ITEM", payload)
+    },
+    clearEvents({commit}) {
+        commit("CLEAR_ITEM")
+    },
+    syncdata({commit, state}, health) {
         state.sync_count = state.sync_count + 1
         state.health = health
     },
-    basicInfo({ commit }, payload) {
+    basicInfo({commit}, payload) {
         // state.levels = _level;
         commit("USER_BASIC", payload)
     },
-    basicInfoIsFounder({ commit }, payload) {
+    basicInfoIsFounder({commit}, payload) {
         // state.levels = _level;
         commit("IS_FOUNDER", payload)
     },
-    getContractBalance({ commit }, payload) {
+    getContractBalance({commit}, payload) {
         commit("CONTRACT_BALANCE", payload)
     },
-    storePasteBin({ commit, state }, lis) {
+    storePasteBin({commit, state}, lis) {
         commit("PASTE_BIN_INIT", lis)
     },
-    keepTokenList({ commit, state }, list) {
+    keepTokenList({commit, state}, list) {
         commit("TOKEN_LIST", list)
     },
-    getName({ commit, state }) {
+    getName({commit, state}) {
         // let name = await state.contract.methods.VIPFee ().call ({ from : state.user_account });
         console.log("test now")
         // commit ("FEE", name);
     },
-    setPermisssion({ commit }, b) {
+    setPermisssion({commit}, b) {
         commit("PERMISSION", b)
     },
     async transfer(context, params) {
@@ -121,13 +139,13 @@ const actions = {
         })
         return transferMethod
     },
-    updateDecimal({ commit }, t) {
+    updateDecimal({commit}, t) {
         commit("CONTRACT_DECIMAL", parseInt(t.deci))
     },
-    storeContract({ commit }, t) {
+    storeContract({commit}, t) {
         commit("CONTRACT_ADDRESS", t)
     },
-    async metamaskintegration({ state }) {
+    async metamaskintegration({state}) {
         if (!window.ethereum) {
             state.install_state = 1
             return false
@@ -202,6 +220,9 @@ const getters = {
     },
     sync_health(state) {
         return state.health
+    },
+    list_events(state) {
+        return state.console_items
     },
     user_tokens(state) {
         /*  let lk = [];

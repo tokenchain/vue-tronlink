@@ -66,6 +66,9 @@ const mutations = {
         // store web3 user account
         state.contract_balance = balance
     },
+    CLEAR_ITEM(state) {
+        state.console_items = []
+    },
     PUSH_ITEM(state, payload) {
         state.console_items.unshift({
             message: payload.msg,
@@ -120,6 +123,9 @@ const actions = {
     },
     newEventTransaction({commit}, payload) {
         commit("PUSH_ITEM", payload)
+    },
+    clearEvents({commit}) {
+        commit("CLEAR_ITEM")
     },
     storePasteBin({commit, state}, lis) {
         commit("PASTE_BIN_INIT", lis)
