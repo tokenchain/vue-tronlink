@@ -21,10 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-imtoken.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-imtoken.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +216,8 @@
       <workItem from="1614045293436" duration="4000" />
       <workItem from="1614053923467" duration="489000" />
       <workItem from="1614060366945" duration="402000" />
-      <workItem from="1614063883303" duration="821000" />
+      <workItem from="1614063883303" duration="863000" />
+      <workItem from="1614065476789" duration="27000" />
     </task>
     <servers />
   </component>
