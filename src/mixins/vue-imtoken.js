@@ -46,6 +46,21 @@ export default {
                 }
             })
         },
+        imtokenScanQRCode(error_cb, result_cb) {
+            if (!this.on_imtoken) return;
+            try {
+                this.imtokenInstance.callAPI("native.scanQRCode", function (err, text) {
+                    if (err) {
+                        error_cb(err.message)
+                    } else {
+                        result_cb(text)
+                    }
+
+                });
+            } catch (error) {
+                error_cb(error)
+            }
+        },
         imtokenToastInfo(message) {
             if (!this.on_imtoken) return;
             this.imtokenInstance.callAPI('native.toast', {
@@ -148,7 +163,8 @@ export default {
                     }
                 })
         }
-    },
+    }
+    ,
     mounted() {
         let _this = this
 
@@ -184,5 +200,6 @@ export default {
 
 
          */
-    },
+    }
+    ,
 }

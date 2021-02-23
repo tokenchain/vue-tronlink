@@ -252,7 +252,7 @@ export default class TronLink {
         }
     }
 
-    eventListener(message: any, tronLinkInitialData: boolean, vueInstance: Vue) {
+    eventListener(message: any, tronLinkInitialData: boolean | any, vueInstance: Vue) {
         if (message.action === 'setNode') {
             // @ts-ignore
             vueInstance.announce_node_name(message.data.node.fullNode)
