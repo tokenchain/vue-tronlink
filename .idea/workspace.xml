@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/mixins/vue-eosscatter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -218,6 +219,7 @@
       <workItem from="1614060366945" duration="402000" />
       <workItem from="1614063883303" duration="863000" />
       <workItem from="1614065476789" duration="27000" />
+      <workItem from="1614065530123" duration="566000" />
     </task>
     <servers />
   </component>
