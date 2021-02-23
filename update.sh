@@ -65,6 +65,8 @@ gitpush(){
 }
 
 taobao(){
+  echo "wait a moment then let taobao to sync the package"
+  sleep 10
   cnpm sync vue-tronlink
   cnpm info vue-tronlink
 }
