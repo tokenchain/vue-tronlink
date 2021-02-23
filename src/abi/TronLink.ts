@@ -243,6 +243,14 @@ export default class TronLink {
         }
     }
 
+    __debugMessage(data_message_raw: any): boolean {
+        if (this.selected_function_caller) {
+            this.selected_function_caller.debug(data_message_raw)
+            return true
+        } else {
+            return false
+        }
+    }
 
     eventListener(message: any, tronLinkInitialData: boolean, vueInstance: Vue) {
         if (message.action === 'setNode') {
@@ -312,6 +320,7 @@ export default class TronLink {
             console.group("TronLink action hook")
             console.log("checker from-", message.action)
             console.log(message.data)
+            this.__debugMessage(message)
             console.groupEnd()
         }
     }

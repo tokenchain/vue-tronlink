@@ -11,6 +11,8 @@ export interface TronLinkEventCaller {
     signer(payload: TronLinkTunnelMessage): boolean;
 
     reply(payload: TronLinkTabReply): boolean;
+
+    debug(message_called): boolean;
 }
 
 export interface TronTRC20Token {

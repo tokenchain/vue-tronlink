@@ -11,7 +11,6 @@ export default {
         return {
             imtokenInstance: false,
             on_imtoken: false,
-
             imtoken_pop_setting_align: "top",
             imtoken_pop_setting_model: "banner"
         }
