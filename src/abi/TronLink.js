@@ -154,7 +154,6 @@ export default class TronLink {
         }
         else {
             const apbalance = await contract.balanceOf(address);
-            console.log(address, txtUnit(apbalance));
             this.tokens[trc20_address].setHolder(address, txtUnit(apbalance));
         }
         return this.tokens[trc20_address];
