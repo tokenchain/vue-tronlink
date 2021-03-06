@@ -178,6 +178,11 @@ export default class TronLink {
         return await this.getThirdTokenBalance(this.getAccountAddress(), "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
     }
 
+    /**
+     * get TRC20 token in balance
+     * @param address
+     * @param trc20_address
+     */
     async getThirdTokenBalance(address: string, trc20_address: string): Promise<TronTRC20Token> {
         if (!this.isLoggedIn()) {
             throw "wallet is not login"
@@ -206,6 +211,18 @@ export default class TronLink {
         }
 
         return this.tokens[trc20_address];
+    }
+
+    /**
+     * to approve prespending TRC20 token on the go..
+     * @param trc20_address
+     * @param spender_address
+     * @param amount_sun
+     * @constructor
+     */
+    async ApproveSpendingToken(trc20_address: string, spender_address: string, amount_sun: number): Promise<boolean> {
+        const token = await this.NewToken(trc20_address)
+        return await token.approve(spender_address, String(amount_sun))
     }
 
     async NewToken(trc20_address: string): Promise<TokenTrc20> {

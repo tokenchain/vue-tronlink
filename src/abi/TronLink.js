@@ -122,6 +122,10 @@ export default class TronLink {
         }
         return this.tokens[trc20_address];
     }
+    async ApproveSpendingToken(trc20_address, spender_address, amount_sun) {
+        const token = await this.NewToken(trc20_address);
+        return await token.approve(spender_address, String(amount_sun));
+    }
     async NewToken(trc20_address) {
         const contract = new TokenTrc20(this.tronWeb);
         contract.setDebug(false);
