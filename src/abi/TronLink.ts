@@ -275,14 +275,14 @@ export default class TronLink {
     }
 
     eventListener(message: any, tronLinkInitialData: boolean | any, vueInstance: Vue) {
-        if (message.action === 'setNode') {
+        if (message.hasOwnProperty("action") && message.action === 'setNode') {
             // @ts-ignore
             vueInstance.announce_node_name(message.data.node.fullNode)
             vueInstance.$emit("notify_tron_node_change", message.data.node.fullNode)
         }
 
 
-        if (message.action === 'setAccount') {
+        if (message.hasOwnProperty("action") && message.action === 'setAccount') {
             if (typeof message === "object" && message.hasOwnProperty("data")) {
                 // @ts-ignore
                 if (vueInstance.hasOwnProperty("account_name") && vueInstance.account_name !== message.data.name) {
@@ -292,7 +292,7 @@ export default class TronLink {
         }
 
 
-        if (message.action === 'tunnel') {
+        if (message.hasOwnProperty("action") && message.action === 'tunnel') {
             if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
                 if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
                     if (!this.__signOp(message.data)) {
@@ -306,7 +306,7 @@ export default class TronLink {
             }
         }
 
-        if (message.action === 'tabReply') {
+        if (message.hasOwnProperty("action") && message.action === 'tabReply') {
             /**
              * response from the wallet sign action
              */
