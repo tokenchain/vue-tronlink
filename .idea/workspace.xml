@@ -19,11 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
-    </list>
+    <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -227,6 +223,7 @@
       <workItem from="1615020316013" duration="375000" />
       <workItem from="1615020740077" duration="52000" />
       <workItem from="1615022500531" duration="108000" />
+      <workItem from="1615027844621" duration="46000" />
     </task>
     <servers />
   </component>
