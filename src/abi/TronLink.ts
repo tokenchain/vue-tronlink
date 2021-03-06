@@ -1,6 +1,7 @@
 import {Address} from "./base/Address"
 import {TokenTrc20} from "./TokenTrc20";
 import {
+
     TronLinkEventCaller,
     TronLinkTabReply,
     TronLinkToken,
@@ -8,6 +9,9 @@ import {
     TronTRC20Token
 } from "./base/types";
 import {Vue} from "vue/types/vue";
+import {txtUnit} from "./../utils/bnx";
+import CoinDetail from "./CoinDetail";
+
 
 /**
  * TronLink extension interaction functionality
@@ -150,32 +154,88 @@ export default class TronLink {
         })
     }
 
-    async getCoin(trc20_coin: string): Promise<TronTRC20Token> {
+    async getCoin(trc20_coin: string): Promise<number> {
+        return await this.getThirdTokenBalanceSun(this.getAccountAddress(), trc20_coin)
+    }
+
+    async getCoinFlo(trc20_coin: string): Promise<number> {
+        return await this.getThirdTokenBalanceFloat(this.getAccountAddress(), trc20_coin)
+    }
+
+    async coinDPFlo(): Promise<number> {
+        return await this.getCoinFlo("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
+    }
+
+    async coinCOLAFlo(): Promise<number> {
+        return await this.getCoinFlo("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
+    }
+
+    async coinBTCFlo(): Promise<number> {
+        return await this.getCoinFlo("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
+    }
+
+    async coinETHFlo(): Promise<number> {
+        return await this.getCoinFlo("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
+    }
+
+    async coinSUNFlo(): Promise<number> {
+        return await this.getCoinFlo("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
+    }
+
+    async coinUSDTFlo(): Promise<number> {
+        return await this.getCoinFlo("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+    }
+
+    async coinDP(): Promise<number> {
+        return await this.getCoin("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
+    }
+
+    async coinCOLA(): Promise<number> {
+        return await this.getCoin("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
+    }
+
+    async coinBTC(): Promise<number> {
+        return await this.getCoin("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
+    }
+
+    async coinETH(): Promise<number> {
+        return await this.getCoin("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
+    }
+
+    async coinSUN(): Promise<number> {
+        return await this.getCoin("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
+    }
+
+    async coinUSDT(): Promise<number> {
+        return await this.getCoin("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+    }
+
+    async getCoinDetail(trc20_coin: string): Promise<CoinDetail> {
         return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin)
     }
 
-    async coinDP(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
+    async coinDPDetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
     }
 
-    async coinCOLA(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
+    async coinCOLADetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
     }
 
-    async coinBTC(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
+    async coinBTCDetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
     }
 
-    async coinETH(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
+    async coinETHDetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
     }
 
-    async coinSUN(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
+    async coinSUNDetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
     }
 
-    async coinUSDT(): Promise<TronTRC20Token> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+    async coinUSDTDetail(): Promise<CoinDetail> {
+        return await this.getCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
     }
 
     /**
@@ -183,34 +243,35 @@ export default class TronLink {
      * @param address
      * @param trc20_address
      */
-    async getThirdTokenBalance(address: string, trc20_address: string): Promise<TronTRC20Token> {
+    async getThirdTokenBalance(address: string, trc20_address: string): Promise<CoinDetail> {
         if (!this.isLoggedIn()) {
             throw "wallet is not login"
         }
-        let contract
+        const contract = await this.NewToken(trc20_address)
         if (!this.tokens.hasOwnProperty(trc20_address)) {
-            contract = await this.NewToken(address)
-
             const a = await contract.balanceOf(address)
             const d = await contract.decimals()
-
-            this.tokens[trc20_address] = {
-                instance: contract,
-                address: trc20_address,
-                decimal: d,
-                hold: {}
-            }
-
-            this.tokens[trc20_address].hold[address] = a
+            const detail = new CoinDetail(trc20_address, d)
+            detail.setHolder(address, a)
+            this.tokens[trc20_address] = detail
         } else {
-            contract = this.tokens[trc20_address].instance
-            const aa = await contract.balanceOf(address)
-            const dec = await contract.decimals()
-            this.tokens[trc20_address].decimal = dec
-            this.tokens[trc20_address].hold[address] = aa
+            const apbalance = await contract.balanceOf(address)
+            console.log(address, txtUnit(apbalance))
+            this.tokens[trc20_address].setHolder(address, txtUnit(apbalance))
         }
 
+        // @ts-ignore
         return this.tokens[trc20_address];
+    }
+
+    async getThirdTokenBalanceSun(address: string, trc20_address: string): Promise<number> {
+        const conver = await this.getThirdTokenBalance(address, trc20_address)
+        return conver.bySun(address)
+    }
+
+    async getThirdTokenBalanceFloat(address: string, trc20_address: string): Promise<number> {
+        const conver = await this.getThirdTokenBalance(address, trc20_address)
+        return conver.byFloat(address)
     }
 
     /**
@@ -238,7 +299,7 @@ export default class TronLink {
 
     explainTrc20(payload: TronTRC20Token): number {
         const me = this.getAccountAddress()
-        return payload.hold[me]
+        return payload.holder[me]
     }
 
     setCallbackFunctionCall(function_selector: string, caller: TronLinkEventCaller) {
@@ -275,24 +336,27 @@ export default class TronLink {
     }
 
     eventListener(message: any, tronLinkInitialData: boolean | any, vueInstance: Vue) {
-        if (message.hasOwnProperty("action") && message.action === 'setNode') {
+        if (message.action === 'setNode') {
             // @ts-ignore
             vueInstance.announce_node_name(message.data.node.fullNode)
             vueInstance.$emit("notify_tron_node_change", message.data.node.fullNode)
         }
 
 
-        if (message.hasOwnProperty("action") && message.action === 'setAccount') {
-            if (typeof message === "object" && message.hasOwnProperty("data")) {
+        if (message.action === 'setAccount') {
+            if (message.hasOwnProperty("data")) {
                 // @ts-ignore
                 if (vueInstance.hasOwnProperty("account_name") && vueInstance.account_name !== message.data.name) {
                     vueInstance.$emit("notify_tron_account_set", message.data.name, message.data.address)
+                }
+                if (message.data.name === false) {
+                    vueInstance.$emit("notify_tron_account_logout")
                 }
             }
         }
 
 
-        if (message.hasOwnProperty("action") && message.action === 'tunnel') {
+        if (message.action === 'tunnel') {
             if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
                 if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
                     if (!this.__signOp(message.data)) {
@@ -306,7 +370,7 @@ export default class TronLink {
             }
         }
 
-        if (message.hasOwnProperty("action") && message.action === 'tabReply') {
+        if (message.action === 'tabReply') {
             /**
              * response from the wallet sign action
              */
@@ -339,8 +403,8 @@ export default class TronLink {
 
         // @ts-ignore
         if (vueInstance.hasOwnProperty("_debug_tronlink") && vueInstance._debug_tronlink) {
-            console.group("TronLink action hook")
-            console.log("checker from-", message.action)
+            console.group("TronLink Message 🖼")
+            console.log("Action:", message.action)
             console.log(message.data)
             this.__debugMessage(message)
             console.groupEnd()

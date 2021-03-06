@@ -2,6 +2,7 @@
 // tslint:disable:no-use-before-define
 import {BigNumber} from "bignumber.js"
 import {TokenTrc20} from "../TokenTrc20";
+import CoinDetail from "../CoinDetail";
 
 export interface Balancer {
     [holder_address: string]: number;
@@ -16,10 +17,9 @@ export interface TronLinkEventCaller {
 }
 
 export interface TronTRC20Token {
-    instance: TokenTrc20;
     address: string;
     decimal: number;
-    hold: Balancer;
+    holder: Balancer;
 }
 
 export interface TronLinkTunnelMessageDataTransaction {
@@ -91,7 +91,7 @@ export interface TronLinkTabReply {
 }
 
 export interface TronLinkToken {
-    [contract_address: string]: TronTRC20Token;
+    [contract_address: string]: CoinDetail;
 }
 
 export enum OpCode {

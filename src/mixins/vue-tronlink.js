@@ -115,9 +115,19 @@ export default {
          */
         async notify_tron_installed() {
             const vue_level = this
-            window.addEventListener('message', ({data: {isTronLink = false, message}}) => {
-                vue_level.tronLink.eventListener(message, vue_level.tronLinkInitialData, vue_level)
-                vue_level.tronLink.__debugMessage(data)
+            window.addEventListener("message", e => {
+                const d = JSON.stringify(e.data)
+                const hard = JSON.parse(d)
+                if (!(hard && hard.hasOwnProperty("message") && hard.message.hasOwnProperty("action"))) {
+                    return;
+                }
+                const msg = e.data
+                if (msg.hasOwnProperty("isTronLink")) {
+                    if (msg.isTronLink) {
+                        vue_level.tronLink.eventListener(msg.message, vue_level.tronLinkInitialData, vue_level)
+                        vue_level.tronLink.__debugMessage(msg)
+                    }
+                }
             })
             await this.updateNodeVersion()
             // ts-ignore
@@ -125,7 +135,7 @@ export default {
             console.log("TronLink is OK! ✅ ")
             if (this._debug_tronlink) {
                 console.log(provider.fullNode.host)
-                console.log(this.tronWeb)
+                console.log("tronweb object", this.tronWeb)
             }
             this.announce_node_name(provider.fullNode.host)
             this.$emit("notify_tron_installed")

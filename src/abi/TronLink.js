@@ -1,5 +1,7 @@
 import { Address } from "./base/Address";
 import { TokenTrc20 } from "./TokenTrc20";
+import { txtUnit } from "./../utils/bnx";
+import CoinDetail from "./CoinDetail";
 export default class TronLink {
     constructor(tronWeb) {
         this.tronWeb = tronWeb;
@@ -76,51 +78,94 @@ export default class TronLink {
         });
     }
     async getCoin(trc20_coin) {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
+        return await this.getThirdTokenBalanceSun(this.getAccountAddress(), trc20_coin);
+    }
+    async getCoinFlo(trc20_coin) {
+        return await this.getThirdTokenBalanceFloat(this.getAccountAddress(), trc20_coin);
+    }
+    async coinDPFlo() {
+        return await this.getCoinFlo("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+    }
+    async coinCOLAFlo() {
+        return await this.getCoinFlo("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+    }
+    async coinBTCFlo() {
+        return await this.getCoinFlo("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+    }
+    async coinETHFlo() {
+        return await this.getCoinFlo("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+    }
+    async coinSUNFlo() {
+        return await this.getCoinFlo("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+    }
+    async coinUSDTFlo() {
+        return await this.getCoinFlo("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
     }
     async coinDP() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+        return await this.getCoin("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
     }
     async coinCOLA() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+        return await this.getCoin("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
     }
     async coinBTC() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+        return await this.getCoin("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
     }
     async coinETH() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+        return await this.getCoin("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
     }
     async coinSUN() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+        return await this.getCoin("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
     }
     async coinUSDT() {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+        return await this.getCoin("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+    }
+    async getCoinDetail(trc20_coin) {
+        return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
+    }
+    async coinDPDetail() {
+        return await this.getCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+    }
+    async coinCOLADetail() {
+        return await this.getCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+    }
+    async coinBTCDetail() {
+        return await this.getCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+    }
+    async coinETHDetail() {
+        return await this.getCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+    }
+    async coinSUNDetail() {
+        return await this.getCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+    }
+    async coinUSDTDetail() {
+        return await this.getCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
     }
     async getThirdTokenBalance(address, trc20_address) {
         if (!this.isLoggedIn()) {
             throw "wallet is not login";
         }
-        let contract;
+        const contract = await this.NewToken(trc20_address);
         if (!this.tokens.hasOwnProperty(trc20_address)) {
-            contract = await this.NewToken(address);
             const a = await contract.balanceOf(address);
             const d = await contract.decimals();
-            this.tokens[trc20_address] = {
-                instance: contract,
-                address: trc20_address,
-                decimal: d,
-                hold: {}
-            };
-            this.tokens[trc20_address].hold[address] = a;
+            const detail = new CoinDetail(trc20_address, d);
+            detail.setHolder(address, a);
+            this.tokens[trc20_address] = detail;
         }
         else {
-            contract = this.tokens[trc20_address].instance;
-            const aa = await contract.balanceOf(address);
-            const dec = await contract.decimals();
-            this.tokens[trc20_address].decimal = dec;
-            this.tokens[trc20_address].hold[address] = aa;
+            const apbalance = await contract.balanceOf(address);
+            console.log(address, txtUnit(apbalance));
+            this.tokens[trc20_address].setHolder(address, txtUnit(apbalance));
         }
         return this.tokens[trc20_address];
+    }
+    async getThirdTokenBalanceSun(address, trc20_address) {
+        const conver = await this.getThirdTokenBalance(address, trc20_address);
+        return conver.bySun(address);
+    }
+    async getThirdTokenBalanceFloat(address, trc20_address) {
+        const conver = await this.getThirdTokenBalance(address, trc20_address);
+        return conver.byFloat(address);
     }
     async ApproveSpendingToken(trc20_address, spender_address, amount_sun) {
         const token = await this.NewToken(trc20_address);
@@ -137,7 +182,7 @@ export default class TronLink {
     }
     explainTrc20(payload) {
         const me = this.getAccountAddress();
-        return payload.hold[me];
+        return payload.holder[me];
     }
     setCallbackFunctionCall(function_selector, caller) {
         this.selected_function_human_operation = function_selector;
@@ -172,18 +217,21 @@ export default class TronLink {
         }
     }
     eventListener(message, tronLinkInitialData, vueInstance) {
-        if (message.hasOwnProperty("action") && message.action === 'setNode') {
+        if (message.action === 'setNode') {
             vueInstance.announce_node_name(message.data.node.fullNode);
             vueInstance.$emit("notify_tron_node_change", message.data.node.fullNode);
         }
-        if (message.hasOwnProperty("action") && message.action === 'setAccount') {
-            if (typeof message === "object" && message.hasOwnProperty("data")) {
+        if (message.action === 'setAccount') {
+            if (message.hasOwnProperty("data")) {
                 if (vueInstance.hasOwnProperty("account_name") && vueInstance.account_name !== message.data.name) {
                     vueInstance.$emit("notify_tron_account_set", message.data.name, message.data.address);
                 }
+                if (message.data.name === false) {
+                    vueInstance.$emit("notify_tron_account_logout");
+                }
             }
         }
-        if (message.hasOwnProperty("action") && message.action === 'tunnel') {
+        if (message.action === 'tunnel') {
             if (message.data.hasOwnProperty("action") && message.data.action === 'sign') {
                 if (message.data.hasOwnProperty("input") && message.data.input.hasOwnProperty("function_selector")) {
                     if (!this.__signOp(message.data)) {
@@ -197,7 +245,7 @@ export default class TronLink {
                 }
             }
         }
-        if (message.hasOwnProperty("action") && message.action === 'tabReply') {
+        if (message.action === 'tabReply') {
             if (message.data.hasOwnProperty("success")) {
                 if (message.data.success === true) {
                     if (!this.__signReply(message.data)) {
@@ -224,8 +272,8 @@ export default class TronLink {
             }
         }
         if (vueInstance.hasOwnProperty("_debug_tronlink") && vueInstance._debug_tronlink) {
-            console.group("TronLink action hook");
-            console.log("checker from-", message.action);
+            console.group("TronLink Message 🖼");
+            console.log("Action:", message.action);
             console.log(message.data);
             this.__debugMessage(message);
             console.groupEnd();

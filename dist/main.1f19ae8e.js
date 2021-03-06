@@ -60249,7 +60249,599 @@ var TokenTrc20 = /*#__PURE__*/function (_BaseContract) {
 
 exports.TokenTrc20 = TokenTrc20;
 TokenTrc20.contractName = "TokenTrc20";
-},{"tronweb":"../../node_modules/tronweb/dist/TronWeb.node.js","./base/base":"../abi/base/base.js"}],"../abi/TronLink.js":[function(require,module,exports) {
+},{"tronweb":"../../node_modules/tronweb/dist/TronWeb.node.js","./base/base":"../abi/base/base.js"}],"../utils/bnx.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.romanize = romanize;
+exports.deromanize = deromanize;
+exports.___fromSun = ___fromSun;
+exports.___fromSun2Floor = ___fromSun2Floor;
+exports.___fromTrxToSun = ___fromTrxToSun;
+exports.___fromSunBnShort = ___fromSunBnShort;
+exports.___fromSunBNLong = ___fromSunBNLong;
+exports._isBigNumber = _isBigNumber;
+exports.generateReferCode = generateReferCode;
+exports.byBigNumberFloat = byBigNumberFloat;
+exports.toNumber = toNumber;
+exports.toBigNumber = toBigNumber;
+exports.FillZero = FillZero;
+exports.trx = trx;
+exports.trxLong = trxLong;
+exports.trxUnit = trxUnit;
+exports.hexUnitFloat = hexUnitFloat;
+exports.txtUnit = txtUnit;
+exports.txtUnitRomanize = txtUnitRomanize;
+exports.duration = duration;
+exports.hexBlockTime = hexBlockTime;
+exports.blocktime = blocktime;
+exports.sum = sum;
+exports.coinbase = coinbase;
+
+var _tronweb = _interopRequireWildcard(require("tronweb"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+// import { BigNumber } from "bignumber.js"
+var regx_split = /[-.]/;
+var regex_number_sub = /(\d)(?=(\d{3})+$)/g;
+
+_tronweb.BigNumber.prototype.formatCurrency = function () {
+  var thou = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ",";
+  var dec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ".";
+  var sym = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "$";
+  return this.toFixed(2).toString().split(regx_split).reverse().reduceRight(function (t, c, i) {
+    return i === 2 ? "-" + t : i === 1 ? t + c.replace(regex_number_sub, "$1" + thou) : t + dec + c;
+  }, sym);
+};
+
+_tronweb.BigNumber.prototype.formatSun = function () {
+  var thou = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ",";
+  var dec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ".";
+  var sym = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "$";
+  return this.toFixed(6).toString().split(regx_split).reverse().reduceRight(function (t, c, i) {
+    return i === 2 ? "-" + t : i === 1 ? t + c.replace(regex_number_sub, "$1" + thou) : t + dec + c;
+  }, sym);
+};
+
+_tronweb.BigNumber.prototype.unitMoney = function () {
+  var thou = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ",";
+  var dec = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ".";
+  var sym = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "$";
+  return this.toFixed(1).toString().split(regx_split).reverse().reduceRight(function (t, c, i) {
+    return i === 2 ? "-" + t : i === 1 ? t + c.replace(regex_number_sub, "$1" + thou) : t + dec + c;
+  }, sym);
+};
+
+function ___fromSunBNLong(number_string) {
+  try {
+    var _sum = _tronweb.default.fromSun("0");
+
+    if (_tronweb.default.utils.isBigNumber(number_string)) {
+      var amount = number_string.toNumber();
+      _sum = _tronweb.default.fromSun(amount);
+    }
+
+    if (_isBigNumber(number_string)) {
+      if (number_string.hasOwnProperty("_hex")) {
+        var bn = new _tronweb.BigNumber(number_string._hex);
+        _sum = _tronweb.default.fromSun(bn);
+      }
+    }
+
+    return _sum.formatSun(",", ".", "");
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+function ___fromSunBnShort(number_string) {
+  try {
+    var _sum2 = _tronweb.default.fromSun("0");
+
+    if (_tronweb.default.utils.isBigNumber(number_string)) {
+      var amount = number_string.toNumber();
+      _sum2 = _tronweb.default.fromSun(amount);
+    }
+
+    if (_isBigNumber(number_string)) {
+      if (number_string.hasOwnProperty("_hex")) {
+        var bn = new _tronweb.BigNumber(number_string._hex);
+        _sum2 = _tronweb.default.fromSun(bn);
+      }
+    }
+
+    return _sum2.formatCurrency(",", ".", "");
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+/**
+ * to math number
+ * @param number_string
+ * @returns {number|any}
+ */
+
+
+function ___fromSun(number_string) {
+  try {
+    if (_tronweb.default.utils.isBigNumber(number_string)) {
+      var amount = number_string.toNumber();
+      return parseFloat(_tronweb.default.fromSun(amount));
+    }
+
+    if (_isBigNumber(number_string)) {
+      if (number_string.hasOwnProperty("_hex")) {
+        var bn = new _tronweb.BigNumber(number_string._hex);
+        return parseFloat(_tronweb.default.fromSun(bn));
+      }
+    }
+
+    if (typeof number_string === "string") {
+      var bignumer = _tronweb.default.toBigNumber(number_string);
+
+      var _amount = bignumer.toNumber();
+
+      return parseFloat(_tronweb.default.fromSun(_amount));
+    }
+
+    if (typeof number_string === "number") {
+      return parseFloat(_tronweb.default.fromSun(number_string));
+    }
+
+    return 0;
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+function _isBigNumber(numberex) {
+  if (_tronweb.default.utils.isBigNumber(numberex)) {
+    return true;
+  }
+
+  if (_typeof(numberex) === "object") {
+    if (numberex.hasOwnProperty("_isBigNumber")) {
+      return numberex._isBigNumber;
+    }
+
+    if (numberex.hasOwnProperty("_hex")) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function ___fromSun2Floor(number_string) {
+  try {
+    var num = ___fromSun(number_string);
+
+    return Math.floor(num);
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+function ___fromTrxToSun(number_unknown) {
+  try {
+    if (typeof number_unknown === "string") {
+      var bignumer = _tronweb.default.toBigNumber(number_unknown);
+
+      return bignumer.multipliedBy(1000000).toNumber();
+    }
+
+    if (typeof number_unknown === "number") {
+      return _tronweb.default.toBigNumber(number_unknown).multipliedBy(1000000).toNumber();
+    }
+
+    if (_tronweb.default.utils.isBigNumber(number_unknown)) {
+      return number_unknown.multipliedBy(1000000).toNumber();
+    }
+
+    if (_typeof(number_unknown) === "object" && number_unknown.hasOwnProperty("_isBigNumber")) {
+      if (number_unknown._isBigNumber && number_unknown.hasOwnProperty("_hex")) {
+        var val = new _tronweb.BigNumber(number_unknown._hex);
+        return val.multipliedBy(1000000).toNumber();
+      } else {
+        console.log("failed to create big number");
+      }
+    } // eslint-disable-next-line no-throw-literal
+
+
+    throw "Not ready for ___fromTrxToSun...";
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+function toBigNumber(number_unknown) {
+  try {
+    if (typeof number_unknown === "string") {
+      return _tronweb.default.toBigNumber(number_unknown);
+    }
+
+    if (typeof number_unknown === "number") {
+      return _tronweb.default.toBigNumber(number_unknown);
+    }
+
+    if (_tronweb.default.utils.isBigNumber(number_unknown)) {
+      return number_unknown;
+    }
+
+    if (_isBigNumber(number_unknown)) {
+      if (number_unknown._isBigNumber && number_unknown.hasOwnProperty("_hex")) {
+        return new _tronweb.BigNumber(number_unknown._hex);
+      } else {
+        console.log("failed to create big number");
+      }
+    }
+
+    return _tronweb.default.toBigNumber(number_unknown);
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+
+function byBigNumberFloat(number_unknown) {
+  try {
+    if (_tronweb.default.utils.isBigNumber(number_unknown)) {
+      return number_unknown.formatSun(",", ".", "");
+    }
+
+    if (_isBigNumber(number_unknown)) {
+      if (number_unknown._isBigNumber && number_unknown.hasOwnProperty("_hex")) {
+        var bn = new _tronweb.BigNumber(number_unknown._hex);
+        return bn.formatSun(",", ".", "");
+      } else {
+        console.log("failed to create big number");
+      }
+    }
+
+    return "N/A";
+  } catch (e) {
+    console.error(e);
+    return "E";
+  }
+}
+
+function toNumber(number_unknown) {
+  try {
+    var prenum = _tronweb.default.toBigNumber(0);
+
+    if (_tronweb.default.utils.isBigNumber(number_unknown)) {
+      prenum = number_unknown;
+    } else if (_isBigNumber(number_unknown)) {
+      if (number_unknown.hasOwnProperty("_hex")) {
+        prenum = new _tronweb.BigNumber(number_unknown._hex);
+      } else {
+        console.log("failed to create big number");
+      }
+    } else if (typeof number_unknown === "string") {
+      prenum = _tronweb.default.toBigNumber(number_unknown);
+    } else if (typeof number_unknown === "number") {
+      prenum = _tronweb.default.toBigNumber(number_unknown);
+    }
+
+    return prenum.toNumber();
+  } catch (e) {
+    console.error(e);
+    return 0;
+  }
+}
+/**
+ * all the calculations for sum
+ * @param list
+ * @returns {number}
+ */
+
+
+function sum(list) {
+  var c = 0;
+  list.forEach(function (num, i) {
+    var amou = 0;
+
+    if (_isBigNumber(num)) {
+      amou = toNumber(num);
+    } else {
+      amou = parseInt(num);
+    }
+
+    c = c + amou;
+  });
+  return c;
+}
+
+function trx(value) {
+  var sun = toBigNumber(1000000);
+
+  if (!_isBigNumber(value)) {
+    var sunamount = toBigNumber(value);
+    var trxamtf = sunamount.div(sun);
+
+    if (trxamtf.isGreaterThan(0)) {
+      return trxamtf.formatCurrency(",", ".", "");
+    } else {
+      return "-";
+    }
+  } else {
+    return ___fromSunBnShort(value);
+  }
+}
+
+function trxLong(value) {
+  if (!_isBigNumber(value)) {
+    var sun = toBigNumber(1000000);
+    var sunamount = toBigNumber(value);
+
+    var _trx = sunamount.div(sun);
+
+    if (_trx.isGreaterThan(0)) {
+      return _trx.formatSun(",", ".", "");
+    } else {
+      return "-";
+    }
+  } else {
+    return ___fromSunBNLong(value);
+  }
+}
+
+function trxUnit(value) {
+  var sun = toBigNumber(1000000);
+
+  if (isNaN(value)) {
+    return "-";
+  }
+
+  if (!_isBigNumber(value)) {
+    var sunamount = toBigNumber(value);
+
+    var _trx2 = sunamount.div(sun);
+
+    if (_trx2.isGreaterThan(0)) {
+      return _trx2.unitMoney(",", ".", "");
+    } else {
+      return "-";
+    }
+  } else {
+    var _trx3 = value.div(sun);
+
+    if (_trx3.isGreaterThan(0)) {
+      return _trx3.unitMoney(",", ".", "");
+    } else {
+      return "-";
+    }
+  }
+}
+
+function hexUnitFloat(value) {
+  if (isNaN(value)) {
+    return 0;
+  } else if (_isBigNumber(value)) {
+    return ___fromSun(value);
+  } else {
+    return parseFloat(value);
+  }
+}
+
+function txtUnit(value) {
+  if (isNaN(value)) {
+    return "-";
+  } else if (_isBigNumber(value)) {
+    return toNumber(value);
+  } else {
+    return parseInt(value);
+  }
+}
+
+function blocktime(value) {
+  var myDate = new Date(parseInt(value) * 1000);
+  var HH = myDate.getHours();
+  var MM = myDate.getMinutes();
+  var SS = myDate.getSeconds();
+  return "".concat(HH, ":").concat(MM, ":").concat(SS);
+}
+
+function hexBlockTime(value) {
+  return txtUnit(blocktime(value));
+}
+
+function duration_ms(value) {
+  var f = parseInt(value);
+  var mm = Math.floor(f / 60);
+  var tm = parseInt(value) % 60;
+  return "".concat(mm, ":").concat(tm);
+}
+
+function duration(value) {
+  if (value > 0) {
+    var secs = parseInt(value);
+    var hours = Math.floor(secs / (60 * 60));
+    var divisor_for_minutes = secs % (60 * 60);
+    var minutes = Math.floor(divisor_for_minutes / 60);
+    var divisor_for_seconds = divisor_for_minutes % 60;
+    var seconds = Math.ceil(divisor_for_seconds);
+    var obj = {
+      h: hours,
+      m: minutes,
+      s: seconds
+    };
+
+    if (obj.h > 0) {
+      return "".concat(obj.h, ":").concat(obj.m, ":").concat(obj.s);
+    }
+
+    if (obj.m > 0) {
+      return "".concat(obj.m, ":").concat(obj.s);
+    }
+  } else {
+    return "0";
+  }
+}
+
+function timeConverter(UNIX_timestamp) {
+  var a = new Date(UNIX_timestamp * 1000);
+  var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var year = a.getFullYear();
+  var month = months[a.getMonth()];
+  var date = a.getDate();
+  var hour = a.getHours();
+  var min = a.getMinutes();
+  var sec = a.getSeconds();
+  var strtime = date + " " + month + " " + year + " " + hour + ":" + min + ":" + sec;
+  return strtime;
+}
+
+function FillZero(p, fill_up) {
+  return new Array(fill_up - String(p).length + 1).join("0") + String(p);
+}
+
+function coinbase(value) {
+  var valuec = parseFloat(value);
+
+  if (valuec > 0) {
+    return Number(valuec).formatCurrency(",", ".", "");
+  } else {
+    return "0.00";
+  }
+}
+
+function generateReferCode() {
+  var chars = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  var serialLength = 5;
+  var randomSerial = "";
+  var i;
+  var randomNumber;
+
+  for (i = 0; i < serialLength; i = i + 1) {
+    randomNumber = Math.floor(Math.random() * chars.length);
+    randomSerial += chars.substring(randomNumber, randomNumber + 1);
+  }
+
+  return randomSerial;
+}
+
+function romanize(num) {
+  if (!+num) {
+    return false;
+  }
+
+  var digits = String(+num).split("");
+  var key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM", "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC", "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  var roman = "";
+  var i = 3;
+
+  while (i--) {
+    roman = (key[+digits.pop() + i * 10] || "") + roman;
+  }
+
+  return Array(+digits.join("") + 1).join("M") + roman;
+}
+
+function deromanize(str) {
+  var stc = str.toUpperCase();
+  var validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/;
+  var token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g;
+  var key = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
+  var num = 0;
+  var m = "";
+
+  if (!(stc && validator.test(stc))) {
+    return false;
+  } // eslint-disable-next-line no-cond-assign
+
+
+  while (m = token.exec(stc)) {
+    num += key[m[0]];
+  }
+
+  return num;
+}
+
+function txtUnitRomanize(value) {
+  if (isNaN(value)) {
+    return "-";
+  } else if (_isBigNumber(value)) {
+    return romanize(toNumber(value));
+  } else {
+    return romanize(parseInt(value));
+  }
+}
+},{"tronweb":"../../node_modules/tronweb/dist/TronWeb.node.js"}],"../abi/CoinDetail.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var CoinDetail = /*#__PURE__*/function () {
+  function CoinDetail(address, dec) {
+    _classCallCheck(this, CoinDetail);
+
+    this.address = address;
+    this.decimal = dec;
+    this.holder = {};
+  }
+
+  _createClass(CoinDetail, [{
+    key: "setHolder",
+    value: function setHolder(address, bal) {
+      if (this.holder.hasOwnProperty(address)) {
+        this.holder[address] = bal;
+      } else {
+        this.holder[address] = bal;
+      }
+    }
+  }, {
+    key: "bySun",
+    value: function bySun(address) {
+      return this.holder[address];
+    }
+  }, {
+    key: "byFloat",
+    value: function byFloat(address) {
+      return this.holder[address] / this.decimal;
+    }
+  }]);
+
+  return CoinDetail;
+}();
+
+exports.default = CoinDetail;
+},{}],"../abi/TronLink.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60260,6 +60852,12 @@ exports.default = void 0;
 var _Address = require("./base/Address");
 
 var _TokenTrc = require("./TokenTrc20");
+
+var _bnx = require("./../utils/bnx");
+
+var _CoinDetail = _interopRequireDefault(require("./CoinDetail"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -60414,7 +61012,7 @@ var TronLink = /*#__PURE__*/function () {
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
+                return this.getThirdTokenBalanceSun(this.getAccountAddress(), trc20_coin);
 
               case 2:
                 return _context2.abrupt("return", _context2.sent);
@@ -60434,15 +61032,15 @@ var TronLink = /*#__PURE__*/function () {
       return getCoin;
     }()
   }, {
-    key: "coinDP",
+    key: "getCoinFlo",
     value: function () {
-      var _coinDP = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      var _getCoinFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(trc20_coin) {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+                return this.getThirdTokenBalanceFloat(this.getAccountAddress(), trc20_coin);
 
               case 2:
                 return _context3.abrupt("return", _context3.sent);
@@ -60455,22 +61053,22 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee3, this);
       }));
 
-      function coinDP() {
-        return _coinDP.apply(this, arguments);
+      function getCoinFlo(_x2) {
+        return _getCoinFlo.apply(this, arguments);
       }
 
-      return coinDP;
+      return getCoinFlo;
     }()
   }, {
-    key: "coinCOLA",
+    key: "coinDPFlo",
     value: function () {
-      var _coinCOLA = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      var _coinDPFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+                return this.getCoinFlo("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
 
               case 2:
                 return _context4.abrupt("return", _context4.sent);
@@ -60483,22 +61081,22 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee4, this);
       }));
 
-      function coinCOLA() {
-        return _coinCOLA.apply(this, arguments);
+      function coinDPFlo() {
+        return _coinDPFlo.apply(this, arguments);
       }
 
-      return coinCOLA;
+      return coinDPFlo;
     }()
   }, {
-    key: "coinBTC",
+    key: "coinCOLAFlo",
     value: function () {
-      var _coinBTC = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+      var _coinCOLAFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+                return this.getCoinFlo("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
 
               case 2:
                 return _context5.abrupt("return", _context5.sent);
@@ -60511,22 +61109,22 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee5, this);
       }));
 
-      function coinBTC() {
-        return _coinBTC.apply(this, arguments);
+      function coinCOLAFlo() {
+        return _coinCOLAFlo.apply(this, arguments);
       }
 
-      return coinBTC;
+      return coinCOLAFlo;
     }()
   }, {
-    key: "coinETH",
+    key: "coinBTCFlo",
     value: function () {
-      var _coinETH = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+      var _coinBTCFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+                return this.getCoinFlo("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
 
               case 2:
                 return _context6.abrupt("return", _context6.sent);
@@ -60539,22 +61137,22 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee6, this);
       }));
 
-      function coinETH() {
-        return _coinETH.apply(this, arguments);
+      function coinBTCFlo() {
+        return _coinBTCFlo.apply(this, arguments);
       }
 
-      return coinETH;
+      return coinBTCFlo;
     }()
   }, {
-    key: "coinSUN",
+    key: "coinETHFlo",
     value: function () {
-      var _coinSUN = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+      var _coinETHFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
         return regeneratorRuntime.wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
               case 0:
                 _context7.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+                return this.getCoinFlo("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
 
               case 2:
                 return _context7.abrupt("return", _context7.sent);
@@ -60567,22 +61165,22 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee7, this);
       }));
 
-      function coinSUN() {
-        return _coinSUN.apply(this, arguments);
+      function coinETHFlo() {
+        return _coinETHFlo.apply(this, arguments);
       }
 
-      return coinSUN;
+      return coinETHFlo;
     }()
   }, {
-    key: "coinUSDT",
+    key: "coinSUNFlo",
     value: function () {
-      var _coinUSDT = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+      var _coinSUNFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
         return regeneratorRuntime.wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
                 _context8.next = 2;
-                return this.getThirdTokenBalance(this.getAccountAddress(), "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+                return this.getCoinFlo("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
 
               case 2:
                 return _context8.abrupt("return", _context8.sent);
@@ -60595,79 +61193,27 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee8, this);
       }));
 
-      function coinUSDT() {
-        return _coinUSDT.apply(this, arguments);
+      function coinSUNFlo() {
+        return _coinSUNFlo.apply(this, arguments);
       }
 
-      return coinUSDT;
+      return coinSUNFlo;
     }()
   }, {
-    key: "getThirdTokenBalance",
+    key: "coinUSDTFlo",
     value: function () {
-      var _getThirdTokenBalance = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9(address, trc20_address) {
-        var contract, a, d, aa, dec;
+      var _coinUSDTFlo = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
         return regeneratorRuntime.wrap(function _callee9$(_context9) {
           while (1) {
             switch (_context9.prev = _context9.next) {
               case 0:
-                if (this.isLoggedIn()) {
-                  _context9.next = 2;
-                  break;
-                }
-
-                throw "wallet is not login";
+                _context9.next = 2;
+                return this.getCoinFlo("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
 
               case 2:
-                if (this.tokens.hasOwnProperty(trc20_address)) {
-                  _context9.next = 17;
-                  break;
-                }
+                return _context9.abrupt("return", _context9.sent);
 
-                contract = new _TokenTrc.TokenTrc20(this.tronWeb);
-                contract.setDebug(false);
-                _context9.next = 7;
-                return contract.init(trc20_address);
-
-              case 7:
-                _context9.next = 9;
-                return contract.balanceOf(address);
-
-              case 9:
-                a = _context9.sent;
-                _context9.next = 12;
-                return contract.decimals();
-
-              case 12:
-                d = _context9.sent;
-                this.tokens[trc20_address] = {
-                  instance: contract,
-                  address: trc20_address,
-                  decimal: d,
-                  hold: {}
-                };
-                this.tokens[trc20_address].hold[address] = a;
-                _context9.next = 26;
-                break;
-
-              case 17:
-                contract = this.tokens[trc20_address].instance;
-                _context9.next = 20;
-                return contract.balanceOf(address);
-
-              case 20:
-                aa = _context9.sent;
-                _context9.next = 23;
-                return contract.decimals();
-
-              case 23:
-                dec = _context9.sent;
-                this.tokens[trc20_address].decimal = dec;
-                this.tokens[trc20_address].hold[address] = aa;
-
-              case 26:
-                return _context9.abrupt("return", this.tokens[trc20_address]);
-
-              case 27:
+              case 3:
               case "end":
                 return _context9.stop();
             }
@@ -60675,11 +61221,570 @@ var TronLink = /*#__PURE__*/function () {
         }, _callee9, this);
       }));
 
-      function getThirdTokenBalance(_x2, _x3) {
+      function coinUSDTFlo() {
+        return _coinUSDTFlo.apply(this, arguments);
+      }
+
+      return coinUSDTFlo;
+    }()
+  }, {
+    key: "coinDP",
+    value: function () {
+      var _coinDP = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.next = 2;
+                return this.getCoin("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+
+              case 2:
+                return _context10.abrupt("return", _context10.sent);
+
+              case 3:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
+
+      function coinDP() {
+        return _coinDP.apply(this, arguments);
+      }
+
+      return coinDP;
+    }()
+  }, {
+    key: "coinCOLA",
+    value: function () {
+      var _coinCOLA = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee11() {
+        return regeneratorRuntime.wrap(function _callee11$(_context11) {
+          while (1) {
+            switch (_context11.prev = _context11.next) {
+              case 0:
+                _context11.next = 2;
+                return this.getCoin("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+
+              case 2:
+                return _context11.abrupt("return", _context11.sent);
+
+              case 3:
+              case "end":
+                return _context11.stop();
+            }
+          }
+        }, _callee11, this);
+      }));
+
+      function coinCOLA() {
+        return _coinCOLA.apply(this, arguments);
+      }
+
+      return coinCOLA;
+    }()
+  }, {
+    key: "coinBTC",
+    value: function () {
+      var _coinBTC = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
+        return regeneratorRuntime.wrap(function _callee12$(_context12) {
+          while (1) {
+            switch (_context12.prev = _context12.next) {
+              case 0:
+                _context12.next = 2;
+                return this.getCoin("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+
+              case 2:
+                return _context12.abrupt("return", _context12.sent);
+
+              case 3:
+              case "end":
+                return _context12.stop();
+            }
+          }
+        }, _callee12, this);
+      }));
+
+      function coinBTC() {
+        return _coinBTC.apply(this, arguments);
+      }
+
+      return coinBTC;
+    }()
+  }, {
+    key: "coinETH",
+    value: function () {
+      var _coinETH = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee13() {
+        return regeneratorRuntime.wrap(function _callee13$(_context13) {
+          while (1) {
+            switch (_context13.prev = _context13.next) {
+              case 0:
+                _context13.next = 2;
+                return this.getCoin("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+
+              case 2:
+                return _context13.abrupt("return", _context13.sent);
+
+              case 3:
+              case "end":
+                return _context13.stop();
+            }
+          }
+        }, _callee13, this);
+      }));
+
+      function coinETH() {
+        return _coinETH.apply(this, arguments);
+      }
+
+      return coinETH;
+    }()
+  }, {
+    key: "coinSUN",
+    value: function () {
+      var _coinSUN = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
+        return regeneratorRuntime.wrap(function _callee14$(_context14) {
+          while (1) {
+            switch (_context14.prev = _context14.next) {
+              case 0:
+                _context14.next = 2;
+                return this.getCoin("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+
+              case 2:
+                return _context14.abrupt("return", _context14.sent);
+
+              case 3:
+              case "end":
+                return _context14.stop();
+            }
+          }
+        }, _callee14, this);
+      }));
+
+      function coinSUN() {
+        return _coinSUN.apply(this, arguments);
+      }
+
+      return coinSUN;
+    }()
+  }, {
+    key: "coinUSDT",
+    value: function () {
+      var _coinUSDT = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
+        return regeneratorRuntime.wrap(function _callee15$(_context15) {
+          while (1) {
+            switch (_context15.prev = _context15.next) {
+              case 0:
+                _context15.next = 2;
+                return this.getCoin("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+
+              case 2:
+                return _context15.abrupt("return", _context15.sent);
+
+              case 3:
+              case "end":
+                return _context15.stop();
+            }
+          }
+        }, _callee15, this);
+      }));
+
+      function coinUSDT() {
+        return _coinUSDT.apply(this, arguments);
+      }
+
+      return coinUSDT;
+    }()
+  }, {
+    key: "getCoinDetail",
+    value: function () {
+      var _getCoinDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee16(trc20_coin) {
+        return regeneratorRuntime.wrap(function _callee16$(_context16) {
+          while (1) {
+            switch (_context16.prev = _context16.next) {
+              case 0:
+                _context16.next = 2;
+                return this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
+
+              case 2:
+                return _context16.abrupt("return", _context16.sent);
+
+              case 3:
+              case "end":
+                return _context16.stop();
+            }
+          }
+        }, _callee16, this);
+      }));
+
+      function getCoinDetail(_x3) {
+        return _getCoinDetail.apply(this, arguments);
+      }
+
+      return getCoinDetail;
+    }()
+  }, {
+    key: "coinDPDetail",
+    value: function () {
+      var _coinDPDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee17() {
+        return regeneratorRuntime.wrap(function _callee17$(_context17) {
+          while (1) {
+            switch (_context17.prev = _context17.next) {
+              case 0:
+                _context17.next = 2;
+                return this.getCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+
+              case 2:
+                return _context17.abrupt("return", _context17.sent);
+
+              case 3:
+              case "end":
+                return _context17.stop();
+            }
+          }
+        }, _callee17, this);
+      }));
+
+      function coinDPDetail() {
+        return _coinDPDetail.apply(this, arguments);
+      }
+
+      return coinDPDetail;
+    }()
+  }, {
+    key: "coinCOLADetail",
+    value: function () {
+      var _coinCOLADetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee18() {
+        return regeneratorRuntime.wrap(function _callee18$(_context18) {
+          while (1) {
+            switch (_context18.prev = _context18.next) {
+              case 0:
+                _context18.next = 2;
+                return this.getCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+
+              case 2:
+                return _context18.abrupt("return", _context18.sent);
+
+              case 3:
+              case "end":
+                return _context18.stop();
+            }
+          }
+        }, _callee18, this);
+      }));
+
+      function coinCOLADetail() {
+        return _coinCOLADetail.apply(this, arguments);
+      }
+
+      return coinCOLADetail;
+    }()
+  }, {
+    key: "coinBTCDetail",
+    value: function () {
+      var _coinBTCDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+        return regeneratorRuntime.wrap(function _callee19$(_context19) {
+          while (1) {
+            switch (_context19.prev = _context19.next) {
+              case 0:
+                _context19.next = 2;
+                return this.getCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+
+              case 2:
+                return _context19.abrupt("return", _context19.sent);
+
+              case 3:
+              case "end":
+                return _context19.stop();
+            }
+          }
+        }, _callee19, this);
+      }));
+
+      function coinBTCDetail() {
+        return _coinBTCDetail.apply(this, arguments);
+      }
+
+      return coinBTCDetail;
+    }()
+  }, {
+    key: "coinETHDetail",
+    value: function () {
+      var _coinETHDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
+        return regeneratorRuntime.wrap(function _callee20$(_context20) {
+          while (1) {
+            switch (_context20.prev = _context20.next) {
+              case 0:
+                _context20.next = 2;
+                return this.getCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+
+              case 2:
+                return _context20.abrupt("return", _context20.sent);
+
+              case 3:
+              case "end":
+                return _context20.stop();
+            }
+          }
+        }, _callee20, this);
+      }));
+
+      function coinETHDetail() {
+        return _coinETHDetail.apply(this, arguments);
+      }
+
+      return coinETHDetail;
+    }()
+  }, {
+    key: "coinSUNDetail",
+    value: function () {
+      var _coinSUNDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
+        return regeneratorRuntime.wrap(function _callee21$(_context21) {
+          while (1) {
+            switch (_context21.prev = _context21.next) {
+              case 0:
+                _context21.next = 2;
+                return this.getCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+
+              case 2:
+                return _context21.abrupt("return", _context21.sent);
+
+              case 3:
+              case "end":
+                return _context21.stop();
+            }
+          }
+        }, _callee21, this);
+      }));
+
+      function coinSUNDetail() {
+        return _coinSUNDetail.apply(this, arguments);
+      }
+
+      return coinSUNDetail;
+    }()
+  }, {
+    key: "coinUSDTDetail",
+    value: function () {
+      var _coinUSDTDetail = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee22() {
+        return regeneratorRuntime.wrap(function _callee22$(_context22) {
+          while (1) {
+            switch (_context22.prev = _context22.next) {
+              case 0:
+                _context22.next = 2;
+                return this.getCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+
+              case 2:
+                return _context22.abrupt("return", _context22.sent);
+
+              case 3:
+              case "end":
+                return _context22.stop();
+            }
+          }
+        }, _callee22, this);
+      }));
+
+      function coinUSDTDetail() {
+        return _coinUSDTDetail.apply(this, arguments);
+      }
+
+      return coinUSDTDetail;
+    }()
+  }, {
+    key: "getThirdTokenBalance",
+    value: function () {
+      var _getThirdTokenBalance = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee23(address, trc20_address) {
+        var contract, a, d, detail, apbalance;
+        return regeneratorRuntime.wrap(function _callee23$(_context23) {
+          while (1) {
+            switch (_context23.prev = _context23.next) {
+              case 0:
+                if (this.isLoggedIn()) {
+                  _context23.next = 2;
+                  break;
+                }
+
+                throw "wallet is not login";
+
+              case 2:
+                _context23.next = 4;
+                return this.NewToken(trc20_address);
+
+              case 4:
+                contract = _context23.sent;
+
+                if (this.tokens.hasOwnProperty(trc20_address)) {
+                  _context23.next = 17;
+                  break;
+                }
+
+                _context23.next = 8;
+                return contract.balanceOf(address);
+
+              case 8:
+                a = _context23.sent;
+                _context23.next = 11;
+                return contract.decimals();
+
+              case 11:
+                d = _context23.sent;
+                detail = new _CoinDetail.default(trc20_address, d);
+                detail.setHolder(address, a);
+                this.tokens[trc20_address] = detail;
+                _context23.next = 22;
+                break;
+
+              case 17:
+                _context23.next = 19;
+                return contract.balanceOf(address);
+
+              case 19:
+                apbalance = _context23.sent;
+                console.log(address, (0, _bnx.txtUnit)(apbalance));
+                this.tokens[trc20_address].setHolder(address, (0, _bnx.txtUnit)(apbalance));
+
+              case 22:
+                return _context23.abrupt("return", this.tokens[trc20_address]);
+
+              case 23:
+              case "end":
+                return _context23.stop();
+            }
+          }
+        }, _callee23, this);
+      }));
+
+      function getThirdTokenBalance(_x4, _x5) {
         return _getThirdTokenBalance.apply(this, arguments);
       }
 
       return getThirdTokenBalance;
+    }()
+  }, {
+    key: "getThirdTokenBalanceSun",
+    value: function () {
+      var _getThirdTokenBalanceSun = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee24(address, trc20_address) {
+        var conver;
+        return regeneratorRuntime.wrap(function _callee24$(_context24) {
+          while (1) {
+            switch (_context24.prev = _context24.next) {
+              case 0:
+                _context24.next = 2;
+                return this.getThirdTokenBalance(address, trc20_address);
+
+              case 2:
+                conver = _context24.sent;
+                return _context24.abrupt("return", conver.bySun(address));
+
+              case 4:
+              case "end":
+                return _context24.stop();
+            }
+          }
+        }, _callee24, this);
+      }));
+
+      function getThirdTokenBalanceSun(_x6, _x7) {
+        return _getThirdTokenBalanceSun.apply(this, arguments);
+      }
+
+      return getThirdTokenBalanceSun;
+    }()
+  }, {
+    key: "getThirdTokenBalanceFloat",
+    value: function () {
+      var _getThirdTokenBalanceFloat = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee25(address, trc20_address) {
+        var conver;
+        return regeneratorRuntime.wrap(function _callee25$(_context25) {
+          while (1) {
+            switch (_context25.prev = _context25.next) {
+              case 0:
+                _context25.next = 2;
+                return this.getThirdTokenBalance(address, trc20_address);
+
+              case 2:
+                conver = _context25.sent;
+                return _context25.abrupt("return", conver.byFloat(address));
+
+              case 4:
+              case "end":
+                return _context25.stop();
+            }
+          }
+        }, _callee25, this);
+      }));
+
+      function getThirdTokenBalanceFloat(_x8, _x9) {
+        return _getThirdTokenBalanceFloat.apply(this, arguments);
+      }
+
+      return getThirdTokenBalanceFloat;
+    }()
+  }, {
+    key: "ApproveSpendingToken",
+    value: function () {
+      var _ApproveSpendingToken = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee26(trc20_address, spender_address, amount_sun) {
+        var token;
+        return regeneratorRuntime.wrap(function _callee26$(_context26) {
+          while (1) {
+            switch (_context26.prev = _context26.next) {
+              case 0:
+                _context26.next = 2;
+                return this.NewToken(trc20_address);
+
+              case 2:
+                token = _context26.sent;
+                _context26.next = 5;
+                return token.approve(spender_address, String(amount_sun));
+
+              case 5:
+                return _context26.abrupt("return", _context26.sent);
+
+              case 6:
+              case "end":
+                return _context26.stop();
+            }
+          }
+        }, _callee26, this);
+      }));
+
+      function ApproveSpendingToken(_x10, _x11, _x12) {
+        return _ApproveSpendingToken.apply(this, arguments);
+      }
+
+      return ApproveSpendingToken;
+    }()
+  }, {
+    key: "NewToken",
+    value: function () {
+      var _NewToken = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee27(trc20_address) {
+        var contract;
+        return regeneratorRuntime.wrap(function _callee27$(_context27) {
+          while (1) {
+            switch (_context27.prev = _context27.next) {
+              case 0:
+                contract = new _TokenTrc.TokenTrc20(this.tronWeb);
+                contract.setDebug(false);
+                _context27.next = 4;
+                return contract.init(trc20_address);
+
+              case 4:
+                return _context27.abrupt("return", contract);
+
+              case 5:
+              case "end":
+                return _context27.stop();
+            }
+          }
+        }, _callee27, this);
+      }));
+
+      function NewToken(_x13) {
+        return _NewToken.apply(this, arguments);
+      }
+
+      return NewToken;
     }()
   }, {
     key: "getListedCoins",
@@ -60690,7 +61795,7 @@ var TronLink = /*#__PURE__*/function () {
     key: "explainTrc20",
     value: function explainTrc20(payload) {
       var me = this.getAccountAddress();
-      return payload.hold[me];
+      return payload.holder[me];
     }
   }, {
     key: "setCallbackFunctionCall",
@@ -60720,6 +61825,16 @@ var TronLink = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "__debugMessage",
+    value: function __debugMessage(data_message_raw) {
+      if (this.selected_function_caller) {
+        this.selected_function_caller.debug(data_message_raw);
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }, {
     key: "eventListener",
     value: function eventListener(message, tronLinkInitialData, vueInstance) {
       if (message.action === 'setNode') {
@@ -60728,9 +61843,13 @@ var TronLink = /*#__PURE__*/function () {
       }
 
       if (message.action === 'setAccount') {
-        if (_typeof(message) === "object" && message.hasOwnProperty("data")) {
+        if (message.hasOwnProperty("data")) {
           if (vueInstance.hasOwnProperty("account_name") && vueInstance.account_name !== message.data.name) {
             vueInstance.$emit("notify_tron_account_set", message.data.name, message.data.address);
+          }
+
+          if (message.data.name === false) {
+            vueInstance.$emit("notify_tron_account_logout");
           }
         }
       }
@@ -60778,9 +61897,12 @@ var TronLink = /*#__PURE__*/function () {
       }
 
       if (vueInstance.hasOwnProperty("_debug_tronlink") && vueInstance._debug_tronlink) {
-        console.group("TronLink action hook");
-        console.log("checker from-", message.action);
+        console.group("TronLink Message 🖼");
+        console.log("Action:", message.action);
         console.log(message.data);
+
+        this.__debugMessage(message);
+
         console.groupEnd();
       }
     }
@@ -60790,7 +61912,7 @@ var TronLink = /*#__PURE__*/function () {
 }();
 
 exports.default = TronLink;
-},{"./base/Address":"../abi/base/Address.js","./TokenTrc20":"../abi/TokenTrc20.js"}],"../utils/const.js":[function(require,module,exports) {
+},{"./base/Address":"../abi/base/Address.js","./TokenTrc20":"../abi/TokenTrc20.js","./../utils/bnx":"../utils/bnx.js","./CoinDetail":"../abi/CoinDetail.js"}],"../utils/const.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -60989,14 +62111,22 @@ var _default = {
             switch (_context.prev = _context.next) {
               case 0:
                 vue_level = _this2;
-                window.addEventListener('message', function (_ref) {
-                  var _ref$data = _ref.data,
-                      _ref$data$isTronLink = _ref$data.isTronLink,
-                      isTronLink = _ref$data$isTronLink === void 0 ? false : _ref$data$isTronLink,
-                      message = _ref$data.message;
+                window.addEventListener("message", function (e) {
+                  var d = JSON.stringify(e.data);
+                  var hard = JSON.parse(d);
 
-                  if (isTronLink) {
-                    vue_level.tronLink.eventListener(message, vue_level.tronLinkInitialData, vue_level);
+                  if (!(hard && hard.hasOwnProperty("message") && hard.message.hasOwnProperty("action"))) {
+                    return;
+                  }
+
+                  var msg = e.data;
+
+                  if (msg.hasOwnProperty("isTronLink")) {
+                    if (msg.isTronLink) {
+                      vue_level.tronLink.eventListener(msg.message, vue_level.tronLinkInitialData, vue_level);
+
+                      vue_level.tronLink.__debugMessage(msg);
+                    }
                   }
                 });
                 _context.next = 4;
@@ -61009,7 +62139,7 @@ var _default = {
 
                 if (_this2._debug_tronlink) {
                   console.log(provider.fullNode.host);
-                  console.log(_this2.tronWeb);
+                  console.log("tronweb object", _this2.tronWeb);
                 }
 
                 _this2.announce_node_name(provider.fullNode.host);
@@ -61495,11 +62625,10 @@ var _TronAnchor = _interopRequireDefault(require("../components/TronAnchor"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var _default = {
   name: "Tronmasonic",
   components: {
@@ -61509,7 +62638,11 @@ var _default = {
   mixins: [_vueTronlink.default],
   data: function data() {
     return {
-      sheet: false,
+      detected_x: 0,
+      my_address: "",
+      my_coin: "TWpN4r9C6Y5wBoJzXYEkVhZcRbY4T83FG8",
+      coin_bal: 0,
+      trx_bal: 0,
       tronlinkinstalled: false
     };
   },
@@ -61520,16 +62653,23 @@ var _default = {
     this.$nextTick(function () {
       _this.$on("notify_tron_not_install", function () {
         _this.tronlinkinstalled = false;
-        console.log("detect done nil  🔔️");
+        console.log("Detect done nil 🔔️");
       });
 
       _this.$on("notify_tron_installed", function () {
         _this.tronlinkinstalled = true;
-        console.log("detect done ok 🔔️");
+
+        _this.debugTronLink(true);
+
+        console.log("Detect done ok 🔔️");
       });
 
       _this.$on("notify_tron_initialization", function () {
         console.log("detect done notify_tron_initialization 🔔️️");
+      });
+
+      _this.$on("notify_tron_account_logout", function () {
+        console.log("Tronlink is not being login 🔔️️");
       });
 
       _this.$on("notify_tron_account_set", function () {
@@ -61548,10 +62688,58 @@ var _default = {
     });
   },
   methods: {
+    event_x: function event_x() {
+      if (this.tronlinkinstalled) {
+        if (this.isNile()) {
+          this.my_address = this.tronLink.getAccountAddress();
+        }
+      }
+    },
+    send_coin: function send_coin() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var bal;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!_this2.tronlinkinstalled) {
+                  _context.next = 9;
+                  break;
+                }
+
+                if (!_this2.isNile()) {
+                  _context.next = 9;
+                  break;
+                }
+
+                _context.next = 4;
+                return _this2.tronLink.coinTRX();
+
+              case 4:
+                _this2.trx_bal = _context.sent;
+                _context.next = 7;
+                return _this2.tronLink.getCoin("TWpN4r9C6Y5wBoJzXYEkVhZcRbY4T83FG8");
+
+              case 7:
+                bal = _context.sent;
+                _this2.coin_bal = bal; //  const list = this.tronLink.getListedCoins()
+                //  console.log(list)
+
+              case 9:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
     goto_main: function goto_main() {
       if (this.tronlinkinstalled) {
         if (this.isNile()) {
           console.log("test passed");
+          this.detected_x++;
         } else {
           console.log("This contract requires Nile network");
         }
@@ -61577,7 +62765,32 @@ exports.default = _default;
   return _c(
     "section",
     { staticClass: "container indexcolor", attrs: { id: "indexbox" } },
-    [_c("button", { on: { click: _vm.goto_main } }, [_vm._v("CONNECT")])]
+    [
+      _c("button", { on: { click: _vm.goto_main } }, [_vm._v("CONNECT")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "TronLink is installed " +
+            _vm._s(_vm.tronlinkinstalled) +
+            " " +
+            _vm._s(_vm.detected_x)
+        )
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("version " + _vm._s(_vm.node_version))]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.event_x } }, [_vm._v("GET EVENTS")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("TronLink - my address " + _vm._s(_vm.my_address))]),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.send_coin } }, [_vm._v("SEND DP")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v("my Coin " + _vm._s(_vm.my_coin) + ": " + _vm._s(_vm.coin_bal))
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v("trx Coin: " + _vm._s(_vm.trx_bal))])
+    ]
   )
 }
 var staticRenderFns = []
@@ -61655,7 +62868,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55437" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54047" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
