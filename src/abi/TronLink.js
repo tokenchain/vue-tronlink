@@ -102,9 +102,7 @@ export default class TronLink {
         }
         let contract;
         if (!this.tokens.hasOwnProperty(trc20_address)) {
-            contract = new TokenTrc20(this.tronWeb);
-            contract.setDebug(false);
-            await contract.init(trc20_address);
+            contract = await this.NewToken(address);
             const a = await contract.balanceOf(address);
             const d = await contract.decimals();
             this.tokens[trc20_address] = {
@@ -123,6 +121,12 @@ export default class TronLink {
             this.tokens[trc20_address].hold[address] = aa;
         }
         return this.tokens[trc20_address];
+    }
+    async NewToken(trc20_address) {
+        const contract = new TokenTrc20(this.tronWeb);
+        contract.setDebug(false);
+        await contract.init(trc20_address);
+        return contract;
     }
     getListedCoins() {
         return this.tokens;
