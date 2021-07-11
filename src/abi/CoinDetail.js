@@ -7,26 +7,23 @@ export default class CoinDetail {
         this.holder = {};
         this.spender = {};
     }
-    setHolder(address, bal) {
-        if (this.holder.hasOwnProperty(address)) {
-            this.holder[address] = bal;
+    _setDeep(obj, path, value, setrecursively = false) {
+        let properties = Array.isArray(path) ? path : path.split(".");
+        if (properties.length > 1) {
+            if (!obj.hasOwnProperty(properties[0]) || typeof obj[properties[0]] !== "object")
+                obj[properties[0]] = {};
+            return this._setDeep(obj[properties[0]], properties.slice(1), value);
         }
         else {
-            this.holder[address] = bal;
+            obj[properties[0]] = value;
+            return true;
         }
     }
+    setHolder(address, bal) {
+        this._setDeep(this.holder, [address], bal);
+    }
     setSpender(coin_owner, spender, allowance) {
-        if (this.spender.hasOwnProperty(coin_owner)) {
-            if (this.spender[coin_owner].hasOwnProperty(spender)) {
-                this.spender[coin_owner][spender] = allowance;
-            }
-            else {
-                this.spender[coin_owner][spender] = allowance;
-            }
-        }
-        else {
-            this.spender[coin_owner][spender] = allowance;
-        }
+        this._setDeep(this.spender, [coin_owner, spender], allowance);
     }
     name() {
         return this.tokenName;

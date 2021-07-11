@@ -20,12 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test/coindetail.test.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abi/CoinDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/CoinDetail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abi/CoinDetail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/CoinDetail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/address.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/address.test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +61,7 @@
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/node_modules/jest" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -80,7 +79,7 @@
       <recent name="$PROJECT_DIR$/develop" />
     </key>
   </component>
-  <component name="RunManager" selected="Jest.All Tests">
+  <component name="RunManager" selected="Jest.coindetail.test.js">
     <configuration name="All Tests" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
@@ -90,17 +89,37 @@
       <scope-kind value="ALL" />
       <method v="2" />
     </configuration>
-    <configuration name="Invalid input format" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+    <configuration name="Set Spender Amount" type="JavaScriptTestRunnerJest" nameIsGenerated="true">
       <node-interpreter value="project" />
       <node-options value="" />
       <jest-package value="$PROJECT_DIR$/node_modules/jest" />
       <working-dir value="$PROJECT_DIR$" />
       <envs />
       <scope-kind value="TEST" />
-      <test-file value="$PROJECT_DIR$/test/address.test.js" />
+      <test-file value="$PROJECT_DIR$/test/coindetail.test.js" />
       <test-names>
-        <test-name value="Invalid input format" />
+        <test-name value="Set Spender Amount" />
       </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="address.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/address.test.js" />
+      <method v="2" />
+    </configuration>
+    <configuration name="coindetail.test.js" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/jest" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST_FILE" />
+      <test-file value="$PROJECT_DIR$/test/coindetail.test.js" />
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -123,23 +142,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Jest.coindetail.test.js" />
+        <item itemvalue="Jest.address.test.js" />
         <item itemvalue="Jest.All Tests" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.coveralls" />
-        <item itemvalue="npm.lint" />
-        <item itemvalue="Jest.Invalid input format" />
       </list>
     </recent_temporary>
   </component>
@@ -237,7 +246,8 @@
       <workItem from="1615056442444" duration="159000" />
       <workItem from="1623774623833" duration="1079000" />
       <workItem from="1626014793020" duration="347000" />
-      <workItem from="1626015946318" duration="1536000" />
+      <workItem from="1626015946318" duration="1899000" />
+      <workItem from="1626019427678" duration="2853000" />
     </task>
     <servers />
   </component>
@@ -267,59 +277,90 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="411" y="217" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612883455435">
-      <screen x="83" y="25" width="1709" height="1095" />
+    <state x="500" y="298" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1626020089094">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state x="408" y="217" key="#com.intellij.execution.impl.EditConfigurationsDialog/79.25.1713.1095@79.25.1713.1095" timestamp="1612882949049" />
-    <state x="411" y="217" key="#com.intellij.execution.impl.EditConfigurationsDialog/83.25.1709.1095@83.25.1709.1095" timestamp="1612883455435" />
-    <state x="694" y="240" key="#com.intellij.ide.util.MemberChooser" timestamp="1615054262343">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state x="500" y="298" key="#com.intellij.fileTypes.FileTypeChooser/43.25.1493.935@43.25.1493.935" timestamp="1626020089094" />
+    <state width="1323" height="275" key="GridCell.Tab.0.bottom" timestamp="1626024136293">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state x="694" y="240" key="#com.intellij.ide.util.MemberChooser/73.25.1719.1095@73.25.1719.1095" timestamp="1615054262343" />
-    <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1610633710729">
-      <screen x="76" y="25" width="1716" height="1095" />
+    <state width="1323" height="275" key="GridCell.Tab.0.bottom/43.25.1493.935@43.25.1493.935" timestamp="1626024136293" />
+    <state width="1323" height="275" key="GridCell.Tab.0.center" timestamp="1626024136292">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state x="593" y="25" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/76.25.1716.1095@76.25.1716.1095" timestamp="1610633710729" />
-    <state x="696" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1612863427521">
-      <screen x="83" y="25" width="1709" height="1095" />
+    <state width="1323" height="275" key="GridCell.Tab.0.center/43.25.1493.935@43.25.1493.935" timestamp="1626024136292" />
+    <state width="1323" height="275" key="GridCell.Tab.0.left" timestamp="1626024136292">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state x="696" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/83.25.1709.1095@83.25.1709.1095" timestamp="1612863427521" />
-    <state x="699" y="303" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/87.25.1705.1095@87.25.1705.1095" timestamp="1612851501387" />
-    <state width="1375" height="330" key="GridCell.Tab.0.bottom" timestamp="1613905170679">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state width="1323" height="275" key="GridCell.Tab.0.left/43.25.1493.935@43.25.1493.935" timestamp="1626024136292" />
+    <state width="1323" height="275" key="GridCell.Tab.0.right" timestamp="1626024136292">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state width="1375" height="330" key="GridCell.Tab.0.bottom/73.25.1719.1095@73.25.1719.1095" timestamp="1613905170679" />
-    <state width="1264" height="330" key="GridCell.Tab.0.bottom/76.25.1716.1095@76.25.1716.1095" timestamp="1613899645184" />
-    <state width="1223" height="235" key="GridCell.Tab.0.bottom/79.25.1713.1095@79.25.1713.1095" timestamp="1612891089392" />
-    <state width="1110" height="371" key="GridCell.Tab.0.bottom/83.25.1709.1095@83.25.1709.1095" timestamp="1612888982873" />
-    <state width="1375" height="330" key="GridCell.Tab.0.center" timestamp="1613905170678">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state width="1323" height="275" key="GridCell.Tab.0.right/43.25.1493.935@43.25.1493.935" timestamp="1626024136292" />
+    <state width="1323" height="306" key="GridCell.Tab.1.bottom" timestamp="1626022571600">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state width="1375" height="330" key="GridCell.Tab.0.center/73.25.1719.1095@73.25.1719.1095" timestamp="1613905170678" />
-    <state width="1264" height="330" key="GridCell.Tab.0.center/76.25.1716.1095@76.25.1716.1095" timestamp="1613899645184" />
-    <state width="1223" height="235" key="GridCell.Tab.0.center/79.25.1713.1095@79.25.1713.1095" timestamp="1612891089391" />
-    <state width="1110" height="371" key="GridCell.Tab.0.center/83.25.1709.1095@83.25.1709.1095" timestamp="1612888982872" />
-    <state width="1375" height="330" key="GridCell.Tab.0.left" timestamp="1613905170677">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state width="1323" height="306" key="GridCell.Tab.1.bottom/43.25.1493.935@43.25.1493.935" timestamp="1626022571600" />
+    <state width="1323" height="306" key="GridCell.Tab.1.center" timestamp="1626022571600">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state width="1375" height="330" key="GridCell.Tab.0.left/73.25.1719.1095@73.25.1719.1095" timestamp="1613905170677" />
-    <state width="1264" height="330" key="GridCell.Tab.0.left/76.25.1716.1095@76.25.1716.1095" timestamp="1613899645184" />
-    <state width="1223" height="235" key="GridCell.Tab.0.left/79.25.1713.1095@79.25.1713.1095" timestamp="1612891089390" />
-    <state width="1110" height="371" key="GridCell.Tab.0.left/83.25.1709.1095@83.25.1709.1095" timestamp="1612888982872" />
-    <state width="1375" height="330" key="GridCell.Tab.0.right" timestamp="1613905170679">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state width="1323" height="306" key="GridCell.Tab.1.center/43.25.1493.935@43.25.1493.935" timestamp="1626022571600" />
+    <state width="1323" height="306" key="GridCell.Tab.1.left" timestamp="1626022571600">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state width="1375" height="330" key="GridCell.Tab.0.right/73.25.1719.1095@73.25.1719.1095" timestamp="1613905170679" />
-    <state width="1264" height="330" key="GridCell.Tab.0.right/76.25.1716.1095@76.25.1716.1095" timestamp="1613899645184" />
-    <state width="1223" height="235" key="GridCell.Tab.0.right/79.25.1713.1095@79.25.1713.1095" timestamp="1612891089391" />
-    <state width="1110" height="371" key="GridCell.Tab.0.right/83.25.1709.1095@83.25.1709.1095" timestamp="1612888982872" />
-    <state x="698" y="299" width="573" height="546" key="find.popup" timestamp="1615051712889">
-      <screen x="73" y="25" width="1719" height="1095" />
+    <state width="1323" height="306" key="GridCell.Tab.1.left/43.25.1493.935@43.25.1493.935" timestamp="1626022571600" />
+    <state width="1323" height="306" key="GridCell.Tab.1.right" timestamp="1626022571600">
+      <screen x="43" y="25" width="1493" height="935" />
     </state>
-    <state x="652" y="280" width="598" height="559" key="find.popup/0.0.1792.1120@0.0.1792.1120" timestamp="1615019400236" />
-    <state x="698" y="299" width="573" height="546" key="find.popup/73.25.1719.1095@73.25.1719.1095" timestamp="1615051712889" />
-    <state x="700" y="299" width="572" height="546" key="find.popup/76.25.1716.1095@76.25.1716.1095" timestamp="1615050499191" />
-    <state x="701" y="299" width="572" height="546" key="find.popup/79.25.1713.1095@79.25.1713.1095" timestamp="1612883104485" />
-    <state x="704" y="299" width="570" height="546" key="find.popup/83.25.1709.1095@83.25.1709.1095" timestamp="1612863002635" />
+    <state width="1323" height="306" key="GridCell.Tab.1.right/43.25.1493.935@43.25.1493.935" timestamp="1626022571600" />
+    <state width="1323" height="306" key="GridCell.Tab.2.bottom" timestamp="1626022571601">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.2.bottom/43.25.1493.935@43.25.1493.935" timestamp="1626022571601" />
+    <state width="1323" height="306" key="GridCell.Tab.2.center" timestamp="1626022571601">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.2.center/43.25.1493.935@43.25.1493.935" timestamp="1626022571601" />
+    <state width="1323" height="306" key="GridCell.Tab.2.left" timestamp="1626022571601">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.2.left/43.25.1493.935@43.25.1493.935" timestamp="1626022571601" />
+    <state width="1323" height="306" key="GridCell.Tab.2.right" timestamp="1626022571601">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.2.right/43.25.1493.935@43.25.1493.935" timestamp="1626022571601" />
+    <state width="1323" height="306" key="GridCell.Tab.3.bottom" timestamp="1626022571602">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.3.bottom/43.25.1493.935@43.25.1493.935" timestamp="1626022571602" />
+    <state width="1323" height="306" key="GridCell.Tab.3.center" timestamp="1626022571602">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.3.center/43.25.1493.935@43.25.1493.935" timestamp="1626022571602" />
+    <state width="1323" height="306" key="GridCell.Tab.3.left" timestamp="1626022571601">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.3.left/43.25.1493.935@43.25.1493.935" timestamp="1626022571601" />
+    <state width="1323" height="306" key="GridCell.Tab.3.right" timestamp="1626022571602">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state width="1323" height="306" key="GridCell.Tab.3.right/43.25.1493.935@43.25.1493.935" timestamp="1626022571602" />
+    <state x="300" y="128" key="SettingsEditor" timestamp="1626020309420">
+      <screen x="43" y="25" width="1493" height="935" />
+    </state>
+    <state x="300" y="128" key="SettingsEditor/43.25.1493.935@43.25.1493.935" timestamp="1626020309420" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand>
+      <path>
+        <item name="vue-tronlink" type="b2602c69:ProjectViewProjectNode" />
+        <item name="vue-tronlink" type="462c0819:PsiDirectoryNode" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/vue_tronlink$address_test_js.info" NAME="address.test.js Coverage Results" MODIFIED="1626020059953" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/vue_tronlink$Set_Spender_Amount.info" NAME="Set Spender Amount Coverage Results" MODIFIED="1626023284906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="JestJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
