@@ -8,6 +8,10 @@ export interface Balancer {
     [holder_address: string]: number;
 }
 
+export interface Spending {
+    [holder_address: string]: Balancer;
+}
+
 export interface TronLinkEventCaller {
     signer(payload: TronLinkTunnelMessage): boolean;
 
@@ -17,9 +21,12 @@ export interface TronLinkEventCaller {
 }
 
 export interface TronTRC20Token {
+    tokenSymbol: string;
+    tokenName: string;
     address: string;
     decimal: number;
     holder: Balancer;
+    spender: Spending;
 }
 
 export interface TronLinkTunnelMessageDataTransaction {

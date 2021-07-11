@@ -34,6 +34,24 @@ export default class TronLink {
         this.tronWeb = tronWeb
         this.tokens = {}
         this.selected_function_human_operation = ""
+        if (window && !window.hasOwnProperty("__tronlinksupportcodex")) {
+            // @ts-ignore
+            window.__tronlinksupportcodex = this
+        }
+    }
+
+    public static Instance(): (TronLink | any | boolean) {
+        if (window && window.hasOwnProperty("__tronlinksupportcodex")) {
+            // @ts-ignore
+            const obj = window.__tronlinksupportcodex
+            if (obj instanceof TronLink) {
+                return (obj) as TronLink
+            } else {
+                return (obj) as TronLink
+            }
+        } else {
+            return false
+        }
     }
 
     /**
@@ -241,26 +259,43 @@ export default class TronLink {
     /**
      * get TRC20 token in balance
      * @param address
-     * @param trc20_address
+     * @param trc20
      */
-    async getThirdTokenBalance(address: string, trc20_address: string): Promise<CoinDetail> {
+    async getThirdTokenBalance(address: string, trc20: string): Promise<CoinDetail> {
         if (!this.isLoggedIn()) {
             throw "wallet is not login"
         }
-        const contract = await this.NewToken(trc20_address)
-        if (!this.tokens.hasOwnProperty(trc20_address)) {
+        const contract = await this.NewToken(trc20)
+        if (!this.tokens.hasOwnProperty(trc20)) {
             const a = await contract.balanceOf(address)
             const d = await contract.decimals()
-            const detail = new CoinDetail(trc20_address, d)
-            detail.setHolder(address, a)
-            this.tokens[trc20_address] = detail
+            const n = await contract.name()
+            const s = await contract.symbol()
+            const detail = new CoinDetail(trc20, d, s, n)
+            detail.setHolder(address, txtUnit(a))
+            this.tokens[trc20] = detail
         } else {
-            const apbalance = await contract.balanceOf(address)
-            this.tokens[trc20_address].setHolder(address, txtUnit(apbalance))
+            const b = await contract.balanceOf(address)
+            this.tokens[trc20].setHolder(address, txtUnit(b))
         }
 
         // @ts-ignore
-        return this.tokens[trc20_address];
+        return this.tokens[trc20];
+    }
+
+    async getTokenBalanceDetail(address: string, trc20: string): Promise<CoinDetail> {
+        return this.getThirdTokenBalance(address, trc20)
+    }
+
+    async getUpdateAllowanceAmount(ins: CoinDetail, myaddress: string, spender: string): Promise<number> {
+        if (!this.isLoggedIn()) {
+            throw "wallet is not login"
+        }
+        const contract = await this.NewToken(ins.address)
+        const allowance = await contract.allowance(myaddress, spender)
+        const nm = txtUnit(allowance)
+        ins.setSpender(myaddress, spender, nm)
+        return ins.showAllowance(myaddress, spender)
     }
 
     async getThirdTokenBalanceSun(address: string, trc20_address: string): Promise<number> {
