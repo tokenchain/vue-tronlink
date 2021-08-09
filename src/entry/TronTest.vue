@@ -72,6 +72,9 @@ export default {
         }
       }
     },
+    TronApiKey() {
+      return "fioafjoiejfo ijeoifjoisjeoiajfiosjefiojsiojefijsijfsj oie"
+    },
     async send_coin() {
       if (this.tronlinkinstalled) {
         if (this.isNile()) {

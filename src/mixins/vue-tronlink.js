@@ -28,10 +28,17 @@ export default {
         }
     },
     methods: {
+        TronApiKey() {
+            return ""
+        },
         checkTronLink() {
             if (window && window.hasOwnProperty("tronWeb")) {
+                const api_key = this.TronApiKey()
                 if (!this.tronWeb) {
                     this.tronWeb = window.tronWeb
+                    if (api_key !== "") {
+                        this.tronWeb.setHeader({"TRON-PRO-API-KEY": api_key});
+                    }
                 }
                 if (!this.tronLink) {
                     this.tronLink = new TronLink(this.tronWeb)
