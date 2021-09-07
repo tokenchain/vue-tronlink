@@ -37,7 +37,11 @@ export default {
                 if (!this.tronWeb) {
                     this.tronWeb = window.tronWeb
                     if (api_key !== "") {
-                        this.tronWeb.setHeader({"TRON-PRO-API-KEY": api_key});
+                        try {
+                            this.tronWeb.setHeader({"TRON-PRO-API-KEY": api_key});
+                        } catch (e) {
+
+                        }
                     }
                 }
                 if (!this.tronLink) {

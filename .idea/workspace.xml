@@ -21,6 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/CoinDetail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/CoinDetail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/mixins/vue-tronlink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +250,12 @@
       <workItem from="1628222670984" duration="205000" />
       <workItem from="1628512292845" duration="1452000" />
       <workItem from="1628514174051" duration="1000" />
-      <workItem from="1628516768382" duration="29000" />
+      <workItem from="1628516768382" duration="98000" />
+      <workItem from="1628518461626" duration="36000" />
+      <workItem from="1629624381541" duration="910000" />
+      <workItem from="1630766572980" duration="61000" />
+      <workItem from="1630767785037" duration="607000" />
+      <workItem from="1630823625305" duration="4000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,4 @@
-import {Balancer, Spending, TronTRC20Token} from "./base/types";
+import {Balancer, Spending, TronTRC20Token, Unlimited} from "./base/types";
 
 export default class CoinDetail implements TronTRC20Token {
     address: string;
@@ -7,6 +7,7 @@ export default class CoinDetail implements TronTRC20Token {
     tokenSymbol: string;
     holder: Balancer;
     spender: Spending;
+    unlimited: Unlimited;
 
     constructor(address: string, dec: number, sym: string, name: string) {
         this.address = address
@@ -15,6 +16,55 @@ export default class CoinDetail implements TronTRC20Token {
         this.tokenSymbol = sym
         this.holder = {}
         this.spender = {}
+        this.unlimited = {}
+    }
+
+    setHolder(address: string, bal: number) {
+        this._setDeep(this.holder, [address], bal)
+    }
+
+    setSpender(coin_owner: string, spender: string, allowance: number) {
+        this._setDeep(this.spender, [coin_owner, spender], allowance)
+    }
+
+    setSpenderAllowed(coin_owner: string, spender: string, isAll: boolean) {
+        this._setDeep(this.unlimited, [coin_owner, spender], isAll)
+    }
+
+    name(): string {
+        return this.tokenName
+    }
+
+    symbol(): string {
+        return this.tokenSymbol
+    }
+
+    showAllowance(coin_owner: string, spender: string): number {
+        if (this.spender.hasOwnProperty(coin_owner)) {
+            if (this.spender[coin_owner].hasOwnProperty(spender)) {
+                return this.spender[coin_owner][spender]
+            }
+        }
+        return 0
+    }
+
+
+    showAllowed(coin_owner: string, spender: string): boolean {
+        if (this.unlimited.hasOwnProperty(coin_owner)) {
+            if (this.unlimited[coin_owner].hasOwnProperty(spender)) {
+                return this.unlimited[coin_owner][spender]
+            }
+        }
+        return false
+    }
+
+
+    bySun(address: string): number {
+        return this.holder[address]
+    }
+
+    byFloat(address: string): number {
+        return this.holder[address] / this.decimal
     }
 
     /**
@@ -26,7 +76,7 @@ export default class CoinDetail implements TronTRC20Token {
      * @param {!mixed} value - The value you want to set it to.
      * @param {boolean} setrecursively - If true, will set value of non-existing path as well.
      */
-    _setDeep(obj: object, path: any, value: number | string, setrecursively = false): boolean {
+    _setDeep(obj: object, path: any, value: number | string | boolean, setrecursively = false): boolean {
         /*       path.reduce((a, b, level) => {
                    if (setrecursively && typeof a[b] === "undefined" && level !== path.length) {
                        a[b] = {};
@@ -57,38 +107,5 @@ export default class CoinDetail implements TronTRC20Token {
             obj[properties[0]] = value
             return true // this is the end
         }
-    }
-
-    setHolder(address: string, bal: number) {
-        this._setDeep(this.holder, [address], bal)
-    }
-
-    setSpender(coin_owner: string, spender: string, allowance: number) {
-        this._setDeep(this.spender, [coin_owner, spender], allowance)
-    }
-
-    name(): string {
-        return this.tokenName
-    }
-
-    symbol(): string {
-        return this.tokenSymbol
-    }
-
-    showAllowance(coin_owner: string, spender: string): number {
-        if (this.spender.hasOwnProperty(coin_owner)) {
-            if (this.spender[coin_owner].hasOwnProperty(spender)) {
-                return this.spender[coin_owner][spender]
-            }
-        }
-        return 0
-    }
-
-    bySun(address: string): number {
-        return this.holder[address]
-    }
-
-    byFloat(address: string): number {
-        return this.holder[address] / this.decimal
     }
 }
