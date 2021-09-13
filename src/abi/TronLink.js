@@ -1,7 +1,7 @@
 import { Address } from "./base/Address";
 import { TokenTrc20 } from "./TokenTrc20";
-import { txtUnit } from "./../utils/bnx";
 import CoinDetail from "./CoinDetail";
+import { txtUnit } from "../utils/bnx";
 export default class TronLink {
     constructor(tronWeb) {
         this.debug = false;

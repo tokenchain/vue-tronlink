@@ -1,4 +1,4 @@
-import TronWeb, {BigNumber} from "tronweb"
+import TronWeb, { BigNumber } from "tronweb"
 // import { BigNumber } from "bignumber.js"
 const regx_split = /[-.]/
 const regex_number_sub = /(\d)(?=(\d{3})+$)/g
@@ -22,12 +22,13 @@ BigNumber.prototype.unitMoney = function (thou = ",", dec = ".", sym = "$") {
 function ___fromSunBNLong(number_string) {
     try {
         let sum = TronWeb.fromSun("0")
+
         if (TronWeb.utils.isBigNumber(number_string)) {
             const amount = number_string.toNumber()
             sum = TronWeb.fromSun(amount)
         }
         if (_isBigNumber(number_string)) {
-            if (number_string.hasOwnProperty("_hex")) {
+            if (number_string._isBigNumber && number_string.hasOwnProperty("_hex")) {
                 const bn = new BigNumber(number_string._hex)
                 sum = TronWeb.fromSun(bn)
             }
@@ -48,7 +49,7 @@ function ___fromSunBnShort(number_string) {
             sum = TronWeb.fromSun(amount)
         }
         if (_isBigNumber(number_string)) {
-            if (number_string.hasOwnProperty("_hex")) {
+            if (number_string._isBigNumber && number_string.hasOwnProperty("_hex")) {
                 const bn = new BigNumber(number_string._hex)
                 sum = TronWeb.fromSun(bn)
             }
@@ -73,7 +74,7 @@ function ___fromSun(number_string) {
             return parseFloat(TronWeb.fromSun(amount))
         }
         if (_isBigNumber(number_string)) {
-            if (number_string.hasOwnProperty("_hex")) {
+            if (number_string._isBigNumber && number_string.hasOwnProperty("_hex")) {
                 const bn = new BigNumber(number_string._hex)
                 return parseFloat(TronWeb.fromSun(bn))
             }
@@ -100,13 +101,8 @@ function _isBigNumber(numberex) {
     if (TronWeb.utils.isBigNumber(numberex)) {
         return true
     }
-    if (typeof numberex === "object") {
-        if (numberex.hasOwnProperty("_isBigNumber")) {
-            return numberex._isBigNumber
-        }
-        if (numberex.hasOwnProperty("_hex")) {
-            return true
-        }
+    if (typeof numberex === "object" && numberex.hasOwnProperty("_isBigNumber")) {
+        return numberex._isBigNumber
     }
     return false
 }
@@ -200,7 +196,7 @@ function toNumber(number_unknown) {
         if (TronWeb.utils.isBigNumber(number_unknown)) {
             prenum = number_unknown
         } else if (_isBigNumber(number_unknown)) {
-            if (number_unknown.hasOwnProperty("_hex")) {
+            if (number_unknown._isBigNumber && number_unknown.hasOwnProperty("_hex")) {
                 prenum = new BigNumber(number_unknown._hex)
             } else {
                 console.log("failed to create big number")
@@ -210,12 +206,50 @@ function toNumber(number_unknown) {
         } else if (typeof number_unknown === "number") {
             prenum = TronWeb.toBigNumber(number_unknown)
         }
-
         return prenum.toNumber()
     } catch (e) {
-        console.error(e)
-        return 0
+        const line = e.toString()
+        if (line.includes("Error: overflow")) {
+            return -1
+        } else {
+            console.info(e)
+            return 0
+        }
     }
+}
+
+function _by_decimalToNumber(val, dec) {
+    const f = Math.pow(10, dec)
+    const g = parseFloat(val) / parseFloat(f)
+    return parseFloat(g)
+}
+
+function ___decimalToNumber(val) {
+    const f = __decimalToNumber(val)
+    return f.formatCurrency(",", ".", "")
+}
+
+function __decimalToNumber(val) {
+    return _by_decimalToNumber(val, 8)
+}
+
+function __usdtBySun(val) {
+    const f = _by_decimalToNumber(val, 6)
+    return f.formatCurrency(",", ".", "")
+}
+
+function __coinBySun(val, d) {
+    const f = _by_decimalToNumber(val, d)
+    return f.formatScience(",", ".", "", 2)
+}
+function __coinBySunBig(val, d) {
+    const f = _by_decimalToNumber(val, d)
+    return f.formatScience(",", ".", "", 6)
+}
+
+function __decSn(val, d) {
+    const f = _by_decimalToNumber(val, d)
+    return f.formatCurrency(",", ".", "")
 }
 
 /**
@@ -311,16 +345,31 @@ function txtUnit(value) {
     }
 }
 
+function claim_time_xx(value) {
+    if (parseInt(value) === 0) {
+        return "--"
+    } else {
+        return blocktimedate(value)
+    }
+}
+
+function blocktimedate(value) {
+    const myDate = new Date(parseInt(value) * 1000)
+    const HH = myDate.getHours()
+    const MM = myDate.getMinutes()
+    const SS = myDate.getSeconds()
+    const YY = myDate.getFullYear()
+    const DD = myDate.getDate()
+    const mm = myDate.getMonth() + 1
+    return `${YY}/${mm}/${DD}, ${HH}:${MM}:${SS}`
+}
+
 function blocktime(value) {
     const myDate = new Date(parseInt(value) * 1000)
     const HH = myDate.getHours()
     const MM = myDate.getMinutes()
     const SS = myDate.getSeconds()
     return `${HH}:${MM}:${SS}`
-}
-
-function hexBlockTime(value) {
-    return txtUnit(blocktime(value))
 }
 
 function duration_ms(value) {
@@ -419,28 +468,13 @@ function deromanize(str) {
     const stc = str.toUpperCase()
     const validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/
     const token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g
-    const key = {
-        M: 1000,
-        CM: 900,
-        D: 500,
-        CD: 400,
-        C: 100,
-        XC: 90,
-        L: 50,
-        XL: 40,
-        X: 10,
-        IX: 9,
-        V: 5,
-        IV: 4,
-        I: 1
-    }
+    const key = { M: 1000, CM: 900, D: 500, CD: 400, C: 100, XC: 90, L: 50, XL: 40, X: 10, IX: 9, V: 5, IV: 4, I: 1 }
 
     let num = 0
-    let m = ""
+    let m
     if (!(stc && validator.test(stc))) {
         return false
     }
-    // eslint-disable-next-line no-cond-assign
     while (m = token.exec(stc)) {
         num += key[m[0]]
     }
@@ -460,6 +494,13 @@ function txtUnitRomanize(value) {
 export {
     romanize,
     deromanize,
+    ___decimalToNumber,
+    __decimalToNumber,
+    _by_decimalToNumber,
+    __usdtBySun,
+    __decSn,
+    __coinBySun,
+    __coinBySunBig,
     ___fromSun,
     ___fromSun2Floor,
     ___fromTrxToSun,
@@ -478,8 +519,8 @@ export {
     txtUnit,
     txtUnitRomanize,
     duration,
-    hexBlockTime,
     blocktime,
+    claim_time_xx,
     sum,
     coinbase
 }

@@ -8,8 +8,8 @@ import {
     TronTRC20Token
 } from "./base/types";
 import {Vue} from "vue/types/vue";
-import {txtUnit} from "./../utils/bnx";
 import CoinDetail from "./CoinDetail";
+import {txtUnit} from "../utils/bnx"
 
 
 /**

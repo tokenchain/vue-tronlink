@@ -28,7 +28,7 @@ export function decodeParams(names, types, output, ignoreMethodHash) {
     })
 
     return abiCoder.decode(types, output).reduce((obj, arg, index) => {
-        if (types[index] == 'address')
+        if (types[index] === 'address')
             arg = ADDRESS_PREFIX + arg.substr(2).toLowerCase();
 
         if (names.length)

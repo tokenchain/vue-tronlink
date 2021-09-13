@@ -20,13 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31ae3959-ae4a-4bf7-9e2f-b0af946fb1a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/abi/LinkIsland.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/math.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/CoinDetail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/CoinDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/CoinDetail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/CoinDetail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abi/TronLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/abi/TronLink.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/TronLink.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/base/method.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/method.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/abi/base/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/abi/base/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/datavuex/eth.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-eosscatter.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/mixins/vue-metamask.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/abi.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/abi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/bnx.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/bnx.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,7 +265,7 @@
       <workItem from="1630766572980" duration="61000" />
       <workItem from="1630767785037" duration="607000" />
       <workItem from="1630823625305" duration="4000" />
-      <workItem from="1631536834593" duration="2279000" />
+      <workItem from="1631536834593" duration="3356000" />
     </task>
     <servers />
   </component>
@@ -273,6 +279,7 @@
         <option value="$PROJECT_DIR$/src/abi/TronLink.js" />
         <option value="$PROJECT_DIR$/src/abi/base/Address.js" />
         <option value="$PROJECT_DIR$/src/abi/CoinDetail.js" />
+        <option value="$PROJECT_DIR$/src/abi/LinkIsland.js" />
       </list>
     </option>
   </component>

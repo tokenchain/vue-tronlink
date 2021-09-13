@@ -14,7 +14,10 @@ This project will also support the future networks
 ### TRC20 display
  * support TRC20 balance
  * TronLink support TRC20 token
- * Basic coins from USDT, BTC, ETH, SUN, DP 
+ * Basic coins from USDT, BTC, ETH, SUN, DP
+ * TRC10 transfer
+ * TRX transfer
+ * TRC20 transfer
 
 ### vue mixin Events:
  * notify_tron_not_install
