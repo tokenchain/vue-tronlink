@@ -4,16 +4,17 @@ import { txtUnit } from "./../utils/bnx";
 import CoinDetail from "./CoinDetail";
 export default class TronLink {
     constructor(tronWeb) {
+        this.debug = false;
         this.tronWeb = tronWeb;
         this.tokens = {};
         this.selected_function_human_operation = "";
-        if (window && !window.hasOwnProperty("__tronlinksupportcodex")) {
-            window.__tronlinksupportcodex = this;
+        if (window && !window.hasOwnProperty("__tronlinkbase_codex")) {
+            window.__tronlinkbase_codex = this;
         }
     }
     static Instance() {
-        if (window && window.hasOwnProperty("__tronlinksupportcodex")) {
-            const obj = window.__tronlinksupportcodex;
+        if (window && window.hasOwnProperty("__tronlinkbase_codex")) {
+            const obj = window.__tronlinkbase_codex;
             if (obj instanceof TronLink) {
                 return (obj);
             }
@@ -24,6 +25,9 @@ export default class TronLink {
         else {
             return false;
         }
+    }
+    setDebug(x) {
+        this.debug = x;
     }
     isInstalled() {
         return !!this.tronWeb;
@@ -136,49 +140,99 @@ export default class TronLink {
     async coinUSDT() {
         return await this.getCoin("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
     }
-    async getCoinDetail(trc20_coin) {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin);
+    async getMyCoinDetail(trc20_coin) {
+        return await this.getCoinDetail(this.getAccountAddress(), trc20_coin);
     }
     async coinDPDetail() {
-        return await this.getCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
+        return await this.getMyCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR");
     }
     async coinCOLADetail() {
-        return await this.getCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
+        return await this.getMyCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG");
     }
     async coinBTCDetail() {
-        return await this.getCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
+        return await this.getMyCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9");
     }
     async coinETHDetail() {
-        return await this.getCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
+        return await this.getMyCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF");
     }
     async coinSUNDetail() {
-        return await this.getCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
+        return await this.getMyCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9");
     }
     async coinUSDTDetail() {
-        return await this.getCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
+        return await this.getMyCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t");
     }
-    async getThirdTokenBalance(address, trc20) {
+    async getCoinDetail(address, trc20) {
         if (!this.isLoggedIn()) {
             throw "wallet is not login";
         }
-        const contract = await this.NewToken(trc20);
         if (!this.tokens.hasOwnProperty(trc20)) {
-            const a = await contract.balanceOf(address);
-            const d = await contract.decimals();
-            const n = await contract.name();
-            const s = await contract.symbol();
-            const detail = new CoinDetail(trc20, d, s, n);
-            detail.setHolder(address, txtUnit(a));
-            this.tokens[trc20] = detail;
+            await this.initCoinDetail(trc20, address);
         }
         else {
+            let contract = this.contracts[trc20];
+            if (!contract) {
+                contract = await this.NewToken(trc20);
+                this.contracts[trc20] = contract;
+            }
             const b = await contract.balanceOf(address);
             this.tokens[trc20].setHolder(address, txtUnit(b));
         }
         return this.tokens[trc20];
     }
-    async getTokenBalanceDetail(address, trc20) {
-        return this.getThirdTokenBalance(address, trc20);
+    async initCoinDetail(trc20, me) {
+        const contract = await this.NewToken(trc20);
+        const a = await contract.balanceOf(me);
+        const d = await contract.decimals();
+        const n = await contract.name();
+        const s = await contract.symbol();
+        const detail = new CoinDetail(trc20, d, s, n);
+        detail.setHolder(me, txtUnit(a));
+        this.tokens[trc20] = detail;
+        this.contracts[trc20] = contract;
+        return detail;
+    }
+    async getContractToken(trc20) {
+        let contract = this.contracts[trc20];
+        if (!contract) {
+            if (this.debug) {
+                console.log("new contract token ...");
+            }
+            contract = await this.NewToken(trc20);
+            this.contracts[trc20] = contract;
+        }
+        return contract;
+    }
+    async sendCoin(amount, toaddress) {
+        await this.tronWeb.trx.sendTransaction(toaddress, amount, {}, (err, receipt) => {
+            if (err === undefined) {
+                if (this.debug) {
+                    console.log('- Output:', receipt, '\n');
+                }
+            }
+        });
+    }
+    async sendTrc10Token(amount, tokenID, toaddress) {
+        const receipt = await this.tronWeb.trx.sendToken(toaddress, amount, tokenID, {});
+        if (this.debug) {
+            console.log('- Output:', receipt, '\n');
+        }
+    }
+    async sendToken(amount, toaddress, trc20) {
+        const contract = await this.NewToken(trc20);
+        const send_amount = String(amount);
+        await contract.transfer(toaddress, send_amount);
+    }
+    async approveToken(trc20, spender_address, amount_sun) {
+        const contract = await this.NewToken(trc20);
+        const am = String(amount_sun);
+        await contract.approve(spender_address, am);
+    }
+    async getMyTokenBalance(trc20_coin) {
+        return await this.getTokenBalanceSun(this.getAccountAddress(), trc20_coin);
+    }
+    async getTokenBalanceSun(address, trc20) {
+        const detail = await this.getCoinDetail(address, trc20);
+        return detail.balance(address);
     }
     async getUpdateAllowanceAmount(ins, myaddress, spender) {
         if (!this.isLoggedIn()) {
@@ -191,11 +245,11 @@ export default class TronLink {
         return ins.showAllowance(myaddress, spender);
     }
     async getThirdTokenBalanceSun(address, trc20_address) {
-        const conver = await this.getThirdTokenBalance(address, trc20_address);
-        return conver.bySun(address);
+        const conver = await this.getCoinDetail(address, trc20_address);
+        return conver.balance(address);
     }
     async getThirdTokenBalanceFloat(address, trc20_address) {
-        const conver = await this.getThirdTokenBalance(address, trc20_address);
+        const conver = await this.getCoinDetail(address, trc20_address);
         return conver.byFloat(address);
     }
     async ApproveSpendingToken(trc20_address, spender_address, amount_sun) {

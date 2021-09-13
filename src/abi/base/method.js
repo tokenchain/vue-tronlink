@@ -107,12 +107,9 @@ export default class Method {
             (err, transaction) => {
                 if (err)
                     return callback(err);
-
                 if (!utils.hasProperty(transaction, 'constant_result'))
                     return callback('Failed to execute');
-
                 try {
-
                     const len = transaction.constant_result[0].length
                     if (len === 0 || len % 64 === 8) {
                         let msg = 'The call has been reverted or has thrown an error.'

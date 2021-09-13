@@ -1,11 +1,10 @@
 import {Address} from "./base/Address"
 import {TokenTrc20} from "./TokenTrc20";
 import {
-
     TronLinkEventCaller,
     TronLinkTabReply,
     TronLinkToken,
-    TronLinkTunnelMessage,
+    TronLinkTunnelMessage, TronMapContract,
     TronTRC20Token
 } from "./base/types";
 import {Vue} from "vue/types/vue";
@@ -19,10 +18,11 @@ import CoinDetail from "./CoinDetail";
 export default class TronLink {
     tronWeb: any
     tokens: TronLinkToken
+    contracts: TronMapContract
     selected_function_reply: string
     selected_function_human_operation: string
     selected_function_caller: TronLinkEventCaller
-
+    debug: boolean = false
 
     /**
      * Initiates TronLink support object.
@@ -34,16 +34,16 @@ export default class TronLink {
         this.tronWeb = tronWeb
         this.tokens = {}
         this.selected_function_human_operation = ""
-        if (window && !window.hasOwnProperty("__tronlinksupportcodex")) {
+        if (window && !window.hasOwnProperty("__tronlinkbase_codex")) {
             // @ts-ignore
-            window.__tronlinksupportcodex = this
+            window.__tronlinkbase_codex = this
         }
     }
 
     public static Instance(): (TronLink | any | boolean) {
-        if (window && window.hasOwnProperty("__tronlinksupportcodex")) {
+        if (window && window.hasOwnProperty("__tronlinkbase_codex")) {
             // @ts-ignore
-            const obj = window.__tronlinksupportcodex
+            const obj = window.__tronlinkbase_codex
             if (obj instanceof TronLink) {
                 return (obj) as TronLink
             } else {
@@ -52,6 +52,10 @@ export default class TronLink {
         } else {
             return false
         }
+    }
+
+    setDebug(x: boolean): void {
+        this.debug = x
     }
 
     /**
@@ -228,32 +232,32 @@ export default class TronLink {
         return await this.getCoin("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
     }
 
-    async getCoinDetail(trc20_coin: string): Promise<CoinDetail> {
-        return await this.getThirdTokenBalance(this.getAccountAddress(), trc20_coin)
+    async getMyCoinDetail(trc20_coin: string): Promise<CoinDetail> {
+        return await this.getCoinDetail(this.getAccountAddress(), trc20_coin)
     }
 
     async coinDPDetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
+        return await this.getMyCoinDetail("TXHvwxYbqsDqTCQ9KxNFj4SkuXy7EF2AHR")
     }
 
     async coinCOLADetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
+        return await this.getMyCoinDetail("TSNWgunSeGUQqBKK4bM31iLw3bn9SBWWTG")
     }
 
     async coinBTCDetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
+        return await this.getMyCoinDetail("TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9")
     }
 
     async coinETHDetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
+        return await this.getMyCoinDetail("THb4CqiFdwNHsWsQCs4JhzwjMWys4aqCbF")
     }
 
     async coinSUNDetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
+        return await this.getMyCoinDetail("TKkeiboTkxXKJpbmVFbv4a8ov5rAfRDMf9")
     }
 
     async coinUSDTDetail(): Promise<CoinDetail> {
-        return await this.getCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
+        return await this.getMyCoinDetail("TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
     }
 
     /**
@@ -261,20 +265,19 @@ export default class TronLink {
      * @param address
      * @param trc20
      */
-    async getThirdTokenBalance(address: string, trc20: string): Promise<CoinDetail> {
+    async getCoinDetail(address: string, trc20: string): Promise<CoinDetail> {
         if (!this.isLoggedIn()) {
             throw "wallet is not login"
         }
-        const contract = await this.NewToken(trc20)
+
         if (!this.tokens.hasOwnProperty(trc20)) {
-            const a = await contract.balanceOf(address)
-            const d = await contract.decimals()
-            const n = await contract.name()
-            const s = await contract.symbol()
-            const detail = new CoinDetail(trc20, d, s, n)
-            detail.setHolder(address, txtUnit(a))
-            this.tokens[trc20] = detail
+            await this.initCoinDetail(trc20, address)
         } else {
+            let contract = this.contracts[trc20]
+            if (!contract) {
+                contract = await this.NewToken(trc20)
+                this.contracts[trc20] = contract
+            }
             const b = await contract.balanceOf(address)
             this.tokens[trc20].setHolder(address, txtUnit(b))
         }
@@ -283,8 +286,72 @@ export default class TronLink {
         return this.tokens[trc20];
     }
 
-    async getTokenBalanceDetail(address: string, trc20: string): Promise<CoinDetail> {
-        return this.getThirdTokenBalance(address, trc20)
+    // @ts-ignore
+    async initCoinDetail(trc20: string, me: string): Promise<CoinDetail> {
+        const contract = await this.NewToken(trc20)
+        const a = await contract.balanceOf(me)
+        const d = await contract.decimals()
+        const n = await contract.name()
+        const s = await contract.symbol()
+        const detail = new CoinDetail(trc20, d, s, n)
+        detail.setHolder(me, txtUnit(a))
+        this.tokens[trc20] = detail
+        this.contracts[trc20] = contract
+        return detail
+
+    }
+
+    async getContractToken(trc20: string): Promise<TokenTrc20> {
+        let contract = this.contracts[trc20]
+        if (!contract) {
+            if (this.debug) {
+                console.log("new contract token ...")
+            }
+            contract = await this.NewToken(trc20)
+            this.contracts[trc20] = contract
+        }
+        return contract
+    }
+
+
+    // @ts-ignore
+    async sendCoin(amount: any, toaddress: string,): Promise<void> {
+        await this.tronWeb.trx.sendTransaction(toaddress, amount, {}, (err, receipt) => {
+            if (err === undefined) {
+                if (this.debug) {
+                    console.log('- Output:', receipt, '\n');
+                }
+            }
+        })
+    }
+
+    async sendTrc10Token(amount: any, tokenID: number, toaddress: string): Promise<void> {
+        const receipt = await this.tronWeb.trx.sendToken(toaddress, amount, tokenID, {})
+        if (this.debug) {
+            console.log('- Output:', receipt, '\n');
+        }
+    }
+
+    public async sendToken(amount: any, toaddress: string, trc20: string): Promise<void> {
+        const contract = await this.NewToken(trc20);
+        // @ts-ignore
+        const send_amount = String(amount);
+        await contract.transfer(toaddress, send_amount);
+    }
+
+    public async approveToken(trc20: string, spender_address: string, amount_sun: any): Promise<void> {
+        const contract = await this.NewToken(trc20);
+        const am = String(amount_sun)
+        await contract.approve(spender_address, am)
+    }
+
+    public async getMyTokenBalance(trc20_coin: string): Promise<number> {
+        return await this.getTokenBalanceSun(this.getAccountAddress(), trc20_coin)
+    }
+
+    async getTokenBalanceSun(address: string, trc20: string): Promise<number> {
+        const detail = await this.getCoinDetail(address, trc20)
+        return detail.balance(address)
     }
 
     async getUpdateAllowanceAmount(ins: CoinDetail, myaddress: string, spender: string): Promise<number> {
@@ -299,12 +366,12 @@ export default class TronLink {
     }
 
     async getThirdTokenBalanceSun(address: string, trc20_address: string): Promise<number> {
-        const conver = await this.getThirdTokenBalance(address, trc20_address)
-        return conver.bySun(address)
+        const conver = await this.getCoinDetail(address, trc20_address)
+        return conver.balance(address)
     }
 
     async getThirdTokenBalanceFloat(address: string, trc20_address: string): Promise<number> {
-        const conver = await this.getThirdTokenBalance(address, trc20_address)
+        const conver = await this.getCoinDetail(address, trc20_address)
         return conver.byFloat(address)
     }
 

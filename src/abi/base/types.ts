@@ -107,6 +107,12 @@ export interface TronLinkToken {
     [contract_address: string]: CoinDetail;
 }
 
+
+export interface TronMapContract {
+    [contract_address: string]: TokenTrc20;
+}
+
+
 export enum OpCode {
     // 0s: Stop and Arithmetic Operations
     Stop = "STOP",

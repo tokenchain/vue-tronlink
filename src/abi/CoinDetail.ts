@@ -59,7 +59,7 @@ export default class CoinDetail implements TronTRC20Token {
     }
 
 
-    bySun(address: string): number {
+    balance(address: string): number {
         return this.holder[address]
     }
 
