@@ -87,5 +87,5 @@ mod_package_json ".repository" "git@gitee.com:jjhoc/vue-tronlink.git"
 mod_package_json ".homepage" "https://gitee.com/jjhoc/vue-tronlink"
 echo "==== done ====="
 gitpush
-npmdeploy
-taobao
+#npmdeploy
+#taobao
